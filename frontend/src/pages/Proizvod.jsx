@@ -1,9 +1,16 @@
-import React from 'react'
+import React ,{useState} from 'react'
 import { useParams } from 'react-router-dom'
 import ProizvodCard from '../components/ProizvodCard';
 
 const Proizvod = () => {
     const { id } = useParams();
+    const [activeImage, setActiveImage] = useState(0);
+    const images = [
+        "https://cdn.pixabay.com/photo/2020/05/22/17/53/mockup-5206355_960_720.jpg",
+        "https://images.unsplash.com/photo-1739741432363-8f5fa6ef4e7d?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxmZWF0dXJlZC1waG90b3MtZmVlZHw5fHx8ZW58MHx8fHx8",
+        "https://images.unsplash.com/photo-1739312025707-bbf6765973b3?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxmZWF0dXJlZC1waG90b3MtZmVlZHw3fHx8ZW58MHx8fHx8",
+        "https://images.unsplash.com/photo-1739531944447-2c68bc64d728?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxmZWF0dXJlZC1waG90b3MtZmVlZHw4fHx8ZW58MHx8fHx8",
+    ];
     const items = [1,2,3,4,5]
     return (
         <div className="bg-gray-100 dark:bg-black py-8">
@@ -14,13 +21,24 @@ const Proizvod = () => {
                         <div className="h-[460px] rounded-lg bg-gray-300 dark:bg-gray-700 mb-4">
                             <img
                                 className="w-full h-full object-cover"
-                                src="https://cdn.pixabay.com/photo/2020/05/22/17/53/mockup-5206355_960_720.jpg"
+                                src={images[activeImage]}
                                 alt="Product Image"
                             />
                         </div>
-
+                        <div className="flex space-x-2 justify-center">
+                            {images.map((img, index) => (
+                                <button key={index} onClick={() => setActiveImage(index)}>
+                                    <img
+                                        src={img}
+                                        alt={`Thumbnail ${index + 1}`}
+                                        className={`w-16 h-16 object-cover rounded-lg border-2 transition ${
+                                            activeImage === index ? "border-white" : "border-transparent"
+                                        } hover:border-gray-500`}
+                                    />
+                                </button>
+                            ))}
+                        </div>
                     </div>
-
                     {/* Informacije o proizvodu */}
                     <div className="md:flex-1 px-4">
                         <h2 className="text-2xl font-bold text-gray-800 dark:text-white mb-2">Product Name</h2>
