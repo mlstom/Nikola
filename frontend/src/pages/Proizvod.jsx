@@ -32,7 +32,7 @@ const Proizvod = () => {
                                         src={img}
                                         alt={`Thumbnail ${index + 1}`}
                                         className={`w-16 h-16 object-cover rounded-lg border-2 transition ${
-                                            activeImage === index ? "border-white" : "border-transparent"
+                                            activeImage === index ? "border-orange-500 scale-105" : "border-transparent"
                                         } hover:border-gray-500`}
                                     />
                                 </button>
