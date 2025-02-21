@@ -117,10 +117,10 @@ const Proizvod = () => {
                     </div>
                 </div>
             </div>
-            <span className="flex items-center">
-                <span className="h-px flex-1 bg-black"></span>
-                <span className="shrink-0 px-6">Izdvajamo</span>
-                <span className="h-px flex-1 bg-black"></span>
+            <span className="flex items-center mt-4">
+                <span className="h-px flex-1 bg-white"></span>
+                <span className="shrink-0 px-6 text-white font-bold ">Izdvajamo</span>
+                <span className="h-px flex-1 bg-white"></span>
             </span>
             <div className="mt-8 grid sm:grid-cols-4 lg:grid-cols-5">
                 {items.map((item)=>(
