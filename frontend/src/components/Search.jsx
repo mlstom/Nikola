@@ -43,7 +43,7 @@ const Search = () => {
       : [];
 
   return (
-    <div className="relative w-[300px] max-w-md mx-auto">
+    <div className="relative lg:w-[300px] max-w-md mx-auto">
       <input
         type="text"
         id="Search"
