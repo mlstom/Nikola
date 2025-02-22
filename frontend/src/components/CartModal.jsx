@@ -23,7 +23,7 @@ const CartModal = () => {
   ]);
   return (
     <div
-      className="relative w-screen max-w-sm border  border-gray-600 bg-white px-4 py-8 sm:px-6 lg:px-8"
+      className="relative w-screen max-w-sm border  border-gray-600 bg-white px-4 py-8 sm:px-4 flex flex-wrap items-center lg:px-8"
       aria-modal="true"
       role="dialog"
       tabIndex="-1"
