@@ -14,7 +14,7 @@ const Search = () => {
 
             <span className="absolute inset-y-0 end-0 grid w-10 place-content-center">
                 <button type="button" className="text-white ">
-                    <span class="sr-only">Search</span>
+                    <span className="sr-only">Search</span>
 
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
