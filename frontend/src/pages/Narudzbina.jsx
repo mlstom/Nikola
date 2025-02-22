@@ -23,7 +23,7 @@ const Narudzbina = () => {
   };
 
   return (
-    <div className='lg:w-2/3 lg:pr-16 xl:pr-20 gap-10 flex flex-col items-center m-auto justify-between pt-10 pb-16 sm:pt-12 sm:pb-20 lg:flex-row lg:pb-24 px-4'>
+    <div className='mx-auto max-w-screen-xl px-8 py-8 sm:px-6 sm:py-12 lg:px-8'>
       <CartModal />
       <div className="pt-4 pb-10">
         <h4 className="text-center font-hk text-xl font-medium text-secondary sm:text-left md:text-2xl">
@@ -47,7 +47,7 @@ const Narudzbina = () => {
         </div>
         <div className="flex flex-col items-center justify-between pt-8 sm:flex-row sm:pt-12">
           <Link to="/korpa" className="group mb-3 flex items-center font-hk text-sm text-secondary transition-all hover:text-primary group-hover:font-bold sm:mb-0">
-            <i className="bx bx-chevron-left -mb-1 pr-2 text-2xl text-secondary transition-colors group-hover:text-primary"></i>
+            
             Return to Cart
           </Link>
           <a href="/cart/shipping-method" className="block  rounded-sm bg-orange-500 px-12 py-3 text-sm font-medium text-white shadow-sm hover:bg-orange-700 focus:ring-3 focus:outline-hidden sm:w-auto"
