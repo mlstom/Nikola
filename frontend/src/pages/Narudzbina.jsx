@@ -50,7 +50,7 @@ const Narudzbina = () => {
             <i className="bx bx-chevron-left -mb-1 pr-2 text-2xl text-secondary transition-colors group-hover:text-primary"></i>
             Return to Cart
           </Link>
-          <a href="/cart/shipping-method" className="block w-full rounded-sm bg-orange-500 px-12 py-3 text-sm font-medium text-white shadow-sm hover:bg-orange-700 focus:ring-3 focus:outline-hidden sm:w-auto"
+          <a href="/cart/shipping-method" className="block  rounded-sm bg-orange-500 px-12 py-3 text-sm font-medium text-white shadow-sm hover:bg-orange-700 focus:ring-3 focus:outline-hidden sm:w-auto"
           >Zavsi kupovinu</a>
         </div>
       </div>
