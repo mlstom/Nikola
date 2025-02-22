@@ -36,7 +36,7 @@ const ShopBaner = () => {
             <h2 className="text-2xl text-white font-semibold">{items[0].title}</h2>
             <p className="mt-2 text-gray-400">{items[0].description}</p>
             <button className="flex items-center mt-4 px-3 py-2 bg-orange-500 text-white text-sm uppercase font-medium rounded hover:bg-orange-700">
-              <span>Shop Now</span>
+              <span>Kupi odmah</span>
               <svg
                 className="h-5 w-5 mx-2"
                 fill="none"
@@ -64,7 +64,7 @@ const ShopBaner = () => {
                 <h2 className="text-2xl text-white font-semibold">{item.title}</h2>
                 <p className="mt-2 text-gray-400">{item.description}</p>
                 <button className="flex items-center mt-4 text-white text-sm uppercase font-medium rounded hover:underline">
-                  <span>Shop Now</span>
+                  <span>Kupi odmah</span>
                   <svg
                     className="h-5 w-5 mx-2"
                     fill="none"

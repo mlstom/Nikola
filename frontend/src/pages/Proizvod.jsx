@@ -13,8 +13,8 @@ const Proizvod = () => {
     ];
     const items = [1,2,3,4,5]
     return (
-        <div className="bg-gray-100 dark:bg-black py-8">
-            <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="bg-black  pt-8">
+            <div className="  max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="flex flex-col md:flex-row -mx-4">
                     {/* Slika proizvoda */}
                     <div className="md:flex-1 px-4">
@@ -97,7 +97,7 @@ const Proizvod = () => {
 
                         {/* Opis proizvoda */}
                         <div>
-                            <span className="font-bold text-gray-700 dark:text-gray-300">Product Description:</span>
+                            <span className="font-bold text-gray-700 dark:text-gray-300">Opis proizvoda:</span>
                             <p className="text-gray-600 dark:text-gray-300 text-sm mt-2">
                                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
                                 sed ante justo. Integer euismod libero id mauris malesuada tincidunt. Vivamus commodo nulla ut
@@ -117,15 +117,17 @@ const Proizvod = () => {
                     </div>
                 </div>
             </div>
-            <span className="flex items-center mt-4">
-                <span className="h-px flex-1 bg-white"></span>
-                <span className="shrink-0 px-6 text-white font-bold ">Izdvajamo</span>
-                <span className="h-px flex-1 bg-white"></span>
+            <div className='bg-white mt-4 pt-10'>
+            <span className="flex items-center ">
+                <span className="h-px flex-1 bg-black"></span>
+                <span className="shrink-0 px-6 text-black font-bold ">Izdvajamo</span>
+                <span className="h-px flex-1 bg-black"></span>
             </span>
             <div className="mt-8 grid sm:grid-cols-4 lg:grid-cols-5">
                 {items.map((item)=>(
                     <ProizvodCard />
                 ))}
+            </div>
             </div>
         </div>
     )

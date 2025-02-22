@@ -20,7 +20,7 @@ const Kontakt = () => {
   ];
   return (
     <div className='flex flex-col items-center space-y-12 md:flex-row md:space-y-0 md:space-x-12 px-8 py-4 gap-4'>
-      <div className="mx-auto w-full border border-grey-darker px-6 py-10 text-center shadow lg:mx-0 lg:w-3/8 lg:py-8 lg:text-left xl:w-1/3 xl:px-8">
+      <div id='kont' className="mx-auto w-full border border-grey-darker px-6 py-10 text-center shadow lg:mx-0 lg:w-3/8 lg:py-8 lg:text-left xl:w-1/3 xl:px-8">
         <h2 className="border-b border-grey-dark pb-6 font-butler text-2xl text-secondary sm:text-3xl md:text-4xl">
           Kontakt
         </h2>
@@ -52,11 +52,11 @@ const Kontakt = () => {
           </div>
         </div>
       </div>
-      <div className="mx-auto text-center sm:w-5/6 md:w-full">
+      <div id='faqs' className="mx-auto text-center sm:w-5/6 md:w-full">
         <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl">Često postavljena pitanja (FAQs)</h2>
         <p className="pt-2 text-lg text-gray-600 md:text-xl">
-          Za odgvoro na vaša pitanja javite se putem mejla.
-        </p>
+          Za odgvore na vaša pitanja javite se putem mejla.
+        </p> 
         <div className="pt-12">
           {faqs.map((faq, index) => (
             <div key={index} className="border border-orange-500 mb-2 cursor-pointer">

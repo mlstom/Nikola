@@ -27,14 +27,14 @@ const ProizvodCard = () => {
                     <button
                         className="block w-full rounded-sm bg-gray-100 px-4 py-3 text-sm font-medium text-orange-500 transition hover:scale-105"
                     >
-                        Add to Cart
+                        Vidi više
                     </button>
 
                     <button
                         type="button"
                         className="block w-full rounded-sm bg-orange-500 px-4 py-3 text-sm font-medium text-white transition hover:scale-105"
                     >
-                        Buy Now
+                        Kupi
                     </button>
                 </form>
             </div>
