@@ -68,7 +68,7 @@ const Kontakt = () => {
           {faqs.map((faq, index) => (
             <div key={index} className="border border-orange-500 mb-2 cursor-pointer">
               <div
-                className="flex items-center text-white justify-between bg-orange-400 px-5 py-5 cursor-pointer"
+                className="flex items-center text-white justify-between bg-orange-500 px-5 py-5 cursor-pointer"
                 onClick={() => setFaqIndex(faqIndex === index ? null : index)}
               >
                 <span className="text-lg font-medium">{faq.question}</span>
