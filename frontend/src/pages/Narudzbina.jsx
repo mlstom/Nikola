@@ -1,8 +1,9 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom';
 import CartModal from '../components/CartModal';
-
+import { toast } from 'react-toastify';
 const Narudzbina = () => {
+  const notify = () => toast.success("Kupovina je uspešno izvršena");
   const [formData, setFormData] = useState({
     first_name: "",
     last_name: "",
@@ -46,14 +47,14 @@ const Narudzbina = () => {
           </div>
         </div>
         <div className="flex flex-col items-center justify-between pt-8 sm:flex-row sm:pt-12">
-          <Link to="/korpa" className="group mb-3 flex items-center font-hk text-sm text-secondary transition-all hover:text-primary group-hover:font-bold sm:mb-0">   
+          <Link to="/korpa" className="group mb-3 flex items-center font-hk text-sm text-secondary transition-all hover:text-primary group-hover:font-bold sm:mb-0">
             Return to Cart
           </Link>
-          <a href="/cart/shipping-method" className="block  rounded-sm bg-orange-500 px-12 py-3 text-sm font-medium text-white shadow-sm hover:bg-orange-700 focus:ring-3 focus:outline-hidden sm:w-auto"
-          >Zavsi kupovinu</a>
+          <Link onClick={notify} to="/" className="block  rounded-sm bg-orange-500 px-12 py-3 text-sm font-medium text-white shadow-sm hover:bg-orange-700 focus:ring-3 focus:outline-hidden sm:w-auto"
+          >Zavsi kupovinu</Link>
         </div>
       </div>
-      
+
     </div>
   );
 }
