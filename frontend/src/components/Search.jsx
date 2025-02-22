@@ -3,7 +3,7 @@ import React from 'react'
 const Search = () => {
     return (
         <div className="relative">
-            <label for="Search" className="sr-only"> Search </label>
+            
 
             <input
                 type="text"
@@ -20,7 +20,7 @@ const Search = () => {
                         xmlns="http://www.w3.org/2000/svg"
                         fill="none"
                         viewBox="0 0 24 24"
-                        stroke-width="1.5"
+                        strokeWidth="1.5"
                         stroke="currentColor"
                         className="size-4"
                     >

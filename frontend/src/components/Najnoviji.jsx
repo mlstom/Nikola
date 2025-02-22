@@ -11,8 +11,9 @@ const Najnoviji = () => {
                 <span className="h-px flex-1 bg-black"></span>
             </span>
             <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4 px-8 py-2">
-                {produts.map((item) => (
-                    <ProizvodCard />
+                {produts.map((item,index) => (
+                    <div key={index}><ProizvodCard />
+                    </div>
                 ))}
             </div>
         </div>

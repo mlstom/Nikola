@@ -378,8 +378,8 @@ const Proizvodi = () => {
 
           <div className="lg:col-span-3">
             <div className="grid gap-2 sm:grid-cols-2 lg:grid-cols-4">
-              {items.map((item) => (
-                <div className=''>
+              {items.map((item,index) => (
+                <div className='' key={index}>
                   <ProizvodCard />
                 </div>
               ))}
