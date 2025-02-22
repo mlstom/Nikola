@@ -23,7 +23,7 @@ const Narudzbina = () => {
   };
 
   return (
-    <div className='mx-auto max-w-screen-xl px-6 py-8 sm:px-6 sm:py-12 lg:px-8'>
+    <div className='mx-auto max-w-screen-xl px-6 py-8 sm:px-6 sm:py-12 lg:px-8 flex flex-wrap items-center justify-center gap-10'>
       <CartModal />
       <div className="pt-4 pb-10">
         <h4 className="text-center font-hk text-xl font-medium text-secondary sm:text-left md:text-2xl">
