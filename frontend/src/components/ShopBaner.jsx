@@ -1,5 +1,7 @@
 import React from 'react'
-
+import alati from "../assets/alatiset.jpg";
+import lanci from "../assets/lanci.jpg"
+import alatiset from "../assets/alat.jpg"
 const ShopBaner = () => {
   const items = [
     {
@@ -7,21 +9,21 @@ const ShopBaner = () => {
       description:
         "Nimalo se nećete pokajati ako pogledate naše proizode",
       image:
-        "https://plus.unsplash.com/premium_photo-1679913792906-13ccc5c84d44?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+        alati
     },
     {
-      title: "Usisivači",
+      title: "Lanci",
       description:
-        "Svi najnoviji usisivači na jednom mestu.",
+        "Svi najnoviji lanci na jednom mestu.",
       image:
-        "https://plus.unsplash.com/premium_photo-1675896084254-dcb626387e1e?q=80&w=2135&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+        lanci
     },
     {
-      title: "Rasveta",
+      title: "Dizalice",
       description:
-        "Bezbroj kvalitetne rasvete na jednom mestu.",
+        "Bezbroj kvalitetnih dizalica na jednom mestu.",
       image:
-        "https://plus.unsplash.com/premium_photo-1675896084254-dcb626387e1e?q=80&w=2135&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+        alatiset
     },
   ];
 

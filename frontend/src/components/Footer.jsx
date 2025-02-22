@@ -107,12 +107,12 @@ const Footer = () => {
 
                             <ul className="mt-6 space-y-1">
                                 <li>
-                                    <a className="text-gray-700 transition hover:text-gray-700/75" href="/kontakt/#faqs"> FAQs </a>
+                                    <Link className="text-gray-700 transition hover:text-gray-700/75" to="/kontakt/#faqs"> FAQs </Link>
                                     <p className='text-gray-700 transition  text-[12px] '>Za sva dodatna pitanja javite nam se putem mejla nikola@gmail.con</p>
                                 </li>
 
                                 <li>
-                                    <a className="text-gray-700 transition hover:text-gray-700/75" href="/kontakt/#kont"> Kontakt </a>
+                                    <Link className="text-gray-700 transition hover:text-gray-700/75" to="/kontakt/#kont"> Kontakt </Link>
                                 </li>
 
                             </ul>

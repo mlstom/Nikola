@@ -20,7 +20,7 @@ const Header = () => {
           >
             <Menu />
           </button>
-          <div className="flex items-center lg:order-2 gap-3 justify-between">
+          <div className="flex mt-1 items-center lg:order-2 gap-3 justify-between">
             <Search />
             <Link
               className="relative rounded-lg border-2 border-white px-4 py-2 text-sm leading-[24px] font-medium text-white hover:bg-gray-50 focus:ring-4 focus:ring-gray-300 focus:outline-none sm:mr-2 lg:px-5 lg:py-2.5 dark:hover:bg-gray-700 dark:focus:ring-gray-800"

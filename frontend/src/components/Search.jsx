@@ -1,40 +1,49 @@
 import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 
 const products = [
   {
     id: 1,
     name: "Nike Air Max",
     category: "Shoes",
-    image: "https://images.unsplash.com/photo-1726064855955-5fe51cd6993c?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxmZWF0dXJlZC1waG90b3MtZmVlZHwxfHx8ZW58MHx8fHx8",
+    image: "https://images.unsplash.com/photo-1726137569854-ce11cc10cf67?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxmZWF0dXJlZC1waG90b3MtZmVlZHwxfHx8ZW58MHx8fHx8",
   },
   {
     id: 2,
     name: "Nike Ultraboost",
     category: "Shoes",
-    image: "https://images.unsplash.com/photo-1726064855955-5fe51cd6993c?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxmZWF0dXJlZC1waG90b3MtZmVlZHwxfHx8ZW58MHx8fHx8",
+    image: "https://images.unsplash.com/photo-1726137569854-ce11cc10cf67?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxmZWF0dXJlZC1waG90b3MtZmVlZHwxfHx8ZW58MHx8fHx8",
   },
   {
     id: 3,
     name: "Puma RS-X",
     category: "Shoes",
-    image: "https://images.unsplash.com/photo-1726064855955-5fe51cd6993c?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxmZWF0dXJlZC1waG90b3MtZmVlZHwxfHx8ZW58MHx8fHx8",
+    image: "https://images.unsplash.com/photo-1726137569854-ce11cc10cf67?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxmZWF0dXJlZC1waG90b3MtZmVlZHwxfHx8ZW58MHx8fHx8",
   },
   {
     id: 4,
     name: "Apple iPhone 13",
     category: "Electronics",
-    image: "https://images.unsplash.com/photo-1726064855955-5fe51cd6993c?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxmZWF0dXJlZC1waG90b3MtZmVlZHwxfHx8ZW58MHx8fHx8",
+    image: "https://images.unsplash.com/photo-1726137569854-ce11cc10cf67?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxmZWF0dXJlZC1waG90b3MtZmVlZHwxfHx8ZW58MHx8fHx8",
   },
   {
     id: 5,
     name: "Samsung Galaxy S22",
     category: "Electronics",
-    image: "https://images.unsplash.com/photo-1726064855955-5fe51cd6993c?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxmZWF0dXJlZC1waG90b3MtZmVlZHwxfHx8ZW58MHx8fHx8",
+    image: "https://images.unsplash.com/photo-1726137569854-ce11cc10cf67?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxmZWF0dXJlZC1waG90b3MtZmVlZHwxfHx8ZW58MHx8fHx8",
   },
 ];
 
 const Search = () => {
   const [query, setQuery] = useState("");
+  const navigate = useNavigate();
+
+  const handleSearch = (e) => {
+    if ( query.length > 0) {
+      navigate(`/proizvodi?query=${encodeURIComponent(query)}`);
+    }
+  };
+
   const filteredProducts =
     query.length >= 3
       ? products.filter((product) =>
@@ -48,12 +57,13 @@ const Search = () => {
         type="text"
         id="Search"
         placeholder="Pretraži..."
-        className="w-full rounded-md border  border-gray-300 py-2.5 px-3 text-white shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 sm:text-sm"
+        className="w-full rounded-md border border-gray-300 py-2.5 px-3 text-white shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 sm:text-sm"
         value={query}
         onChange={(e) => setQuery(e.target.value)}
+        onSubmit={handleSearch}
       />
-      <span className="absolute inset-y-0 right-3 flex items-center">
-        <button type="button" className="text-gray-600">
+      <span className="absolute inset-y-0 right-3 flex items-center cursor-pointer">
+        <button type="button" className="text-white" onClick={handleSearch}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
@@ -74,9 +84,10 @@ const Search = () => {
       {filteredProducts.length > 0 && (
         <div className="absolute z-10 mt-2 w-full rounded-md border border-gray-200 bg-white shadow-lg">
           {filteredProducts.map((product) => (
-            <div
+            <Link
               key={product.id}
               className="flex items-center p-3 hover:bg-gray-100"
+              to={`/proizvod/${product.id}`}
             >
               <img
                 src={product.image}
@@ -88,14 +99,14 @@ const Search = () => {
                 <p className="text-xs text-gray-500">{product.category}</p>
               </div>
               <div className="ml-auto space-x-2">
-                <button className="rounded px-3 py-1 text-xs text-black hover:text-gray-600 ">
+                <button className="rounded px-3 py-1 text-xs text-black hover:text-gray-600">
                   Vidi više
                 </button>
-                <button className="rounded bg-orange-500  px-3 py-1 text-xs text-white hover:bg-orange-700">
+                <button className="rounded bg-orange-500 px-3 py-1 text-xs text-white hover:bg-orange-700">
                   Dodaj u korpu
                 </button>
               </div>
-            </div>
+            </Link>
           ))}
         </div>
       )}
