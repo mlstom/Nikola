@@ -1,13 +1,22 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useStateContext } from "../context/StateContext";
 import Alert from "../components/Alert";
+import {   useNavigate } from "react-router-dom";
 const Settings = () => {
   const { admin, setAdmin } = useStateContext();
+  let navigate = useNavigate();
+ 
+  useEffect(() => {
+    if(!admin){
+      navigate('/login')
+    }
+  }, [])
+  
   const [editingField, setEditingField] = useState(null);
   const [openAlert, setopenAlert] = useState(false)
   const [formData, setFormData] = useState({
-    userName: admin.userName,
-    password: admin.password,
+    userName: admin&&  admin.userName,
+    password: admin && admin.lozinka ,
   });
 
   const handleEdit = (field) => {
@@ -31,8 +40,8 @@ const Settings = () => {
   const ugasi = ()=>{
     setEditingField(null)
     setFormData({
-      userName: admin.userName,
-    password: admin.password,
+      userName:admin && admin.userName,
+    password:admin && admin.lozinka,
     })
     setopenAlert(false)
   }
@@ -56,7 +65,7 @@ const Settings = () => {
               />
             ) : (
               <span onClick={() => handleEdit("userName")} className="cursor-pointer">
-                {admin.userName}
+                {admin && admin.userName}
               </span>
             )}
           </dd>
@@ -78,7 +87,7 @@ const Settings = () => {
               />
             ) : (
               <span onClick={() => handleEdit("password")} className="cursor-pointer">
-                1234
+                {admin && admin.lozinka}
               </span>
             )}
           </dd>
