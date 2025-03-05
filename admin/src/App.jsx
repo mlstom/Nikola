@@ -4,24 +4,28 @@ import { useStateContext } from './context/StateContext';
 import { useEffect } from 'react';
 import Sidebar from './components/SideBar';
 
+
 const App = () => {
+  
   const location = useLocation();
-  const {admin} = useStateContext()
+  const {admin,fetchKupci,fetchProizvodi} = useStateContext()
   let navigate = useNavigate();
   useEffect(() => {
-    console.log(admin)
     if(!admin){
       navigate('/login')
     }
     if(location.pathname =='/'){
       navigate('/proizvodi')
     }
+    fetchProizvodi()
+    fetchKupci()
   }, [])
   
   return (
-    <div className='flex'>
+    <div className='flex gap-10'>
       <Sidebar />
-      <Outlet />
+       <Outlet />
+     
     </div>
   )
 }

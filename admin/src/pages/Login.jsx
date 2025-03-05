@@ -85,11 +85,11 @@ const Login = () => {
                     >
                       {passwordVisible ? (
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="w-6 h-6">
-                          <path stroke-linecap="round" color='white' stroke-linejoin="round" stroke-width="2" d="M15 12h.01M12 4a9.98 9.98 0 0 1 6.73 2.73l1.73-1.73A12 12 0 0 0 12 2c-3.33 0-6.33 1.35-8.48 3.52l1.73 1.73A9.98 9.98 0 0 1 12 4zm0 16a9.98 9.98 0 0 1-6.73-2.73l-1.73 1.73A12 12 0 0 0 12 22c3.33 0 6.33-1.35 8.48-3.52l-1.73-1.73A9.98 9.98 0 0 1 12 20z" />
+                          <path strokeLinecap="round" color='white' strokeLinejoin="round" strokeWidth="2" d="M15 12h.01M12 4a9.98 9.98 0 0 1 6.73 2.73l1.73-1.73A12 12 0 0 0 12 2c-3.33 0-6.33 1.35-8.48 3.52l1.73 1.73A9.98 9.98 0 0 1 12 4zm0 16a9.98 9.98 0 0 1-6.73-2.73l-1.73 1.73A12 12 0 0 0 12 22c3.33 0 6.33-1.35 8.48-3.52l-1.73-1.73A9.98 9.98 0 0 1 12 20z" />
                         </svg>
                       ) : (
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="w-6 h-6">
-                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12h.01M12 4a9.98 9.98 0 0 1 6.73 2.73l1.73-1.73A12 12 0 0 0 12 2c-3.33 0-6.33 1.35-8.48 3.52l1.73 1.73A9.98 9.98 0 0 1 12 4zm0 16a9.98 9.98 0 0 1-6.73-2.73l-1.73 1.73A12 12 0 0 0 12 22c3.33 0 6.33-1.35 8.48-3.52l-1.73-1.73A9.98 9.98 0 0 1 12 20z" />
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 12h.01M12 4a9.98 9.98 0 0 1 6.73 2.73l1.73-1.73A12 12 0 0 0 12 2c-3.33 0-6.33 1.35-8.48 3.52l1.73 1.73A9.98 9.98 0 0 1 12 4zm0 16a9.98 9.98 0 0 1-6.73-2.73l-1.73 1.73A12 12 0 0 0 12 22c3.33 0 6.33-1.35 8.48-3.52l-1.73-1.73A9.98 9.98 0 0 1 12 20z" />
                         </svg>
                       )}
                     </button>

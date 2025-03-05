@@ -1,6 +1,6 @@
 import React from 'react'
 
-const Alert = ({text,ugasi}) => {
+const Alert = ({text,ugasi,potvrdi}) => {
     return (
         <div className='z-50 absolute bg-black/70 flex justify-center items-center w-dvw h-dvh  top-0 left-0'>
         <div role="alert" className="max-w-[450px] max-h-[150px] rounded-xl border border-gray-100 bg-white p-4">
@@ -28,10 +28,10 @@ const Alert = ({text,ugasi}) => {
 
                     <div className="mt-4 flex gap-2">
                         <div
-                            
+                            onClick={()=>potvrdi()}
                             className="inline-flex items-center gap-2 rounded-lg bg-orange-500 px-4 py-2 text-white hover:bg-orange-700"
                         >
-                            <span className="text-sm"> Sacuvaj </span>
+                            <span className="text-sm"> Potvrdi </span>
 
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
