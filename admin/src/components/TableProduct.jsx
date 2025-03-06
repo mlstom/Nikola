@@ -4,7 +4,7 @@ import TableSlika from "./TableSlika";
 import axios from "axios";
 
 const TableProduct = ({ kolone, onDelete, proizvodi = [], edit,brojKorpe }) => {
-  const { setIsOpenModel, setOpenProizvod,fetchNarudzbine } = useStateContext();
+  const { setIsOpenModel, setOpenProizvod,fetchNarudzbine,backURL } = useStateContext();
   const [loadingId, setLoadingId] = useState(null);
 
   const handleEdit = (item) => {
@@ -19,7 +19,7 @@ const TableProduct = ({ kolone, onDelete, proizvodi = [], edit,brojKorpe }) => {
   const updateKolicina = async (brojKorpe, idProizvoda, akcija) => {
     setLoadingId(idProizvoda);
     try {
-      const response = await axios.put(`http://localhost:5000/api/narudzbina/korpa/${brojKorpe}/${idProizvoda}`, { akcija });
+      const response = await axios.put(`${backURL}/api/narudzbina/korpa/${brojKorpe}/${idProizvoda}`, { akcija });
       console.log(response.data.message)
       fetchNarudzbine()
     } catch (error) {
@@ -44,7 +44,7 @@ const TableProduct = ({ kolone, onDelete, proizvodi = [], edit,brojKorpe }) => {
         </thead>
 
         <tbody className="divide-y divide-gray-200">
-          {proizvodi.length > 0 ? (
+          {proizvodi?.length > 0 ? (
             proizvodi.map((item, index) => (
               <tr key={index}>
                 {item.kolicina && (

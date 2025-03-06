@@ -4,7 +4,7 @@ import Alert from "./Alert";
 import FileUpload from "./FileUpload";
 import axios from "axios";
 const ModelCreateaTable = () => {
-  const { files, setFiles, fetchProizvodi ,setIsCreateModel} = useStateContext();
+  const { files, setFiles, fetchProizvodi ,setIsCreateModel,backURL} = useStateContext();
     const [openAlert, setOpenAlert] = useState(false);
     const [openALertBrisanjeSlika, setopenALertBrisanjeSlika] = useState(false);
     const [formData, setFormData] = useState({
@@ -22,7 +22,7 @@ const ModelCreateaTable = () => {
 
     async function postSlike(urlSlika, idProizvod) {
         try {
-            const { data } = await axios.post(`http://localhost:5000/api/proizvodSlika/${idProizvod}`, { urlSlika: `${urlSlika}` });
+            const { data } = await axios.post(`${backURL}/api/proizvodSlika/${idProizvod}`, { urlSlika: `${urlSlika}` });
             console.log("Slika sačuvana u bazi:", data);
         } catch (error) {
             console.error("Greška pri čuvanju slike u bazi:", error.response?.data?.message || error.message);
@@ -34,14 +34,14 @@ const ModelCreateaTable = () => {
         setOpenAlert(true);
 
         try {
-            const id = await axios.post(`http://localhost:5000/api/proizvod`, formData);
+            const id = await axios.post(`${backURL}/api/proizvod`, formData);
             
             if (files.length > 0) {
                 for (const file of files) {
                     const formData1 = new FormData();
                     formData1.append('image', file.file);
 
-                    const { data } = await axios.post('http://localhost:5000/api/uploads/upload', formData1, {
+                    const { data } = await axios.post('${backURL}/api/uploads/upload', formData1, {
                         headers: { 'Content-Type': 'multipart/form-data' },
                     });
                     await postSlike(data.filePath, id.data.id);

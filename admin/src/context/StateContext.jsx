@@ -1,7 +1,7 @@
 import React, { createContext, useContext, useState } from 'react';
 import axios from 'axios';
 
-const API_URL = 'http://localhost:5000/api';
+
 
 const Context = createContext();
 
@@ -20,24 +20,28 @@ export const StateContext = ({ children }) => {
   const [trIdProizvoda, settrIdProizvoda] = useState()
   const [filteredProizvodi, setFilteredProizvodi] = useState(proizvodi);
 
+  const backURL = 'https://nikola-1.onrender.com'
+
+
   async function fetchProizvodi() {
-    const data = await axios.get(`${API_URL}/proizvod`)
+    const data = await axios.get(`${backURL}/api/proizvod`)
+   
     setProizvodi(data.data)
   }
   async function fetchKupci() {
-    const data = await axios.get(`${API_URL}/kupac`)
+    const data = await axios.get(`${backURL}/api/kupac`)
     setKupci(data.data)
   }
   async function deleteProizvod(id) {
-    await axios.delete(`${API_URL}/proizvod/${id}`)
+    await axios.delete(`${backURL}/api/proizvod/${id}`)
     fetchProizvodi()
   }
   async function deleteSlikaPoProizvodu(idProizvod) {
-    await axios.delete(`${API_URL}/proizvodSlika//brisanjePoProizvodu/${idProizvod}`)
+    await axios.delete(`${backURL}/api/proizvodSlika/brisanjePoProizvodu/${idProizvod}`)
   }
   const fetchNarudzbine = async () => {
     try {
-      const { data } = await axios.get("http://localhost:5000/api/narudzbina/konacnaNarudzbina");
+      const { data } = await axios.get(`${backURL}/api/narudzbina/konacnaNarudzbina`);
       setNarudzbine(data.narudzbine);
       setFilteredNarudzbine(data.narudzbine);
     } catch (error) {
@@ -50,7 +54,7 @@ export const StateContext = ({ children }) => {
         return;
       }
       try {
-        const response = await axios.get(`http://localhost:5000/api/proizvod/search/${searchQuery}`);
+        const response = await axios.get(`${backURL}/api/proizvod/search/${searchQuery}`);
         console.log(response.data);
         setFilteredProizvodi(response.data);
       } catch (error) {
@@ -76,7 +80,8 @@ export const StateContext = ({ children }) => {
         trKorpa,settrKorpa,
         trIdProizvoda,settrIdProizvoda,
         filteredNarudzbine,setFilteredNarudzbine,
-        filteredProizvodi,setFilteredProizvodi
+        filteredProizvodi,setFilteredProizvodi,
+        backURL
       }}
     >
       {children}

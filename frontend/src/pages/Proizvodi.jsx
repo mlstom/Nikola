@@ -1,17 +1,49 @@
 import React, { useState } from 'react'
 import ProizvodCard from '../components/ProizvodCard'
 import Search from "../components/Search"
+import { useStateContext } from '../context/StateContext'
 const Proizvodi = () => {
-  const items = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+  const { proizvodi } = useStateContext()
   const [showMobileSort, setShowMobileSort] = useState(false);
+  const [selectedSort, setSelectedSort] = useState(""); // Držimo sort opciju
+  const [selectedCategories, setSelectedCategories] = useState([]); // Filter kategorije
+  const [priceRange, setPriceRange] = useState({ min: "", max: "" })
   const kategorije = [
-    { id: "FilterTraktori", naziv: "Traktori" },
-    { id: "FilterTrimeri", naziv: "Trimeri" },
-    { id: "FilterRasveta", naziv: "Rasveta" },
-    { id: "FilterAlati", naziv: "Alati" },
-    { id: "FilterStolice", naziv: "Stolice" },
-    { id: "FilterTestere", naziv: "Testere" },
+    { id: "Traktori", naziv: "Traktori" },
+    { id: "Trimeri", naziv: "Trimeri" },
+    { id: "Rasveta", naziv: "Rasveta" },
+    { id: "Alati", naziv: "Alati" },
+    { id: "Stolice", naziv: "Stolice" },
+    { id: "Ostalo", naziv: "Ostalo" },
   ];
+
+  const sortirajProizvode = (proizvodi) => {
+    if (selectedSort === "priceAsc") {
+      return [...proizvodi].sort((a, b) => a.cena - b.cena);
+    } else if (selectedSort === "priceDesc") {
+      return [...proizvodi].sort((a, b) => b.cena - a.cena);
+    } else if (selectedSort === "latest") {
+      return proizvodi;
+    }
+    return proizvodi;
+  };
+
+  // Funkcija za filtriranje proizvoda
+  const filtrirajProizvode = (proizvodi) => {
+    return proizvodi.filter((proizvod) => {
+      const isInCategory =
+        selectedCategories.length === 0 || selectedCategories.includes(proizvod.kategorija);
+      const isInPriceRange =
+        (!priceRange.min || proizvod.cena >= parseInt(priceRange.min)) &&
+        (!priceRange.max || proizvod.cena <= parseInt(priceRange.max));
+
+      return isInCategory && isInPriceRange;
+    });
+  };
+
+  // Ažuriraj listu proizvoda posle filtriranja i sortiranja
+  const prikazaniProizvodi = sortirajProizvode(filtrirajProizvode(proizvodi));
+
   return (
     <section>
       <div className="mx-auto max-w-screen-xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8">
@@ -49,13 +81,14 @@ const Proizvodi = () => {
               </label>
               <select
                 id="SortByMobile"
+                value={selectedSort}
+                onChange={(e) => setSelectedSort(e.target.value)}
                 className="mt-1 w-full border rounded-sm border-gray-300 text-sm"
               >
                 <option>Izaberi raspored</option>
-                <option value="Title, DESC">Najnovije prvo</option>
-                <option value="Title, ASC">Cena opadajuća</option>
-                <option value="Price, DESC">Cena rastuća</option>
-                <option value="Price, ASC">Preporučeno prvo</option>
+                <option value="latest">Najnovije prvo</option>
+                <option value="priceDesc">Cena opadajuća</option>
+                <option value="priceAsc">Cena rastuća</option>
               </select>
               <details
                 className="overflow-hidden rounded-sm border border-gray-300 [&_summary::-webkit-details-marker]:hidden mt-2"
@@ -86,7 +119,7 @@ const Proizvodi = () => {
                 <div className="border-t border-gray-200 bg-white">
                   <header className="flex items-center justify-between p-4">
 
-                    <button type="button" className="text-sm text-gray-900 underline underline-offset-4">
+                    <button onClick={()=>setPriceRange({ min: "", max: "" })} type="button" className="text-sm text-gray-900 underline underline-offset-4">
                       Reset
                     </button>
                   </header>
@@ -98,6 +131,8 @@ const Proizvodi = () => {
                           type="number"
                           id="FilterPriceFrom"
                           placeholder="Od"
+                          value={priceRange.min}
+                          onChange={(e) => setPriceRange({ ...priceRange, min: e.target.value })}
                           className="w-full rounded-md border-gray-200 shadow-xs sm:text-sm"
                         />
                         <span className="text-sm text-gray-600">RSD</span>
@@ -110,6 +145,8 @@ const Proizvodi = () => {
                           type="number"
                           id="FilterPriceTo"
                           placeholder="Do"
+                          value={priceRange.max}
+                          onChange={(e) => setPriceRange({ ...priceRange, max: e.target.value })}
                           className="w-full rounded-md border-gray-200 shadow-xs sm:text-sm"
                         />
                         <span className="text-sm text-gray-600">RSD</span>
@@ -121,56 +158,64 @@ const Proizvodi = () => {
               </details>
 
               <details
-                  className="overflow-hidden rounded-sm border border-gray-300 [&_summary::-webkit-details-marker]:hidden mt-2"
+                className="overflow-hidden rounded-sm border border-gray-300 [&_summary::-webkit-details-marker]:hidden mt-2"
+              >
+                <summary
+                  className="flex cursor-pointer items-center justify-between gap-2 p-4 text-gray-900 transition"
                 >
-                  <summary
-                    className="flex cursor-pointer items-center justify-between gap-2 p-4 text-gray-900 transition"
-                  >
-                    <span className="text-sm font-medium"> Kategorija </span>
+                  <span className="text-sm font-medium"> Kategorija </span>
 
-                    <span className="transition group-open:-rotate-180">
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        strokeWidth="1.5"
-                        stroke="currentColor"
-                        className="size-4"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          d="M19.5 8.25l-7.5 7.5-7.5-7.5"
-                        />
-                      </svg>
-                    </span>
-                  </summary>
+                  <span className="transition group-open:-rotate-180">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      strokeWidth="1.5"
+                      stroke="currentColor"
+                      className="size-4"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M19.5 8.25l-7.5 7.5-7.5-7.5"
+                      />
+                    </svg>
+                  </span>
+                </summary>
 
-                  <div className="border-t border-gray-200 bg-white">
-                    <header className="flex items-center justify-between p-4">
-                      <span className="text-sm text-gray-700"> 0 Selektovano </span>
+                <div className="border-t border-gray-200 bg-white">
+                  <header className="flex items-center justify-between p-4">
+                    
 
-                      <button type="button" className="text-sm text-gray-900 underline underline-offset-4">
-                        Reset
-                      </button>
-                    </header>
+                    <button onClick={()=>setSelectedCategories([])} type="button" className="text-sm text-gray-900 underline underline-offset-4">
+                      Reset
+                    </button>
+                  </header>
 
-                    <ul className="space-y-1 border-t border-gray-200 p-4">
-                      {kategorije.map((kategorija) => (
-                        <li key={kategorija.id}>
-                          <label htmlFor={kategorija.id} className="inline-flex items-center gap-2">
-                            <input
-                              type="checkbox"
-                              id={kategorija.id}
-                              className="size-5 rounded-sm border-gray-300"
-                            />
-                            <span className="text-sm font-medium text-gray-700">{kategorija.naziv}</span>
-                          </label>
-                        </li>
-                        ))}
-                    </ul>
-                  </div>
-                </details>
+                  <ul className="space-y-1 border-t border-gray-200 p-4">
+                    {kategorije.map((kategorija) => (
+                      <li key={kategorija.id}>
+                        <label htmlFor={kategorija.id} className="inline-flex items-center gap-2">
+                          <input
+                            type="checkbox"
+                            id={kategorija.id}
+                            checked={selectedCategories.includes(kategorija.id)}
+                            onChange={() => {
+                              if (selectedCategories.includes(kategorija.id)) {
+                                setSelectedCategories(selectedCategories.filter((id) => id !== kategorija.id));
+                              } else {
+                                setSelectedCategories([...selectedCategories, kategorija.id]);
+                              }
+                            }}
+                            className="size-5 rounded-sm border-gray-300"
+                          />
+                          <span className="text-sm font-medium text-gray-700">{kategorija.naziv}</span>
+                        </label>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </details>
             </div>
 
           )}
@@ -180,7 +225,10 @@ const Proizvodi = () => {
             <div>
               <label htmlFor="SortBy" className="block text-xs font-medium text-gray-700"> Sortiraj </label>
 
-              <select id="SortBy" className="mt-1 border-1 rounded-sm border-gray-300 text-sm">
+              <select id="SortBy" className="mt-1 border-1 rounded-sm border-gray-300 text-sm"
+                value={selectedSort}
+                onChange={(e) => setSelectedSort(e.target.value)}
+              >
                 <option>Izaberi raspored</option>
                 <option value="Title, DESC">Najnovije prvo</option>
                 <option value="Title, ASC">Cena opadajuća</option>
@@ -193,70 +241,7 @@ const Proizvodi = () => {
               <p className="block text-xs font-medium text-gray-700">Filteri</p>
 
               <div className="mt-1 space-y-2">
-                <details
-                  className="overflow-hidden rounded-sm border border-gray-300 [&_summary::-webkit-details-marker]:hidden"
-                >
-                  <summary
-                    className="flex cursor-pointer items-center justify-between gap-2 p-4 text-gray-900 transition"
-                  >
-                    <span className="text-sm font-medium"> Dostupnost </span>
-
-                    <span className="transition group-open:-rotate-180">
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        strokeWidth="1.5"
-                        stroke="currentColor"
-                        className="size-4"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          d="M19.5 8.25l-7.5 7.5-7.5-7.5"
-                        />
-                      </svg>
-                    </span>
-                  </summary>
-
-                  <div className="border-t border-gray-200 bg-white">
-                    <header className="flex items-center justify-between p-4">
-                      <span className="text-sm text-gray-700"> 0 Seletkovano </span>
-
-                      <button type="button" className="text-sm text-gray-900 underline underline-offset-4">
-                        Reset
-                      </button>
-                    </header>
-
-                    <ul className="space-y-1 border-t border-gray-200 p-4">
-                      <li>
-                        <label htmlFor="FilterInStock" className="inline-flex items-center gap-2">
-                          <input
-                            type="checkbox"
-                            id="FilterInStock"
-                            className="size-5 rounded-sm border-gray-300"
-                          />
-
-                          <span className="text-sm font-medium text-gray-700"> Na stanju (5+) </span>
-                        </label>
-                      </li>
-
-
-                      <li>
-                        <label htmlFor="FilterOutOfStock" className="inline-flex items-center gap-2">
-                          <input
-                            type="checkbox"
-                            id="FilterOutOfStock"
-                            className="size-5 rounded-sm border-gray-300"
-                          />
-
-                          <span className="text-sm font-medium text-gray-700"> Van stanja(10+) </span>
-                        </label>
-                      </li>
-                    </ul>
-                  </div>
-                </details>
-
+                
                 <details
                   className="overflow-hidden rounded-sm border border-gray-300 [&_summary::-webkit-details-marker]:hidden"
                 >
@@ -286,7 +271,7 @@ const Proizvodi = () => {
                   <div className="border-t border-gray-200 bg-white">
                     <header className="flex items-center justify-between p-4">
 
-                      <button type="button" className="text-sm text-gray-900 underline underline-offset-4">
+                      <button onClick={()=>setPriceRange({min:'',max:''})} type="button" className="text-sm text-gray-900 underline underline-offset-4">
                         Reset
                       </button>
                     </header>
@@ -300,6 +285,8 @@ const Proizvodi = () => {
                             type="number"
                             id="FilterPriceFrom"
                             placeholder="Od"
+                            value={priceRange.min}
+                            onChange={(e) => setPriceRange({ ...priceRange, min: e.target.value })}
                             className="w-full rounded-md border-gray-200 shadow-xs sm:text-sm"
                           />
                           <span className="text-sm text-gray-600">RSD</span>
@@ -312,6 +299,8 @@ const Proizvodi = () => {
                             type="number"
                             id="FilterPriceTo"
                             placeholder="Do"
+                            value={priceRange.max}
+                            onChange={(e) => setPriceRange({ ...priceRange, max: e.target.value })}
                             className="w-full rounded-md border-gray-200 shadow-xs sm:text-sm"
                           />
                           <span className="text-sm text-gray-600">RSD</span>
@@ -349,9 +338,8 @@ const Proizvodi = () => {
 
                   <div className="border-t border-gray-200 bg-white">
                     <header className="flex items-center justify-between p-4">
-                      <span className="text-sm text-gray-700"> 0 Selektovano </span>
 
-                      <button type="button" className="text-sm text-gray-900 underline underline-offset-4">
+                      <button onClick={()=>setSelectedCategories([])} type="button" className="text-sm text-gray-900 underline underline-offset-4">
                         Reset
                       </button>
                     </header>
@@ -363,12 +351,20 @@ const Proizvodi = () => {
                             <input
                               type="checkbox"
                               id={kategorija.id}
+                              checked={selectedCategories.includes(kategorija.id)}
+                              onChange={() => {
+                                if (selectedCategories.includes(kategorija.id)) {
+                                  setSelectedCategories(selectedCategories.filter((id) => id !== kategorija.id));
+                                } else {
+                                  setSelectedCategories([...selectedCategories, kategorija.id]);
+                                }
+                              }}
                               className="size-5 rounded-sm border-gray-300"
                             />
                             <span className="text-sm font-medium text-gray-700">{kategorija.naziv}</span>
                           </label>
                         </li>
-                        ))}
+                      ))}
                     </ul>
                   </div>
                 </details>
@@ -377,12 +373,12 @@ const Proizvodi = () => {
           </div>
 
           <div className="lg:col-span-3">
-            <div className="grid gap-2 sm:grid-cols-2 lg:grid-cols-4">
-              {items.map((item,index) => (
-                <div className='' key={index}>
-                  <ProizvodCard />
-                </div>
-              ))}
+            <div className="mt-8 grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4">
+              {prikazaniProizvodi.length > 0 ? (
+                prikazaniProizvodi.map((proizvod) => <ProizvodCard key={proizvod.id} proizvod={proizvod} />)
+              ) : (
+                <p className="text-gray-500">Nema proizvoda koji odgovaraju filterima.</p>
+              )}
             </div>
           </div>
         </div>

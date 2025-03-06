@@ -3,10 +3,10 @@ import axios from 'axios';
 import { useStateContext } from '../context/StateContext';
 import { useNavigate } from "react-router-dom";
 
-const API_URL = 'http://localhost:5000/api/admin';
+
 
 const Login = () => {
-  const { setAdmin } = useStateContext();
+  const { setAdmin,backURL } = useStateContext();
   const [formData, setFormData] = useState({ userName: '', lozinka: '' });
   const [nepostojeci, setnepostojeci] = useState(false);
   const [passwordVisible, setPasswordVisible] = useState(false); // Stanje za vidljivost lozinke
@@ -27,7 +27,7 @@ const Login = () => {
   const loginAdmin = async (e) => {
     e.preventDefault(); // Sprečava refresh stranice pri submit-u
     try {
-      const response = await axios.post(`${API_URL}/login`, formData);
+      const response = await axios.post(`${backURL}/login`, formData);
       setAdmin(response.data.admin);
       console.log("Login uspeo");
       navigate("/proizvodi");

@@ -2,15 +2,15 @@ import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import { useStateContext } from '../context/StateContext';
 
-const API_URL = 'http://localhost:5000/api';
+
 
 const TableSlika = ({ item }) => {
     const [slikeProizvoda, setSlikeProizvoda] = useState([])
-    const { isOpenModel, fetchProizvodi } = useStateContext()
+    const { isOpenModel, fetchProizvodi,backURL } = useStateContext()
 
     async function getSlikeProizvoda(id) {
         try {
-            const response = await axios.get(`${API_URL}/proizvodSlika/proizvod/${id}`)
+            const response = await axios.get(`${backURL}/api/proizvodSlika/proizvod/${id}`)
             setSlikeProizvoda(response.data)
             
         } catch (error) {
@@ -25,7 +25,7 @@ const TableSlika = ({ item }) => {
 
     const handleDelete = async (slika) => {
         try {
-            await axios.delete(`${API_URL}/proizvodSlika/delete/${slika.id}`);
+            await axios.delete(`${backURL}/api/proizvodSlika/delete/${slika.id}`);
             setSlikeProizvoda(prevSlike => prevSlike.filter(s => s.id !== slika.id));
             fetchProizvodi();
         } catch (error) {
@@ -49,7 +49,7 @@ const TableSlika = ({ item }) => {
                         <img
                             className="relative mr-4 inline-block h-16 w-16 rounded-lg object-cover object-center"
                             alt="Image placeholder"
-                            src={`http://localhost:5000${slika.urlSlika}`}
+                            src={`${backURL}${slika.urlSlika}`}
                         />
                     </div>
                 )

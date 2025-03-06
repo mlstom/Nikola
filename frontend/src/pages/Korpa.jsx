@@ -1,41 +1,61 @@
-import React, { useState } from 'react';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { useStateContext } from '../context/StateContext';
+import axios from 'axios';
+import { toast } from 'react-toastify';
 
 const Korpa = () => {
-  const [proizvodi, setProizvodi] = useState([
-    {
-      id: 1,
-      naziv: 'Basic Tee 6-Pack',
-      slika: 'https://images.unsplash.com/photo-1618354691373-d851c5c3a990?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=830&q=80',
-      kategorija: 'XXS',
-      kolicina: 1,
-      cena: 50,
-    },
-    {
-      id: 2,
-      naziv: 'Premium Hoodie',
-      slika: 'https://images.unsplash.com/photo-1618354691373-d851c5c3a990?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=830&q=80',
-      kategorija: 'M',
-      kolicina: 1,
-      cena: 80,
-    },
-  ]);
+  const { newOrder, setNewOrder, backURL } = useStateContext();
 
+  // Brisanje proizvoda iz korpe
   const handleRemove = (id) => {
-    setProizvodi(proizvodi.filter((proizvod) => proizvod.id !== id));
+    setNewOrder((prevOrder) => ({
+      ...prevOrder,
+      proizvodi: prevOrder.proizvodi.filter((p) => p.id !== id),
+    }));
   };
 
+  // Promena količine proizvoda
   const handleQuantityChange = (id, novaKolicina) => {
-    setProizvodi(
-      proizvodi.map((proizvod) =>
-        proizvod.id === id ? { ...proizvod, kolicina: novaKolicina } : proizvod
-      )
-    );
+    const proizvodStanje = newOrder.proizvodi.find((prev)=>(prev.id == id)).stanje
+    if(novaKolicina<= proizvodStanje)
+    {setNewOrder((prevOrder) => ({
+      ...prevOrder,
+      proizvodi: prevOrder.proizvodi.map((p) =>
+        p.id === id ? { ...p, kolicina: novaKolicina } : p
+      ),
+    }));}else{
+      toast.warning("Ne mozes dodati vise od stanja proizvoda")
+    }
   };
 
-  const subtotal = proizvodi.reduce((sum, p) => sum + p.kolicina * p.cena, 0);
-  const vat = subtotal * 0.1;
-  const discount = 20;
+  // Dohvatanje slika proizvoda i dodavanje u state
+  const fetchSlike = async (id) => {
+    try {
+      const { data } = await axios.get(`${backURL}/api/proizvodSlika/proizvod/${id}`);
+      setNewOrder((prevOrder) => ({
+        ...prevOrder,
+        proizvodi: prevOrder.proizvodi.map((p) =>
+          p.id === id ? { ...p, slike: data } : p
+        ),
+      }));
+    } catch (error) {
+      console.error('Greška prilikom dohvatanja slika:', error);
+    }
+  };
+
+  // Poziv fetchSlike za svaki proizvod koji nema slike
+  useEffect(() => {
+    newOrder.proizvodi.forEach((p) => {
+      if (!p.slike || p.slike.length === 0) {
+        fetchSlike(p.id);
+      }
+    });
+  }, [newOrder]);
+
+  const subtotal = newOrder.proizvodi.reduce((sum, p) => sum + p.kolicina * p.cena, 0);
+  const vat = 500;
+  const discount = 2000;
   const total = subtotal + vat - discount;
 
   return (
@@ -48,10 +68,10 @@ const Korpa = () => {
 
           <div className="mt-8">
             <ul className="space-y-4">
-              {proizvodi.map((proizvod) => (
+              {newOrder.proizvodi.map((proizvod) => (
                 <li key={proizvod.id} className="flex items-center gap-4">
                   <img
-                    src={proizvod.slika}
+                    src={proizvod.slike?.[0]?.urlSlika ? `${backURL}${proizvod.slike[0].urlSlika}` : '/placeholder.jpg'}
                     alt={proizvod.naziv}
                     className="size-16 rounded-sm object-cover"
                   />
@@ -69,9 +89,13 @@ const Korpa = () => {
                   <div className="flex flex-1 items-center justify-end gap-2">
                     <input
                       type="number"
-                      min="1"
-                      value={proizvod.kolicina}
-                      onChange={(e) => handleQuantityChange(proizvod.id, parseInt(e.target.value))}
+                      min="0"
+                      value={isNaN(proizvod.kolicina) || proizvod.kolicina < 1 ? 0 : proizvod.kolicina}
+                      onChange={(e) => {
+                        let novaKolicina = parseInt(e.target.value);
+                        if (isNaN(novaKolicina) ) novaKolicina = 0; // Sprečavamo NaN i negativne vrednosti
+                        handleQuantityChange(proizvod.id, novaKolicina);
+                      }}
                       className="h-8 w-12 rounded-sm border-gray-200 bg-gray-50 p-0 text-center text-xs text-gray-600"
                     />
                     <button
@@ -82,6 +106,7 @@ const Korpa = () => {
                       ❌
                     </button>
                   </div>
+
                 </li>
               ))}
             </ul>
@@ -91,19 +116,19 @@ const Korpa = () => {
                 <dl className="text-sm text-gray-700">
                   <div className="flex justify-between">
                     <dt>Cena:</dt>
-                    <dd>£{subtotal.toFixed(2)}</dd>
+                    <dd>{subtotal.toFixed(2)}RSD</dd>
                   </div>
                   <div className="flex justify-between">
                     <dt>Poštarina</dt>
-                    <dd>£{vat.toFixed(2)}</dd>
+                    <dd>{vat.toFixed(2)}RSD</dd>
                   </div>
                   <div className="flex justify-between">
                     <dt>Popust</dt>
-                    <dd>-£{discount.toFixed(2)}</dd>
+                    <dd>-{discount.toFixed(2)}RSD</dd>
                   </div>
                   <div className="flex justify-between text-base font-medium">
                     <dt>Ukupno</dt>
-                    <dd>£{total.toFixed(2)}</dd>
+                    <dd>{total.toFixed(2)}RSD</dd>
                   </div>
                 </dl>
 

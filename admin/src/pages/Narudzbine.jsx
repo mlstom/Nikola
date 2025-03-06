@@ -13,6 +13,8 @@ const Narudzbine = () => {
   const [editState, setEditState] = useState({}); // Track the edit state per order
   const [noviBroj, setnoviBroj] = useState("");
 
+  const{backURL} = useStateContext()
+
   const kolone = ["id", "sifra", "naziv", "opis", "kategorija", "cena", "stanje", "slike"];
 
   const { akcija, trIdProizvoda, trKorpa, settrKorpa, fetchNarudzbine, filteredNarudzbine, setFilteredNarudzbine,proizvodi,fetchProizvodi,handleSearchProizvoda,filteredProizvodi,setFilteredProizvodi} = useStateContext()
@@ -33,7 +35,7 @@ const Narudzbine = () => {
   const handleAddOrder = async () => {
     try {
       // 1. Kreiranje kupca
-      const kupacResponse = await axios.post("http://localhost:5000/api/kupac", {
+      const kupacResponse = await axios.post(`${backURL}/api/kupac`, {
         ime: newOrder.ime,
         prezime: newOrder.prezime,
         email: newOrder.email,
@@ -50,7 +52,7 @@ const Narudzbine = () => {
   
       // 3. Dodavanje proizvoda u korpu
       await Promise.all(newOrder.proizvodi.map(async (proizvod) => {
-        await axios.post("http://localhost:5000/api/narudzbina/korpa", {
+        await axios.post(`${backURL}/api/narudzbina/korpa`, {
           brojKorpe: brojKorpe,
           idProizvoda: proizvod.id,
           kolicina: proizvod.kolicina
@@ -60,7 +62,7 @@ const Narudzbine = () => {
       // 4. Kreiranje narudžbine
       const brojPosiljke ="Posiljka"+ Math.floor(100000 + Math.random() * 900000); // Šestocifren broj pošiljke
   
-      await axios.post("http://localhost:5000/api/narudzbina", {
+      await axios.post(`${backURL}/api/narudzbina`, {
         brojKorpe: brojKorpe,
         idKupca: idKupca,
         brojPosiljke: brojPosiljke,
@@ -107,14 +109,14 @@ const Narudzbine = () => {
       setFilteredNarudzbine(narudzbine)
       return
     }
-    const { data } = await axios.get(`http://localhost:5000/api/narudzbina/search/${e.target.value}`)
+    const { data } = await axios.get(`${backURL}/api/narudzbina/search/${e.target.value}`)
     console.log(data)
     setFilteredNarudzbine(data.narudzbine)
   };
 
   const handleDeleteOrder = async (brojPosiljke) => {
     try {
-      await axios.delete(`http://localhost:5000/api/narudzbina/${brojPosiljke}`);
+      await axios.delete(`${backURL}/api/narudzbina/${brojPosiljke}`);
       setNarudzbine(narudzbine.filter(n => n.brojPosiljke !== brojPosiljke));
     } catch (error) {
       console.error("Greška pri brisanju narudžbine:", error);
@@ -123,7 +125,7 @@ const Narudzbine = () => {
 
   const handleStatusChange = async (brojPosiljke, poslato) => {
     try {
-      await axios.put(`http://localhost:5000/api/narudzbina/poslato/${brojPosiljke}`, { poslato });
+      await axios.put(`${backURL}/api/narudzbina/poslato/${brojPosiljke}`, { poslato });
       setNarudzbine(narudzbine.map(n => n.brojPosiljke === brojPosiljke ? { ...n, poslato } : n));
       setFilteredNarudzbine(narudzbine.map(n => n.brojPosiljke === brojPosiljke ? { ...n, poslato } : n))
     } catch (error) {
@@ -133,8 +135,8 @@ const Narudzbine = () => {
 
   const handlePromeniBroj = async (stariBroj, noviBroj) => {
     try {
-      await axios.put(`http://localhost:5000/api/narudzbina/broj/${stariBroj}`, { noviBroj });
-      const { data } = await axios.get("http://localhost:5000/api/narudzbina/konacnaNarudzbina");
+      await axios.put(`${backURL}/api/narudzbina/broj/${stariBroj}`, { noviBroj });
+      const { data } = await axios.get(`${backURL}/api/narudzbina/konacnaNarudzbina`);
       setNarudzbine(data.narudzbine);
       setFilteredNarudzbine(data.narudzbine);
       setEditState((prevState) => ({ ...prevState, [stariBroj]: false })); // Reset the edit state

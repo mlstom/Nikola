@@ -1,8 +1,17 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import ProizvodCard from './ProizvodCard'
+import { useStateContext } from '../context/StateContext'
 
 const Najnoviji = () => {
-    const produts = [1, 2, 3, 4]
+    const {proizvodi} = useStateContext()
+    const [najnovijiProizvodi, setNajnovijiProizvodi] = useState([])
+    useEffect(() => {
+        const pom = proizvodi.slice(-4).reverse();
+        console.log("Privremeni niz:", pom); 
+    
+        setNajnovijiProizvodi(pom);
+    }, [proizvodi]);
+    
     return (
         <div>
             <span className="flex items-center mt-2 font-[700]">
@@ -11,8 +20,8 @@ const Najnoviji = () => {
                 <span className="h-px flex-1 bg-black"></span>
             </span>
             <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4 px-8 py-2">
-                {produts.map((item,index) => (
-                    <div key={index}><ProizvodCard />
+                {najnovijiProizvodi.map((item,index) => (
+                    <div key={index}><ProizvodCard proizvod={item} />
                     </div>
                 ))}
             </div>

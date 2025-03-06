@@ -4,7 +4,6 @@ import ModelTable from "../components/ModelTable";
 import { useStateContext } from "../context/StateContext";
 import Alert from "../components/Alert";
 import ModelCreateaTable from "../components/ModelCreateaTable";
-import axios from "axios";
 
 const Proizvodi = () => {
   const {

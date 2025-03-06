@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import axios from "axios";
+import { useStateContext } from "../context/StateContext";
 
 const CustomerDetails = ({ kupac }) => {
   const [editMode, setEditMode] = useState({});
   const [customerData, setCustomerData] = useState(kupac);
-
+  const {backURL}= useStateContext()
   const handleEdit = (field, subField = null) => {
     setEditMode({ ...editMode, [field]: subField || true });
   };
@@ -34,7 +35,7 @@ const CustomerDetails = ({ kupac }) => {
       const { ime, prezime, email, telefon, adresa, postanskiBroj, mesto } = customerData;
       const dataToSend = { ime, prezime, email, telefon, adresa, postanskiBroj, mesto, ...updatedData };
   
-      const response = await axios.put(`http://localhost:5000/api/kupac/${customerData.id}`, dataToSend);
+      const response = await axios.put(`${backURL}/api/kupac/${customerData.id}`, dataToSend);
   
       // Osveži customerData sa podacima iz odgovora servera
       setCustomerData(response.data); 

@@ -1,26 +1,12 @@
 import React, { useState } from "react";
+import { useStateContext } from "../context/StateContext";
 
 const CartModal = () => {
-  const [items, setItems] = useState([
-    {
-      id: 1,
-      naziv: 'Basic Tee 6-Pack',
-      slika: 'https://images.unsplash.com/photo-1618354691373-d851c5c3a990?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=830&q=80',
-      kategorija: 'XXS',
-      kolicina: 1,
-      cena: 50,
-    },
-    {
-      id: 2,
-      naziv: 'Premium Hoodie',
-      slika: 'https://images.unsplash.com/photo-1618354691373-d851c5c3a990?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=830&q=80',
-      kategorija: 'M',
-      kolicina: 1,
-      cena: 80,
-    },
-    
-
-  ]);
+  const{newOrder,setNewOrder,backURL} = useStateContext()
+  const subtotal = newOrder.proizvodi.reduce((sum, p) => sum + p.kolicina * p.cena, 0);
+  const vat = 500;
+  const discount = 2000;
+  const total = subtotal + vat - discount;
   return (
     <div
       className="relative w-screen max-w-sm border  border-gray-600 bg-white px-4 py-8 sm:px-4  lg:px-8"
@@ -31,10 +17,10 @@ const CartModal = () => {
       <h1>Proizvodi u korpi</h1>
       <div className="mt-4 space-y-6">
         <ul className="space-y-4">
-          {items.map((item, index) => (
+          {newOrder.proizvodi.map((item, index) => (
             <li key={index} className="flex items-center gap-4">
               <img
-                src={item.slika}
+                src={`${backURL}${item.slike[0]?.urlSlika}`}
                 alt={item.naziv}
                 className="size-16 rounded-sm object-cover"
               />
@@ -60,19 +46,19 @@ const CartModal = () => {
         <dl className="text-sm text-gray-700">
           <div className="flex justify-between">
             <dt>Cena:</dt>
-            <dd>£123</dd>
+            <dd>{subtotal}RSD</dd>
           </div>
           <div className="flex justify-between">
-            <dt>Poštarina</dt>
-            <dd>£123</dd>
+            <dt>Poštarina:</dt>
+            <dd>{vat}RSD</dd>
           </div>
           <div className="flex justify-between">
-            <dt>Popust</dt>
-            <dd>-£123</dd>
+            <dt>Popust:</dt>
+            <dd>-{discount}RSD</dd>
           </div>
           <div className="flex justify-between text-base font-medium">
-            <dt>Ukupno</dt>
-            <dd>£123</dd>
+            <dt>Ukupno:</dt>
+            <dd>{total}RSD</dd>
           </div>
         </dl>
       </div>

@@ -1,62 +1,155 @@
-import React, { useState } from 'react'
+import React from 'react';
 import { Link } from 'react-router-dom';
 import CartModal from '../components/CartModal';
 import { toast } from 'react-toastify';
+import { useStateContext } from '../context/StateContext';
+import axios from 'axios';
+
 const Narudzbina = () => {
   const notify = () => toast.success("Kupovina je uspešno izvršena");
-  const [formData, setFormData] = useState({
-    first_name: "",
-    last_name: "",
-    address: "",
-    address2: "",
-    city: "",
-    country: "",
-    post_code: "",
-    save_info: false,
-  });
+  const { newOrder, setNewOrder, backURL } = useStateContext();
 
   const handleChange = (e) => {
-    const { id, value, type, checked } = e.target;
-    setFormData({
-      ...formData,
-      [id]: type === "checkbox" ? checked : value,
-    });
+    const { id, value } = e.target;
+    setNewOrder((prevOrder) => ({
+      ...prevOrder,
+      kupac: {
+        ...prevOrder.kupac,
+        [id]: value, // Direktno ažuriranje kupca unutar newOrder
+      },
+    }));
   };
+  const zavrsiKupovinu = async () => {
+    try {
+      const kupac = {
+        ime: newOrder.ime,
+        prezime: newOrder.prezime,
+        email: newOrder.email,
+        telefon: newOrder.telefon,
+        postanskiBroj: newOrder.postanskiBroj,
+        mesto: newOrder.mesto
+      }
+      const kupacResponse = await axios.post(`${backURL}/api/kupac`, kupac)
+
+      const idKupca = kupacResponse.data.id;
+
+      const brojKorpe = "KORPA" + Math.floor(100000 + Math.random() * 900000);
+
+      await Promise.all(newOrder.proizvodi.map(async (proizvod) => {
+        await axios.post(`${backURL}/api/narudzbina/korpa`, {
+          brojKorpe: brojKorpe,
+          idProizvoda: proizvod.id,
+          kolicina: proizvod.kolicina
+        });
+      }));
+
+      const brojPosiljke = "Posiljka" + Math.floor(100000 + Math.random() * 900000); // Šestocifren broj pošiljke
+
+      await axios.post(`${backURL}/api/narudzbina`, {
+        brojKorpe: brojKorpe,
+        idKupca: idKupca,
+        brojPosiljke: brojPosiljke,
+        poslato: 0
+      });
+
+
+    } catch (error) {
+      toast.error(`Greška: ${error.message}`);
+    }
+  }
 
   return (
-    <div className='m-auto max-w-screen-xl px-6 py-8  sm:py-12 lg:px-8 flex flex-wrap items-center justify-center gap-10'>
+    <div className="m-auto max-w-screen-xl px-6 py-8 sm:py-12 lg:px-8 flex flex-wrap items-center justify-center gap-10">
       <CartModal />
-      <div className="pt-4 pb-10 pl-8">
+      <div className="pt-4 pb-10 pl-8 overflow-x-scroll">
         <h4 className="text-center font-hk text-xl font-medium text-secondary sm:text-left md:text-2xl">
-          Shipping address
+          Shipping Address
         </h4>
-        <div className="pt-4 md:pt-5">
-          <div className="flex justify-between">
-            <input type="text" placeholder="First Name" className="form-input mb-4  sm:mb-5" id="first_name" value={formData.first_name} onChange={handleChange} />
-            <input type="text" placeholder="Last Name" className="form-input mb-4  sm:mb-5" id="last_name" value={formData.last_name} onChange={handleChange} />
+        <div className="pt-4 md:pt-5 ">
+          <div className="flex justify-between ">
+            <input
+              type="text"
+              placeholder="Ime"
+              className="form-input mb-4 sm:mb-5"
+              id="ime"
+              value={newOrder.kupac?.ime || ""}
+              onChange={handleChange}
+            />
+            <input
+              type="text"
+              placeholder="Prezime"
+              className="form-input mb-4 sm:mb-5"
+              id="prezime"
+              value={newOrder.kupac?.prezime || ""}
+              onChange={handleChange}
+            />
           </div>
-          <input type="text" placeholder="Your address" className="form-input mb-4 sm:mb-5" id="address" value={formData.address} onChange={handleChange} />
-          <input type="text" placeholder="Apartment, Suite, etc" className="form-input mb-4 sm:mb-5" id="address2" value={formData.address2} onChange={handleChange} />
-          <input type="text" placeholder="City" className="form-input mb-4 sm:mb-5" id="city" value={formData.city} onChange={handleChange} />
+          <input
+            type="email"
+            placeholder="Email"
+            className="form-input mb-4 sm:mb-5"
+            id="email"
+            value={newOrder.kupac?.email || ""}
+            onChange={handleChange}
+          />
+          <input
+            type="text"
+            placeholder="Telefon"
+            className="form-input mb-4 sm:mb-5"
+            id="telefon"
+            value={newOrder.kupac?.telefon || ""}
+            onChange={handleChange}
+          />
+          <input
+            type="text"
+            placeholder="Adresa"
+            className="form-input mb-4 sm:mb-5"
+            id="adresa"
+            value={newOrder.kupac?.adresa || ""}
+            onChange={handleChange}
+          />
           <div className="flex justify-between">
-            <input type="text" placeholder="Country/Region" className="form-input mb-4  sm:mb-5" id="country" value={formData.country} onChange={handleChange} />
-            <input type="number" placeholder="Post code" className="form-input mb-4  sm:mb-5" id="post_code" value={formData.post_code} onChange={handleChange} />
+            <input
+              type="text"
+              placeholder="Mesto"
+              className="form-input mb-4 sm:mb-5"
+              id="mesto"
+              value={newOrder.kupac?.mesto || ""}
+              onChange={handleChange}
+            />
+            <input
+              type="number"
+              placeholder="Poštanski broj"
+              className="form-input mb-4 sm:mb-5"
+              id="postanskiBroj"
+              value={newOrder.kupac?.postanskiBroj || ""}
+              onChange={handleChange}
+            />
           </div>
           <div className="flex items-center pt-2">
-            <p className="pl-3 font-hk text-sm text-secondary">Prihvatamo plaćanje samo pouzećom</p>
+            <p className="pl-3 font-hk text-sm text-secondary">
+              Prihvatamo plaćanje samo pouzećem
+            </p>
           </div>
         </div>
         <div className="flex flex-col items-center justify-between pt-8 sm:flex-row sm:pt-12">
-          <Link to="/korpa" className="group mb-3 flex items-center font-hk text-sm text-secondary transition-all hover:text-primary group-hover:font-bold sm:mb-0">
+          <Link
+            to="/korpa"
+            className="group mb-3 flex items-center font-hk text-sm text-secondary transition-all hover:text-primary group-hover:font-bold sm:mb-0"
+          >
             Return to Cart
           </Link>
-          <Link onClick={notify} to="/" className="block  rounded-sm bg-orange-500 px-12 py-3 text-sm font-medium text-white shadow-sm hover:bg-orange-700 focus:ring-3 focus:outline-hidden sm:w-auto"
-          >Zavsi kupovinu</Link>
+          <Link
+            onClick={zavrsiKupovinu}
+            to="/"
+            className="block rounded-sm bg-orange-500 px-12 py-3 text-sm font-medium text-white shadow-sm hover:bg-orange-700 focus:ring-3 focus:outline-hidden sm:w-auto"
+          >
+            Završi kupovinu
+          </Link>
         </div>
       </div>
-
     </div>
   );
-}
+};
 
-export default Narudzbina
+export default Narudzbina;

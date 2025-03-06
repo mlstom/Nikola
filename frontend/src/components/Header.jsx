@@ -1,10 +1,11 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { ShoppingCart,Menu } from 'lucide-react';
 import Search from "./Search";
+import { useStateContext } from "../context/StateContext";
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const cartItemCount = 3;
+  const {newOrder} = useStateContext()
   return (
     <header className="w-full">
       <nav className="border-gray-200 bg-black py-2.5">
@@ -27,9 +28,9 @@ const Header = () => {
               to="/korpa"
             >
               <ShoppingCart className="h-6 w-6" />
-              {cartItemCount > 0 && (
+              {(
                 <span className="absolute -top-1 -right-1 flex h-5 w-5 items-center justify-center rounded-full bg-orange-500 text-xs font-bold text-white">
-                  {cartItemCount}
+                  {newOrder?.proizvodi.length}
                 </span>
               )}
             </Link>
