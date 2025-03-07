@@ -48,24 +48,23 @@ const Narudzbine = () => {
       const idKupca = kupacResponse.data.id; // ID kupca iz odgovora
   
       // 2. Kreiranje broja korpe (generisanje nasumičnog broja)
-      const brojKorpe ="KORPA"+ Math.floor(100000 + Math.random() * 900000); 
-  
+
+      
       // 3. Dodavanje proizvoda u korpu
-      await Promise.all(newOrder.proizvodi.map(async (proizvod) => {
-        console,log(proizvod)
-        await axios.post(`${backURL}/api/narudzbina/korpa`, {
-          brojKorpe: brojKorpe,
-          idProizvoda: proizvod.id,
+      await Promise.allSettled(newOrder.proizvodi.map(async (proizvod) => {
+        
+        return axios.post(`${backURL}/api/narudzbina/korpa`, {
+          idProizvod: proizvod.id,
           kolicina: proizvod.kolicina
         });
-      }));
+      })).then(results => console.log(results));
   
       // 4. Kreiranje narudžbine
-      const brojPosiljke ="Posiljka"+ Math.floor(100000 + Math.random() * 900000); // Šestocifren broj pošiljke
+      const brojPosiljke =Math.floor(100000 + Math.random() * 900000); // Šestocifren broj pošiljke
   
       await axios.post(`${backURL}/api/narudzbina`, {
         brojKorpe: brojKorpe,
-        idKupca: idKupca,
+        idPodaciKupca: idKupca,
         brojPosiljke: brojPosiljke,
         poslato: 0
       });
@@ -325,7 +324,7 @@ const Narudzbine = () => {
       )}
 
       {/* Lista narudžbina */}
-      {filteredNarudzbine.map((narudzbina) => (
+      {filteredNarudzbine?.map((narudzbina) => (
         <div key={narudzbina.brojPosiljke} className="border p-4 mb-4 rounded-md shadow">
           <h2 className="text-lg font-bold">
             {!editState[narudzbina.brojPosiljke] ? (
