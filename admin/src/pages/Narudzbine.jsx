@@ -48,35 +48,27 @@ const Narudzbine = () => {
       const idKupca = kupacResponse.data.id; // ID kupca iz odgovora
   
       // 2. Kreiranje broja korpe (generisanje nasumičnog broja)
-
+      const brojKorpe =Math.floor(100000 + Math.random() * 900000); 
       
       // 3. Dodavanje proizvoda u korpu
-      const response = await axios.post(`${backURL}/api/narudzbina/korpa`,{
-          idProizvod: 6,
-          kolicina: 1,
-        }
-      );
-      /*for (const proizvod of newOrder.proizvodi) {
-        try {
-          console.log(proizvod)
-          
-          console.log("Uspešno poslat:", response.data);
-        } catch (error) {
-          console.error("Greška pri slanju:", error.response?.data || error.message);
-        }
-      }*/
-      
-      
+      await Promise.allSettled(newOrder.proizvodi.map(async (proizvod) => {
+        
+        return axios.post(`${backURL}/api/narudzbina/korpa`, {
+          brojKorpe: brojKorpe,
+          idProizvod: proizvod.id,
+          kolicina: proizvod.kolicina
+        });
+      })).then(results => console.log(results));
   
       // 4. Kreiranje narudžbine
-      const brojPosiljke ="Korpa"+Math.floor(100000 + Math.random() * 900000); // Šestocifren broj pošiljke
+      const brojPosiljke =Math.floor(100000 + Math.random() * 900000); // Šestocifren broj pošiljke
   
-     /* await axios.post(`${backURL}/api/narudzbina`, {
-        brojKorpe: korpaRes.data.brojKorpe,
+      await axios.post(`${backURL}/api/narudzbina`, {
+        brojKorpe: brojKorpe,
         idPodaciKupca: idKupca,
         brojPosiljke: brojPosiljke,
         poslato: 0
-      });*/
+      });
   
       // Osveži podatke i zatvori modal
       fetchNarudzbine();
