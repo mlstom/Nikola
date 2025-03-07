@@ -30,7 +30,7 @@ router.get("jednaNarudzbina/:id", (req, res) => {
 router.post("/", (req, res) => {
     const { brojKorpe, idPodaciKupca, brojPosiljke, poslato } = req.body;
     db.query(
-        "INSERT INTO Narudzbina (brojKorpe, idPodaciKupca, brojPosiljke,  poslato) VALUES (?, ?, ?, ?)",
+        "INSERT INTO Narudzbina (brojKorpe, idKupac, brojPosiljke,  poslato) VALUES (?, ?, ?, ?)",
         [brojKorpe, idPodaciKupca, brojPosiljke, poslato],
         (err, result) => {
             if (err) return res.status(500).json(err);
