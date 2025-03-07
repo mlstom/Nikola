@@ -62,6 +62,7 @@ router.get('/korpa/:brojKorpe', (res, req) => {
 
 router.post("/korpa",(res,req)=>{
     const{idProizvod,kolicina} = req.body
+    console.log("Primljen zahtev:", req.body);
     const brojKorpe = "KORPA" + Math.floor(100000 + Math.random() * 900000)
     db.query("INSERT INTO Korpa (brojKorpe, idProizvod, kolicina) VALUES (?, ?, ?)", [brojKorpe,idProizvod,kolicina], (err, result) => {
         res.json(result)

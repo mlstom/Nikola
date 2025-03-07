@@ -53,7 +53,7 @@ const Narudzbine = () => {
       // 3. Dodavanje proizvoda u korpu
       let korpaRes
       await Promise.allSettled(newOrder.proizvodi.map(async (proizvod) => {
-        
+        console.log(proizvod)
         return axios.post(`${backURL}/api/narudzbina/korpa`, {
           idProizvod: proizvod.id,
           kolicina: proizvod.kolicina
@@ -64,10 +64,10 @@ const Narudzbine = () => {
       console.log(korpaRes)
   
       // 4. Kreiranje narudžbine
-      const brojPosiljke =Math.floor(100000 + Math.random() * 900000); // Šestocifren broj pošiljke
+      const brojPosiljke ="Korpa"+Math.floor(100000 + Math.random() * 900000); // Šestocifren broj pošiljke
   
       await axios.post(`${backURL}/api/narudzbina`, {
-        brojKorpe: brojKorpe,
+        brojKorpe: korpaRes.data.brojKorpe,
         idPodaciKupca: idKupca,
         brojPosiljke: brojPosiljke,
         poslato: 0
