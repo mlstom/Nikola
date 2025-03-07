@@ -52,6 +52,7 @@ const Narudzbine = () => {
   
       // 3. Dodavanje proizvoda u korpu
       await Promise.all(newOrder.proizvodi.map(async (proizvod) => {
+        console,log(proizvod)
         await axios.post(`${backURL}/api/narudzbina/korpa`, {
           brojKorpe: brojKorpe,
           idProizvoda: proizvod.id,
@@ -153,7 +154,7 @@ const Narudzbine = () => {
   };
   const handlePromenaProizvoda = () => {
     axios
-      .post(`/korpa/${trKorpa}/${trIdProizvoda}`, { akcija })
+      .post(`${backURL}/api/narudzbina/korpa/${trKorpa}/${trIdProizvoda}`, { akcija })
 
       .catch(error => {
         console.error('Greška:', error);

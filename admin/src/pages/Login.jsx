@@ -27,7 +27,7 @@ const Login = () => {
   const loginAdmin = async (e) => {
     e.preventDefault(); // Sprečava refresh stranice pri submit-u
     try {
-      const response = await axios.post(`${backURL}/login`, formData);
+      const response = await axios.post(`${backURL}/api/admin/login`, formData);
       setAdmin(response.data.admin);
       console.log("Login uspeo");
       navigate("/proizvodi");

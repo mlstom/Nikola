@@ -197,7 +197,7 @@ router.get("/konacnaNarudzbina", (req, res) => {
     db.query(query, (err, results) => {
         if (err) return res.status(500).json(err);
         if (results.length === 0) {
-            return res.status(404).json({ message: "Nema narudžbina" });
+            return res.json({ message: "Nema narudžbina" });
         }
 
         const narudzbineMap = new Map();

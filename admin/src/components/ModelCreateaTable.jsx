@@ -41,7 +41,7 @@ const ModelCreateaTable = () => {
                     const formData1 = new FormData();
                     formData1.append('image', file.file);
 
-                    const { data } = await axios.post('${backURL}/api/uploads/upload', formData1, {
+                    const { data } = await axios.post(`${backURL}/api/uploads/upload`, formData1, {
                         headers: { 'Content-Type': 'multipart/form-data' },
                     });
                     await postSlike(data.filePath, id.data.id);
