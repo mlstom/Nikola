@@ -53,16 +53,16 @@ router.put("/broj/:brojPosiljke", (req, res) => {
     );
 });
 
-router.get('/korpa/:brojKorpe', (res, req) => {
+router.get('/korpa/:brojKorpe', (req, res) => {
     console.log("Primljen zahtev:", req.body);
     db.query("select * from Korpa where brojKorpe = ?", [req.params.brojKorpe], (err, result) => {
         res.json(result[0])
     })
 })
 
-router.post("/korpa",(res,req)=>{
-    const{idProizvod,kolicina} = req.body
-    console.log("Primljen zahtev:", req.body);
+router.post("/korpa",(req,res)=>{
+    const { idProizvod, kolicina} = req.body
+    
     const brojKorpe = "KORPA" + Math.floor(100000 + Math.random() * 900000)
     db.query("INSERT INTO Korpa (brojKorpe, idProizvod, kolicina) VALUES (?, ?, ?)", [brojKorpe,idProizvod,kolicina], (err, result) => {
         res.json(result)

@@ -51,27 +51,32 @@ const Narudzbine = () => {
 
       
       // 3. Dodavanje proizvoda u korpu
-      let korpaRes
-      await Promise.allSettled(newOrder.proizvodi.map(async (proizvod) => {
-        console.log(proizvod)
-        return axios.post(`${backURL}/api/narudzbina/korpa`, {
-          idProizvod: proizvod.id,
-          kolicina: proizvod.kolicina
-        });
-      })).then(results => {
-        korpaRes = results
-      });
-      console.log(korpaRes)
+      const response = await axios.post(`${backURL}/api/narudzbina/korpa`,{
+          idProizvod: 6,
+          kolicina: 1,
+        }
+      );
+      /*for (const proizvod of newOrder.proizvodi) {
+        try {
+          console.log(proizvod)
+          
+          console.log("Uspešno poslat:", response.data);
+        } catch (error) {
+          console.error("Greška pri slanju:", error.response?.data || error.message);
+        }
+      }*/
+      
+      
   
       // 4. Kreiranje narudžbine
       const brojPosiljke ="Korpa"+Math.floor(100000 + Math.random() * 900000); // Šestocifren broj pošiljke
   
-      await axios.post(`${backURL}/api/narudzbina`, {
+     /* await axios.post(`${backURL}/api/narudzbina`, {
         brojKorpe: korpaRes.data.brojKorpe,
         idPodaciKupca: idKupca,
         brojPosiljke: brojPosiljke,
         poslato: 0
-      });
+      });*/
   
       // Osveži podatke i zatvori modal
       fetchNarudzbine();
