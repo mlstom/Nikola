@@ -13,23 +13,21 @@ const Narudzbina = () => {
     const { id, value } = e.target;
     setNewOrder((prevOrder) => ({
       ...prevOrder,
-      kupac: {
-        ...prevOrder.kupac,
-        [id]: value, // Direktno ažuriranje kupca unutar newOrder
-      },
+      [id]: value, // Direktno ažuriranje kupca unutar newOrder
     }));
   };
   const zavrsiKupovinu = async () => {
     try {
-      const kupac = {
+      console.log(newOrder)
+      const kupacResponse = await axios.post(`${backURL}/api/kupac`, {
         ime: newOrder.ime,
         prezime: newOrder.prezime,
         email: newOrder.email,
         telefon: newOrder.telefon,
+        adresa: newOrder.adresa,
         postanskiBroj: newOrder.postanskiBroj,
-        mesto: newOrder.mesto
-      }
-      const kupacResponse = await axios.post(`${backURL}/api/kupac`, kupac)
+        mesto: newOrder.mesto,
+      });
 
       const idKupca = kupacResponse.data.id;
 
@@ -38,7 +36,7 @@ const Narudzbina = () => {
       await Promise.all(newOrder.proizvodi.map(async (proizvod) => {
         await axios.post(`${backURL}/api/narudzbina/korpa`, {
           brojKorpe: brojKorpe,
-          idProizvoda: proizvod.id,
+          idProizvod: proizvod.id,
           kolicina: proizvod.kolicina
         });
       }));
@@ -47,11 +45,21 @@ const Narudzbina = () => {
 
       await axios.post(`${backURL}/api/narudzbina`, {
         brojKorpe: brojKorpe,
-        idKupca: idKupca,
+        idPodaciKupca: idKupca,
         brojPosiljke: brojPosiljke,
         poslato: 0
       });
 
+      setNewOrder({
+        ime: "",
+        prezime: "",
+        email: "",
+        telefon: "",
+        adresa: "",
+        postanskiBroj: "",
+        mesto: "",
+        proizvodi: []
+      })
 
     } catch (error) {
       toast.error(`Greška: ${error.message}`);
@@ -72,7 +80,7 @@ const Narudzbina = () => {
               placeholder="Ime"
               className="form-input mb-4 sm:mb-5"
               id="ime"
-              value={newOrder.kupac?.ime || ""}
+              value={newOrder.ime}
               onChange={handleChange}
             />
             <input
@@ -80,7 +88,7 @@ const Narudzbina = () => {
               placeholder="Prezime"
               className="form-input mb-4 sm:mb-5"
               id="prezime"
-              value={newOrder.kupac?.prezime || ""}
+              value={newOrder.prezime }
               onChange={handleChange}
             />
           </div>
@@ -89,7 +97,7 @@ const Narudzbina = () => {
             placeholder="Email"
             className="form-input mb-4 sm:mb-5"
             id="email"
-            value={newOrder.kupac?.email || ""}
+            value={newOrder.email }
             onChange={handleChange}
           />
           <input
@@ -97,7 +105,7 @@ const Narudzbina = () => {
             placeholder="Telefon"
             className="form-input mb-4 sm:mb-5"
             id="telefon"
-            value={newOrder.kupac?.telefon || ""}
+            value={newOrder.telefon }
             onChange={handleChange}
           />
           <input
@@ -105,7 +113,7 @@ const Narudzbina = () => {
             placeholder="Adresa"
             className="form-input mb-4 sm:mb-5"
             id="adresa"
-            value={newOrder.kupac?.adresa || ""}
+            value={newOrder.adresa }
             onChange={handleChange}
           />
           <div className="flex justify-between">
@@ -114,7 +122,7 @@ const Narudzbina = () => {
               placeholder="Mesto"
               className="form-input mb-4 sm:mb-5"
               id="mesto"
-              value={newOrder.kupac?.mesto || ""}
+              value={newOrder.mesto }
               onChange={handleChange}
             />
             <input
@@ -122,7 +130,7 @@ const Narudzbina = () => {
               placeholder="Poštanski broj"
               className="form-input mb-4 sm:mb-5"
               id="postanskiBroj"
-              value={newOrder.kupac?.postanskiBroj || ""}
+              value={newOrder.postanskiBroj }
               onChange={handleChange}
             />
           </div>

@@ -38,7 +38,7 @@ const CustomerDetails = ({ kupac }) => {
       const response = await axios.put(`${backURL}/api/kupac/${customerData.id}`, dataToSend);
   
       // Osveži customerData sa podacima iz odgovora servera
-      setCustomerData(response.data); 
+      setCustomerData(customerData); 
     } catch (error) {
       console.error("Greška pri ažuriranju kupca:", error);
     }

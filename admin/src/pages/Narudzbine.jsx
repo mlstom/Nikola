@@ -5,7 +5,7 @@ import CustomerDetails from "../components/CustomerDetails";
 import { useStateContext } from "../context/StateContext";
 
 const Narudzbine = () => {
-  const [narudzbine, setNarudzbine] = useState([]);
+  
   const [searchQuery, setSearchQuery] = useState("");
   const [searchTerm, setSearchTerm] = useState("")
   const [showProductList, setShowProductList] = useState(false)
@@ -17,7 +17,7 @@ const Narudzbine = () => {
 
   const kolone = ["id", "sifra", "naziv", "opis", "kategorija", "cena", "stanje", "slike"];
 
-  const { akcija, trIdProizvoda, trKorpa, settrKorpa, fetchNarudzbine, filteredNarudzbine, setFilteredNarudzbine,proizvodi,fetchProizvodi,handleSearchProizvoda,filteredProizvodi,setFilteredProizvodi} = useStateContext()
+  const { akcija, trIdProizvoda, trKorpa, settrKorpa, fetchNarudzbine, filteredNarudzbine, setFilteredNarudzbine,proizvodi,fetchProizvodi,handleSearchProizvoda,filteredProizvodi,setFilteredProizvodi,narudzbine,setNarudzbine} = useStateContext()
 
   const [newOrder, setNewOrder] = useState({
     ime: "",
@@ -127,7 +127,7 @@ const Narudzbine = () => {
   const handleStatusChange = async (brojPosiljke, poslato) => {
     try {
       await axios.put(`${backURL}/api/narudzbina/poslato/${brojPosiljke}`, { poslato });
-      setNarudzbine(narudzbine.map(n => n.brojPosiljke === brojPosiljke ? { ...n, poslato } : n));
+
       setFilteredNarudzbine(narudzbine.map(n => n.brojPosiljke === brojPosiljke ? { ...n, poslato } : n))
     } catch (error) {
       console.error("Greška pri ažuriranju statusa narudžbine:", error);

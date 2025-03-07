@@ -30,7 +30,7 @@ const Header = () => {
               <ShoppingCart className="h-6 w-6" />
               {(
                 <span className="absolute -top-1 -right-1 flex h-5 w-5 items-center justify-center rounded-full bg-orange-500 text-xs font-bold text-white">
-                  {newOrder?.proizvodi.length}
+                  {newOrder?.proizvodi?.length}
                 </span>
               )}
             </Link>
