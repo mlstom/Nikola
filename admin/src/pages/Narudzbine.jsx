@@ -51,13 +51,17 @@ const Narudzbine = () => {
 
       
       // 3. Dodavanje proizvoda u korpu
+      let korpaRes
       await Promise.allSettled(newOrder.proizvodi.map(async (proizvod) => {
         
         return axios.post(`${backURL}/api/narudzbina/korpa`, {
           idProizvod: proizvod.id,
           kolicina: proizvod.kolicina
         });
-      })).then(results => console.log(results));
+      })).then(results => {
+        korpaRes = results
+      });
+      console.log(korpaRes)
   
       // 4. Kreiranje narudžbine
       const brojPosiljke =Math.floor(100000 + Math.random() * 900000); // Šestocifren broj pošiljke

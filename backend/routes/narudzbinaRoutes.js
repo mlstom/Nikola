@@ -54,6 +54,7 @@ router.put("/broj/:brojPosiljke", (req, res) => {
 });
 
 router.get('/korpa/:brojKorpe', (res, req) => {
+    console.log("Primljen zahtev:", req.body);
     db.query("select * from Korpa where brojKorpe = ?", [req.params.brojKorpe], (err, result) => {
         res.json(result[0])
     })
