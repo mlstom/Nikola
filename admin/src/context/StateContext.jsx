@@ -19,7 +19,7 @@ export const StateContext = ({ children }) => {
   const [trKorpa, settrKorpa] = useState()
   const [trIdProizvoda, settrIdProizvoda] = useState()
   const [filteredProizvodi, setFilteredProizvodi] = useState(proizvodi);
-
+  const [searchQuery, setsearchQuery] = useState()
   const backURL = 'https://nikola-1.onrender.com'
 
 
@@ -49,7 +49,7 @@ export const StateContext = ({ children }) => {
     }
   };
   const handleSearchProizvoda = async () => {
-      if (!searchQuery.trim()) {
+      if (!searchQuery?.trim()) {
         setFilteredProizvodi(proizvodi);
         return;
       }
@@ -81,6 +81,7 @@ export const StateContext = ({ children }) => {
         trIdProizvoda,settrIdProizvoda,
         filteredNarudzbine,setFilteredNarudzbine,
         filteredProizvodi,setFilteredProizvodi,
+        searchQuery,setsearchQuery,
         backURL
       }}
     >

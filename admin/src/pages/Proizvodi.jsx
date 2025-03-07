@@ -15,12 +15,13 @@ const Proizvodi = () => {
     isOpenModel,
     handleSearchProizvoda,
     filteredProizvodi,
-    setFilteredProizvodi
+    setFilteredProizvodi,
+    setsearchQuery,searchQuery
   } = useStateContext();
 
   const [openAlert, setopenAlert] = useState(false);
   const [idBrisanje, setIdBrisanje] = useState();
-  const [searchQuery, setSearchQuery] = useState("");
+ 
   
 
   const kolone = ["id", "sifra", "naziv", "opis", "kategorija", "cena", "stanje", "slike"];
@@ -44,7 +45,7 @@ const Proizvodi = () => {
 
   // Resetuje filtrirane proizvode kada je searchQuery prazan
   useEffect(() => {
-    if (!searchQuery.trim()) {
+    if (!searchQuery?.trim()) {
       setFilteredProizvodi(proizvodi);
     }
   }, [searchQuery, proizvodi]);
@@ -64,7 +65,7 @@ const Proizvodi = () => {
         <input
           type="text"
           value={searchQuery}
-          onChange={(e) => setSearchQuery(e.target.value)}
+          onChange={(e) => setsearchQuery(e.target.value)}
           placeholder="Pretraži proizvode..."
           className="border px-2 py-1 rounded-md"
         />
