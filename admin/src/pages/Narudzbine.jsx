@@ -48,7 +48,7 @@ const Narudzbine = () => {
       const idKupca = kupacResponse.data.id; // ID kupca iz odgovora
   
       // 2. Kreiranje broja korpe (generisanje nasumičnog broja)
-      const brojKorpe =Math.floor(100000 + Math.random() * 900000); 
+      const brojKorpe ="KORPA"+Math.floor(100000 + Math.random() * 900000); 
       
       // 3. Dodavanje proizvoda u korpu
       await Promise.allSettled(newOrder.proizvodi.map(async (proizvod) => {
@@ -61,7 +61,7 @@ const Narudzbine = () => {
       })).then(results => console.log(results));
   
       // 4. Kreiranje narudžbine
-      const brojPosiljke =Math.floor(100000 + Math.random() * 900000); // Šestocifren broj pošiljke
+      const brojPosiljke ="Posiljka"+Math.floor(100000 + Math.random() * 900000); // Šestocifren broj pošiljke
   
       await axios.post(`${backURL}/api/narudzbina`, {
         brojKorpe: brojKorpe,

@@ -28,10 +28,10 @@ router.get("jednaNarudzbina/:id", (req, res) => {
 
 // POST - Dodaj novi proizvod
 router.post("/", (req, res) => {
-    const { idProizvod, idPodaciKupca, brojPosiljke, poslato } = req.body;
+    const { brojKorpe, idPodaciKupca, brojPosiljke, poslato } = req.body;
     db.query(
-        "INSERT INTO Narudzbina (idProizvod, idPodaciKupca, brojPosiljke,  poslato) VALUES (?, ?, ?, ?)",
-        [idProizvod, idPodaciKupca, brojPosiljke, poslato],
+        "INSERT INTO Narudzbina (brojKorpe, idPodaciKupca, brojPosiljke,  poslato) VALUES (?, ?, ?, ?)",
+        [brojKorpe, idPodaciKupca, brojPosiljke, poslato],
         (err, result) => {
             if (err) return res.status(500).json(err);
             res.json({ message: "Narudžbina dodata", id: result.insertId });
