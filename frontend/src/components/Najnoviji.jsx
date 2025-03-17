@@ -20,10 +20,10 @@ const Najnoviji = () => {
                 <span className="h-px flex-1 bg-black"></span>
             </span>
             <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4 px-8 py-2">
-                {najnovijiProizvodi.map((item,index) => (
+                {najnovijiProizvodi? najnovijiProizvodi.map((item,index) => (
                     <div key={index}><ProizvodCard proizvod={item} />
                     </div>
-                ))}
+                )):<p>Učitavanje proizvoda</p>}
             </div>
         </div>
     )
