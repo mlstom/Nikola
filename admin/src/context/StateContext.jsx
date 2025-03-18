@@ -20,7 +20,7 @@ export const StateContext = ({ children }) => {
   const [trIdProizvoda, settrIdProizvoda] = useState()
   const [filteredProizvodi, setFilteredProizvodi] = useState(proizvodi);
   const [searchQuery, setsearchQuery] = useState()
-  const backURL = 'https://nikola-1.onrender.com'
+  const backURL = 'http://backend.srv758372.hstgr.cloud'
 
 
   async function fetchProizvodi() {
