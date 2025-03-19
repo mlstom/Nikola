@@ -9,8 +9,8 @@ const Kontakt = () => {
   const [faqIndex, setFaqIndex] = useState(null);
   const faqs = [
     {
-      question: "Koliko dugo se čeka poštarina?",
-      answer: "Maksimum je 5 dana na teritoriji Srbije.",
+      question: "Koliko dugo se čeka dostava?",
+      answer: "Dostava se čeka od 2 do 5 dana na teritoriji Srbije.",
     },
     {
       question: "Koliko košta poštarina?",
