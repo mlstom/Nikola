@@ -9,7 +9,7 @@ const Sidebar = () => {
     ];
 
     return (
-        <div className="h-screen w-10 flex flex-col  items-center justify-between bg-gray-900 text-white py-4 space-y-4 px-2">
+        <div className="h-screen w-12 flex flex-col  items-center justify-between bg-gray-900 text-white py-4 space-y-4 px-2">
            
                 {links.map(({ path, icon: Icon }) => (
                     <Link
