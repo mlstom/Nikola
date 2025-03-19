@@ -5,7 +5,9 @@ import tailwindcss from '@tailwindcss/vite'
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [react(), tailwindcss()],
-server:{
-allowedHosts:[ 'localhost','admin.alatinidza.rs','admin.srv758372.hstgr.cloud']
-}
+  server: {
+    host: true, // Omogućava eksterni pristup
+    strictPort: true, // Osigurava da se koristi samo navedeni port
+    allowedHosts: ['admin.srv758372.hstgr.cloud'] // Dodaj svoj domen ovde
+  }
 })
