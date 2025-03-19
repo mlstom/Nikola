@@ -10,7 +10,7 @@ const Kontakt = () => {
   const faqs = [
     {
       question: "Koliko dugo se čeka poštarina?",
-      answer: "Pa maksimum je 5 dana na teritoriji Srbije.",
+      answer: "Maksimum je 5 dana na teritoriji Srbije.",
     },
     {
       question: "Koliko košta poštarina?",

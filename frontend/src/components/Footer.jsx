@@ -5,31 +5,6 @@ const Footer = () => {
     return (
         <footer className="bg-white">
             <div className="mx-auto max-w-screen-xl px-4 pt-16 pb-8 sm:px-6 lg:px-8">
-                <div className="mx-auto max-w-md">
-                    <strong className="block text-center text-xl font-bold text-gray-900 sm:text-3xl">
-                        Želiš li dodatan popust, odlično ostavi svoj email?
-                    </strong>
-
-                    <form className="mt-6">
-                        <div className="relative max-w-lg">
-                            <label className="sr-only" htmlFor="email"> Email </label>
-
-                            <input
-                                className="w-full rounded-full border-gray-200 bg-gray-100 p-4 pe-32 text-sm font-medium"
-                                id="email"
-                                type="email"
-                                placeholder="nikola@gmail.com"
-                            />
-
-                            <button
-                                className="absolute end-1 top-1/2 -translate-y-1/2 rounded-full bg-orange-500 px-5 py-3 text-sm font-medium text-white transition hover:bg-orange-700"
-                            >
-                                Pošalji
-                            </button>
-                        </div>
-                    </form>
-                </div>
-
                 <div className="mt-16 grid grid-cols-1 gap-8 lg:grid-cols-2 lg:gap-32">
                     <div className="mx-auto max-w-sm lg:max-w-none">
                         <p className="mt-4 text-center text-gray-500 lg:text-left lg:text-lg">
@@ -124,6 +99,14 @@ const Footer = () => {
                     <p className="text-center text-xs/relaxed text-gray-500">
                         © Company 2025. Sva prava ostaju nama.
 
+                        <br />
+                        Nikola Mihajlovic PR Alati Nidža 
+                        <br />
+                        Negotin Kneza Mihaila Bb 
+                        <br />
+                        Negotin 19300 
+                        <br />
+                        PIB 112505047
                         <br />
 
                         Napravio mlstomic
