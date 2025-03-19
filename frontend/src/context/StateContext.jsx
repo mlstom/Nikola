@@ -15,7 +15,7 @@ export const StateContext = ({ children }) => {
     mesto: "",
     proizvodi: []
   })
-  const backURL = 'http://backend.srv758372.hstgr.cloud'
+  const backURL = 'http://147.93.122.78:5000'
   const fetchSlike = async (id) => {
     const { data } = await axios.get(`${backURL}/api/proizvodSlika/proizvod/${id}`);
     setImages(data);

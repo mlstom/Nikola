@@ -48,7 +48,7 @@ router.get("/images", (req, res) => {
 
     const imageLinks = files.map(file => ({
       filename: file,
-      url: `http://localhost:5000/uploads/${file}`, // Promeni URL ako hostuješ aplikaciju
+      url: `http://147.93.122.78:5000/uploads/${file}`, // Promeni URL ako hostuješ aplikaciju
     }));
 
     res.json(imageLinks);

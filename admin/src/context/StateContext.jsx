@@ -20,7 +20,7 @@ export const StateContext = ({ children }) => {
   const [trIdProizvoda, settrIdProizvoda] = useState()
   const [filteredProizvodi, setFilteredProizvodi] = useState(proizvodi);
   const [searchQuery, setsearchQuery] = useState()
-  const backURL = 'http://backend.srv758372.hstgr.cloud'
+  const backURL = 'http://147.93.122.78:5000/'
 
 
   async function fetchProizvodi() {

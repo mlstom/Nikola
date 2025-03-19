@@ -26,7 +26,8 @@ const Kontakt = () => {
         </h2>
 
         <h4 className="pt-8 font-hk text-lg font-bold uppercase text-secondary sm:text-xl">Email</h4>
-        <p className="font-hk text-secondary">nikola@gmail.com</p>
+        <p className="font-hk text-secondary">nikola@alatinidza.rs</p>
+        <p className="font-hk text-secondary">info@alatinidza.rs</p>
 
         <h4 className="pt-8 font-hk text-lg font-bold uppercase text-secondary sm:text-xl">Telefon</h4>
         <p className="font-hk text-secondary">+381 61 208 27 78</p>
@@ -38,7 +39,7 @@ const Kontakt = () => {
         </p>
 
         <div className="pt-8">
-          <h4 className="font-hk text-lg font-bold uppercase text-secondary sm:text-xl">Follow Us</h4>
+          <h4 className="font-hk text-lg font-bold uppercase text-secondary sm:text-xl">Zaprati nas</h4>
           <div className="flex justify-center pt-3 lg:justify-start">
             {socialLinks.map((link, index) => (
               <a
