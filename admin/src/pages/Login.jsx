@@ -42,17 +42,17 @@ const Login = () => {
 
   return (
     <main id="content" role="main" className="w-full max-w-md mx-auto p-6">
-      <div className="mt-7 bg-white rounded-xl shadow-lg dark:bg-gray-800 dark:border-[#d39430] border-2 border-[#d39430]">
+      <div className="mt-7 rounded-xl shadow-lg bg-gray-800 border-[#d39430] border-2 ">
         <div className="p-4 sm:p-7">
           <div className="text-center">
-            <h1 className="block text-2xl font-bold text-gray-800 dark:text-white">Prijava</h1>
+            <h1 className="block text-2xl font-bold  text-white">Prijava</h1>
           </div>
 
           <div className="mt-5">
             <form onSubmit={loginAdmin}>
               <div className="grid gap-y-4">
                 <div>
-                  <label htmlFor="userName" className="block text-sm font-bold ml-1 mb-2 dark:text-white">
+                  <label htmlFor="userName" className="block text-sm font-bold ml-1 mb-2 text-white">
                     Korisničko ime
                   </label>
                   <input
@@ -65,7 +65,7 @@ const Login = () => {
                     required
                   />
 
-                  <label htmlFor="lozinka" className="block text-sm font-bold ml-1 mb-2 dark:text-white">
+                  <label htmlFor="lozinka" className="block text-sm font-bold ml-1 mb-2 text-white">
                     Lozinka
                   </label>
                   <div className="relative">
@@ -104,7 +104,7 @@ const Login = () => {
 
                 <button
                   type="submit"
-                  className="py-3 px-4 inline-flex justify-center items-center gap-2 rounded-md border border-transparent font-semibold bg-orange-500 text-white hover:bg-orange-700 focus:outline-none focus:ring-2 focus:ring-[#d39430] focus:ring-offset-2 transition-all text-sm dark:focus:ring-offset-gray-800"
+                  className="py-3 px-4 inline-flex justify-center items-center gap-2 rounded-md border border-transparent font-semibold bg-orange-500 text-white hover:bg-orange-700 focus:outline-none focus:ring-2  focus:ring-offset-2 transition-all text-sm focus:ring-offset-gray-800"
                 >
                   Prijavi se
                 </button>
