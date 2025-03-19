@@ -111,8 +111,8 @@ const Korpa = () => {
               ))}
             </ul>
 
-            <div className="mt-8 flex justify-end border-t border-gray-100 pt-8">
-              {newOrder.proizvodi.length > 0 ?<div className="w-screen max-w-lg space-y-4">
+            {newOrder.proizvodi.length > 0 ? <div className="mt-8 flex justify-end border-t border-gray-100 pt-8">
+              <div className="w-screen max-w-lg space-y-4">
                 <dl className="text-sm text-gray-700">
                   <div className="flex justify-between">
                     <dt>Cena:</dt>
@@ -146,8 +146,8 @@ const Korpa = () => {
                     Plaćanje
                   </Link>
                 </div>
-              </div>:<p> Vaša korpa je prazna.</p>}
-            </div>
+              </div>
+            </div>:<p> Vaša korpa je prazna.</p>}
           </div>
         </div>
       </div>
