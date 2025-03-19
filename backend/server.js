@@ -14,7 +14,9 @@ const allowedOrigins = [
 ];
 
 app.use(cors({
-    origin: ['*'],
+    origin: (origin, callback) => {
+        callback(null, true); // Dozvoljava sve izvore
+    },
     methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
     credentials: true
 }));
