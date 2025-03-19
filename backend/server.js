@@ -8,11 +8,27 @@ const db = require("./config/db");
 const app = express();
 const PORT = process.env.PORT || 5000;
 
+const cors = require("cors");
+
+const cors = require("cors");
+
+const allowedOrigins = [
+    "http://admin.srv758372.hstgr.cloud",
+    "http://alatinidza.rs" // Dodaj drugi dozvoljeni sajt
+];
+
 app.use(cors({
-    origin: '*', // Dozvoli admin panel
-    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+    origin: function (origin, callback) {
+        if (!origin || allowedOrigins.includes(origin)) {
+            callback(null, true);
+        } else {
+            callback(new Error("Not allowed by CORS"));
+        }
+    },
+    methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
     credentials: true
 }));
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
