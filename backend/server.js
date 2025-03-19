@@ -8,11 +8,6 @@ const db = require("./config/db");
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-const allowedOrigins = [
-    "http://admin.srv758372.hstgr.cloud",
-    "http://alatinidza.rs" // Dodaj drugi dozvoljeni sajt
-];
-
 app.use(cors({
     origin: (origin, callback) => {
         callback(null, true); // Dozvoljava sve izvore
