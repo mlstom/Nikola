@@ -90,32 +90,32 @@ const Proizvod = () => {
 
                     {/* Informacije o proizvodu */}
                     <div className="md:flex-1 px-4">
-                        <h2 className="text-2xl font-bold text-gray-800 dark:text-white mb-2">{proizvod?.naziv}</h2>
-                        <p className="text-gray-600 dark:text-gray-300 text-sm mb-4">{proizvod?.opis}</p>
+                        <h2 className="text-2xl font-bold text-white mb-2">{proizvod?.naziv}</h2>
+                        <p className="text-gray-300 text-sm mb-4">{proizvod?.opis}</p>
                         <div className="flex mb-4">
                             <div className="mr-4">
-                                <span className="font-bold text-gray-700 dark:text-gray-300">Cena:</span>
-                                <span className="text-gray-600 dark:text-gray-300"> {proizvod?.cena}RSD</span>
+                                <span className="font-bold text-gray-300">Cena:</span>
+                                <span className="text-gray-300"> {proizvod?.cena}RSD</span>
                             </div>
                             <div>
-                                <span className="font-bold text-gray-700 dark:text-gray-300">Kategorija:</span>
-                                <span className="text-gray-600 dark:text-gray-300"> {proizvod?.kategorija}</span>
+                                <span className="font-boldtext-gray-300">Kategorija:</span>
+                                <span className="text-gray-300"> {proizvod?.kategorija}</span>
                             </div>
                             <div>
-                                <span className="font-bold text-gray-700 dark:text-gray-300">Dostupnost:</span>
-                                <span className="text-gray-600 dark:text-gray-300"> {proizvod?.stanje}</span>
+                                <span className="font-bold text-gray-300">Dostupnost:</span>
+                                <span className="text-gray-300"> {proizvod?.stanje}</span>
                             </div>
                         </div>
 
                         {/* Odabir količine */}
                         <div className="mb-4">
-                            <span className="font-bold text-gray-700 dark:text-gray-300">Količina:</span>
+                            <span className="font-bold text-gray-300">Količina:</span>
                             <div className="flex items-center mt-2">
                                 <div className="flex items-center gap-1">
                                     <button
                                         type="button"
                                         onClick={handleDecreaseQuantity}
-                                        className="size-10 leading-10 text-gray-600 transition hover:opacity-75 dark:text-gray-300"
+                                        className="size-10 leading-10  transition hover:opacity-75 text-gray-300"
                                     >
                                         -
                                     </button>
@@ -124,13 +124,13 @@ const Proizvod = () => {
                                         type="number"
                                         value={kolicina}
                                         readOnly
-                                        className="h-10 w-16 rounded-sm border-gray-200 text-center sm:text-sm dark:border-gray-700 dark:bg-gray-800 dark:text-white"
+                                        className="h-10 w-16 rounded-sm  text-center sm:text-sm border-gray-700 bg-gray-800 text-white"
                                     />
 
                                     <button
                                         type="button"
                                         onClick={handleIncreaseQuantity}
-                                        className="size-10 leading-10 text-gray-600 transition hover:opacity-75 dark:text-gray-300"
+                                        className="size-10 leading-10  transition hover:opacity-75 text-gray-300"
                                     >
                                         +
                                     </button>
@@ -143,7 +143,7 @@ const Proizvod = () => {
                             <div className="w-1/2 px-2">
                                 <button
                                     onClick={dodajUKorpu}
-                                    className="w-full bg-gray-900 dark:bg-orange-500 text-white py-2 px-4 rounded-full font-bold hover:bg-gray-800 dark:hover:bg-orange-700"
+                                    className="w-full  bg-orange-500 text-white py-2 px-4 rounded-full font-bold  hover:bg-orange-700"
                                 >
                                     Dodaj u korpu
                                 </button>
