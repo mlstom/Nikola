@@ -147,7 +147,7 @@ const Korpa = () => {
                   </Link>
                 </div>
               </div>
-            </div>:<p> Vaša korpa je prazna.</p>}
+            </div>:<p className='text-center'> Vaša korpa je prazna.</p>}
           </div>
         </div>
       </div>
