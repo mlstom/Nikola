@@ -9,13 +9,10 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 
 app.use(cors({
-    origin: (origin, callback) => {
-        callback(null, origin || '*'); // Dozvoli bilo koji origin
-    },
+    origin: '*', // Dozvoli admin panel
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
     credentials: true
 }));
-
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
