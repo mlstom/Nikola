@@ -61,7 +61,7 @@ const Proizvodi = () => {
       )}
 
       {/* Input za pretragu */}
-      <div className="flex space-x-2 mb-4 overflow-x-scroll">
+      <div className="flex space-x-2 mb-4 ml-4 overflow-x-scroll">
         <input
           type="text"
           value={searchQuery}
