@@ -65,7 +65,7 @@ const Proizvod = () => {
     return (
         <div>
             <Helmet>
-                <title>{proizvod?.naziv} | Alati Nidža</title>
+                <title>Proizvod | Alati Nidža</title>
                 <meta name="description" content={`Mismo mesto koje nodi najbolje cene za proizvod poput ${proizvod.naziv} `} />
                 <meta name="keywords" content="Bušilice, Pumpe, Lampe, Auto delovi,Automobili"/>
             </Helmet>
