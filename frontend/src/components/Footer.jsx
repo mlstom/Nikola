@@ -83,7 +83,7 @@ const Footer = () => {
                             <ul className="mt-6 space-y-1">
                                 <li>
                                     <Link className="text-gray-700 transition hover:text-gray-700/75" to="/kontakt/#faqs"> FAQs </Link>
-                                    <p className='text-gray-700 transition  text-[12px] '>Za sva dodatna pitanja javite nam se putem mejla nikola@gmail.con</p>
+                                    <p className='text-gray-700 transition  text-[12px] '>Za sva dodatna pitanja javite nam se putem mejla nikola@alatinidza.rs ili info@alatinidza.rs</p>
                                 </li>
 
                                 <li>

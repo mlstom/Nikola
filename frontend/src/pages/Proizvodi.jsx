@@ -17,6 +17,10 @@ const Proizvodi = () => {
     { id: "Stolice", naziv: "Stolice" },
     { id: "Ostalo", naziv: "Ostalo" },
   ];
+  const podkategorija =[
+    { id: "Sijalice", naziv: "Sijalice" },
+    
+  ]
 
   const sortirajProizvode = (proizvodi) => {
     if (selectedSort === "priceAsc") {
