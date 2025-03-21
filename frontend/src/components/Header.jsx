@@ -12,7 +12,7 @@ const Header = () => {
         <div className="mx-auto flex max-w-screen-xl flex-wrap items-center justify-between px-4">
           <Link to="/" className="flex items-center">
             <span className="self-center text-xl font-semibold whitespace-nowrap text-white">
-              Nidža Alati
+            Alati Nidža 
             </span>
           </Link>
           <button

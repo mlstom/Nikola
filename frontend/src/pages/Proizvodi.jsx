@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import ProizvodCard from '../components/ProizvodCard'
 import Search from "../components/Search"
 import { useStateContext } from '../context/StateContext'
+import { Helmet } from "react-helmet";
 const Proizvodi = () => {
   const { proizvodi } = useStateContext()
   const [showMobileSort, setShowMobileSort] = useState(false);
@@ -46,6 +47,11 @@ const Proizvodi = () => {
 
   return (
     <section>
+      <Helmet>
+        <title>Proizvodi | Alati Nidža</title>
+        <meta name="description" content={`Najve'i asortiman proizvoda za svu ku'nu upotrebu na jednom mestu. `} />
+        <meta name="keywords" content="Bušilice, Pumpe, Lampe, Auto delovi,Automobili" />
+      </Helmet>
       <div className="mx-auto max-w-screen-xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8">
         <header>
           <h2 className="text-xl font-bold text-gray-900 sm:text-3xl">Proizvodi</h2>
@@ -119,7 +125,7 @@ const Proizvodi = () => {
                 <div className="border-t border-gray-200 bg-white">
                   <header className="flex items-center justify-between p-4">
 
-                    <button onClick={()=>setPriceRange({ min: "", max: "" })} type="button" className="text-sm text-gray-900 underline underline-offset-4">
+                    <button onClick={() => setPriceRange({ min: "", max: "" })} type="button" className="text-sm text-gray-900 underline underline-offset-4">
                       Reset
                     </button>
                   </header>
@@ -185,9 +191,9 @@ const Proizvodi = () => {
 
                 <div className="border-t border-gray-200 bg-white">
                   <header className="flex items-center justify-between p-4">
-                    
 
-                    <button onClick={()=>setSelectedCategories([])} type="button" className="text-sm text-gray-900 underline underline-offset-4">
+
+                    <button onClick={() => setSelectedCategories([])} type="button" className="text-sm text-gray-900 underline underline-offset-4">
                       Reset
                     </button>
                   </header>
@@ -241,7 +247,7 @@ const Proizvodi = () => {
               <p className="block text-xs font-medium text-gray-700">Filteri</p>
 
               <div className="mt-1 space-y-2">
-                
+
                 <details
                   className="overflow-hidden rounded-sm border border-gray-300 [&_summary::-webkit-details-marker]:hidden"
                 >
@@ -271,7 +277,7 @@ const Proizvodi = () => {
                   <div className="border-t border-gray-200 bg-white">
                     <header className="flex items-center justify-between p-4">
 
-                      <button onClick={()=>setPriceRange({min:'',max:''})} type="button" className="text-sm text-gray-900 underline underline-offset-4">
+                      <button onClick={() => setPriceRange({ min: '', max: '' })} type="button" className="text-sm text-gray-900 underline underline-offset-4">
                         Reset
                       </button>
                     </header>
@@ -339,7 +345,7 @@ const Proizvodi = () => {
                   <div className="border-t border-gray-200 bg-white">
                     <header className="flex items-center justify-between p-4">
 
-                      <button onClick={()=>setSelectedCategories([])} type="button" className="text-sm text-gray-900 underline underline-offset-4">
+                      <button onClick={() => setSelectedCategories([])} type="button" className="text-sm text-gray-900 underline underline-offset-4">
                         Reset
                       </button>
                     </header>

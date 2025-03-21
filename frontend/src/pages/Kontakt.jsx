@@ -1,16 +1,16 @@
-import React,{useState} from 'react'
-import { Facebook , Instagram} from 'lucide-react';
-
+import React, { useState } from 'react'
+import { Facebook, Instagram } from 'lucide-react';
+import { Helmet } from "react-helmet";
 const Kontakt = () => {
   const socialLinks = [
-    { href: "/", icon:  <Facebook />},
+    { href: "/", icon: <Facebook /> },
     { href: "/", icon: <Instagram /> },
   ];
   const [faqIndex, setFaqIndex] = useState(null);
   const faqs = [
     {
       question: "Koliko dugo se čeka dostava?",
-      answer: "Dostava se čeka od 2 do 5 dana na teritoriji Srbije.",
+      answer: "Dostava se čeka od 2 do 5 radnih dana na teritoriji Srbije.",
     },
     {
       question: "Koliko košta poštarina?",
@@ -19,60 +19,67 @@ const Kontakt = () => {
     },
   ];
   return (
-    <div className='flex flex-col items-center space-y-12 md:flex-row md:space-y-0 md:space-x-12 px-8 py-4 gap-4'>
-      <div id='kont' className="mx-auto w-full border border-grey-darker px-6 py-10 text-center shadow lg:mx-0 lg:w-3/8 lg:py-8 lg:text-left xl:w-1/3 xl:px-8">
-        <h2 className="border-b border-grey-dark pb-6 font-butler text-2xl text-secondary sm:text-3xl md:text-4xl">
-          Kontakt
-        </h2>
+    <div>
+      <Helmet>
+        <title>Kontakt | Alati Nidža</title>
+        <meta name="description" content="Saznajte sve o nama na jednom mestu, za neka osnovna pitanja možeze se javiti putem mejla." />
+        <meta name="keywords" content="Kontakt, Email, Telefon, Radno vreme" />
+      </Helmet>
+      <div className='flex flex-col items-center space-y-12 md:flex-row md:space-y-0 md:space-x-12 px-8 py-4 gap-4'>
+        <div id='kont' className="mx-auto w-full border border-grey-darker px-6 py-10 text-center shadow lg:mx-0 lg:w-3/8 lg:py-8 lg:text-left xl:w-1/3 xl:px-8">
+          <h2 className="border-b border-grey-dark pb-6 font-butler text-2xl text-secondary sm:text-3xl md:text-4xl">
+            Kontakt
+          </h2>
 
-        <h4 className="pt-8 font-hk text-lg font-bold uppercase text-secondary sm:text-xl">Email</h4>
-        <p className="font-hk text-secondary">nikola@alatinidza.rs</p>
-        <p className="font-hk text-secondary">info@alatinidza.rs</p>
+          <h4 className="pt-8 font-hk text-lg font-bold uppercase text-secondary sm:text-xl">Email</h4>
+          <p className="font-hk text-secondary">nikola@alatinidza.rs</p>
+          <p className="font-hk text-secondary">info@alatinidza.rs</p>
 
-        <h4 className="pt-8 font-hk text-lg font-bold uppercase text-secondary sm:text-xl">Telefon</h4>
-        <p className="font-hk text-secondary">+381 61 208 27 78</p>
+          <h4 className="pt-8 font-hk text-lg font-bold uppercase text-secondary sm:text-xl">Telefon</h4>
+          <p className="font-hk text-secondary">+381 61 208 27 78</p>
 
-        <h4 className="pt-8 font-hk text-lg font-bold uppercase text-secondary sm:text-xl">Radno vreme</h4>
+          <h4 className="pt-8 font-hk text-lg font-bold uppercase text-secondary sm:text-xl">Radno vreme</h4>
 
-        <p className="font-hk text-secondary">
-          <span className="text-primary"></span> Pon - Sub: 9.00 - 18.00
-        </p>
+          <p className="font-hk text-secondary">
+            <span className="text-primary"></span> Pon - Sub: 9.00 - 18.00
+          </p>
 
-        <div className="pt-8">
-          <h4 className="font-hk text-lg font-bold uppercase text-secondary sm:text-xl">Zaprati nas</h4>
-          <div className="flex justify-center pt-3 lg:justify-start">
-            {socialLinks.map((link, index) => (
-              <a
-                key={index}
-                href={link.href}
-                className="mr-2 flex items-center rounded-full bg-secondary-lighter p-3 text-xl transition-colors hover:bg-primary hover:scale-95"
-              >
-               {link.icon}
-              </a>
-            ))}
+          <div className="pt-8">
+            <h4 className="font-hk text-lg font-bold uppercase text-secondary sm:text-xl">Zaprati nas</h4>
+            <div className="flex justify-center pt-3 lg:justify-start">
+              {socialLinks.map((link, index) => (
+                <a
+                  key={index}
+                  href={link.href}
+                  className="mr-2 flex items-center rounded-full bg-secondary-lighter p-3 text-xl transition-colors hover:bg-primary hover:scale-95"
+                >
+                  {link.icon}
+                </a>
+              ))}
+            </div>
           </div>
         </div>
-      </div>
-      <div id='faqs' className="mx-auto text-center sm:w-5/6 md:w-full">
-        <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl">Često postavljena pitanja (FAQs)</h2>
-        <p className="pt-2 text-lg text-gray-600 md:text-xl">
-          Za odgvore na vaša pitanja javite se putem mejla.
-        </p> 
-        <div className="pt-12">
-          {faqs.map((faq, index) => (
-            <div key={index} className="border border-orange-500 mb-2 cursor-pointer">
-              <div
-                className="flex items-center text-white justify-between bg-orange-500 px-5 py-5 cursor-pointer"
-                onClick={() => setFaqIndex(faqIndex === index ? null : index)}
-              >
-                <span className="text-lg font-medium">{faq.question}</span>
-                <i className={`bx text-2xl ${faqIndex === index ? "bx-minus" : "bx-plus"}`}></i>
+        <div id='faqs' className="mx-auto text-center sm:w-5/6 md:w-full">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl">Često postavljena pitanja (FAQs)</h2>
+          <p className="pt-2 text-lg text-gray-600 md:text-xl">
+            Za odgvore na vaša pitanja javite se putem mejla.
+          </p>
+          <div className="pt-12">
+            {faqs.map((faq, index) => (
+              <div key={index} className="border border-orange-500 mb-2 cursor-pointer">
+                <div
+                  className="flex items-center text-white justify-between bg-orange-500 px-5 py-5 cursor-pointer"
+                  onClick={() => setFaqIndex(faqIndex === index ? null : index)}
+                >
+                  <span className="text-lg font-medium">{faq.question}</span>
+                  <i className={`bx text-2xl ${faqIndex === index ? "bx-minus" : "bx-plus"}`}></i>
+                </div>
+                {faqIndex === index && (
+                  <div className="px-5 py-5 text-left text-sm text-gray-700">{faq.answer}</div>
+                )}
               </div>
-              {faqIndex === index && (
-                <div className="px-5 py-5 text-left text-sm text-gray-700">{faq.answer}</div>
-              )}
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       </div>
     </div>

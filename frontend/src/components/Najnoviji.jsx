@@ -23,7 +23,7 @@ const Najnoviji = () => {
                 {najnovijiProizvodi? najnovijiProizvodi.map((item,index) => (
                     <div key={index}><ProizvodCard proizvod={item} />
                     </div>
-                )):<p>Učitavanje proizvoda</p>}
+                )):<p className='text-black'>Učitavanje proizvoda</p>}
             </div>
         </div>
     )
