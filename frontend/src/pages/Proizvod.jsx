@@ -64,7 +64,11 @@ const Proizvod = () => {
 
     return (
         <div>
-           
+            <Helmet>
+                <title>{proizvod?.naziv} | Alati Nidža</title>
+                <meta name="description" content={`Mismo mesto koje nodi najbolje cene za proizvod poput ${proizvod.naziv} `} />
+                <meta name="keywords" content="Bušilice, Pumpe, Lampe, Auto delovi,Automobili"/>
+            </Helmet>
             <div className="bg-black pt-8">
                 <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="flex flex-col md:flex-row -mx-4">
