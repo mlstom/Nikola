@@ -104,7 +104,7 @@ const Proizvod = () => {
                                     <span className="text-gray-300"> {proizvod?.cena}RSD</span>
                                 </div>
                                 <div>
-                                    <span className="font-boldtext-gray-300">Kategorija:</span>
+                                    <span className="font-bold text-gray-300">Kategorija:</span>
                                     <span className="text-gray-300"> {proizvod?.kategorija}</span>
                                 </div>
                                 <div>
