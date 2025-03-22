@@ -9,9 +9,7 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 
 app.use(cors({
-    origin: (origin, callback) => {
-        callback(null, true); // Dozvoljava sve izvore
-    },
+    origin:['*'],
     methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
     credentials: true
 }));
