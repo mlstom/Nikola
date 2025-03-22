@@ -12,11 +12,11 @@ const FileUpload = () => {
             return ["jpg", "png", "jpeg"].includes(fileExtension);
         });
 
-        if (validFiles.length !== selectedFiles.length) {
+       /* if (validFiles.length !== selectedFiles.length) {
             setError("Samo jpg, jpeg i png su dozvoljeni.");
         } else {
             setError("");
-        }
+        }*/
 
         const newFiles = validFiles.map(file => ({
             file: file, // 🛠 Sačuvaj originalni fajl
