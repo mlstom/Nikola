@@ -153,7 +153,6 @@ router.get("/konacnaNarudzbina", (req, res) => {
             n.brojPosiljke, 
             n.brojKorpe,
             n.poslato,
-            n.cena,
             p.id AS proizvod_id,
             p.naziv AS proizvod_naziv,
             p.cena AS proizvod_cena,
@@ -179,7 +178,6 @@ router.get("/konacnaNarudzbina", (req, res) => {
             n.brojPosiljke, 
             n.poslato,
             n.brojKorpe,
-            n.cena ,
             p.id,
             p.naziv,
             p.cena,
@@ -240,8 +238,7 @@ router.get("/konacnaNarudzbina", (req, res) => {
                 opis: row.proizvod_opis,
                 kolicina: row.kolicina
             });
-            narudzbina.ukupnaCenaProizvoda += row.kolicina * row.proizvod_cena;
-            narudzbina.ukupnaCena = row.cena;
+            narudzbina.ukupnaCena+= row.kolicina * row.proizvod_cena;
         });
 
         res.json({ narudzbine: Array.from(narudzbineMap.values()) });
@@ -257,7 +254,6 @@ router.get("/search/:query", (req, res) => {
             n.brojPosiljke, 
             n.brojKorpe,
             n.poslato,
-            n.cena,
             p.id AS proizvod_id,
             p.naziv AS proizvod_naziv,
             p.cena AS proizvod_cena,
@@ -290,7 +286,6 @@ router.get("/search/:query", (req, res) => {
             n.brojPosiljke, 
             n.poslato,
             n.brojKorpe,
-            n.cena,
             p.id,
             p.naziv,
             p.cena,
@@ -352,8 +347,8 @@ router.get("/search/:query", (req, res) => {
                 kolicina: row.kolicina
             });
 
-            narudzbina.ukupnaCenaProizvoda += row.kolicina * row.proizvod_cena;
-            narudzbina.ukupnaCena = row.cena
+            narudzbina.ukupnaCena += row.kolicina * row.proizvod_cena;
+            
         });
 
         res.json({ narudzbine: Array.from(narudzbineMap.values()) });
