@@ -10,17 +10,11 @@ const Proizvodi = () => {
   const [selectedCategories, setSelectedCategories] = useState([]); // Filter kategorije
   const [priceRange, setPriceRange] = useState({ min: "", max: "" })
   const kategorije = [
-    { id: "Traktori", naziv: "Traktori" },
-    { id: "Trimeri", naziv: "Trimeri" },
-    { id: "Rasveta", naziv: "Rasveta" },
-    { id: "Alati", naziv: "Alati" },
-    { id: "Stolice", naziv: "Stolice" },
-    { id: "Ostalo", naziv: "Ostalo" },
+    { id: "Alati", naziv: "Alati",podKategorija:['Aku alati','Električni alati','Ručni alati','Setovi gedora','Specijalni setovi'] },
+    { id: "Dvorište i bašta", naziv: "Dvorište i bašta",podKategorija:['Oprema za košenja','Motorni bušači rupa','Creva i brze spojke','Makaze za orezivanje','Ostali baštenski alati'] },
+    { id: "Auto oprema", naziv: "Auto oprema",podKategorija:['Ambijentalna LED svetla za vodila','Audio oprema','Halogene auto sijalice','Kopresori za automobile i setovi za krpljenje guma','LED auto sijalice','Obloge volana', ' Presvlake za vozila', 'Punjači akumulatora'] },
   ];
-  const podkategorija =[
-    { id: "Sijalice", naziv: "Sijalice" },
-    
-  ]
+  
 
   const sortirajProizvode = (proizvodi) => {
     if (selectedSort === "priceAsc") {

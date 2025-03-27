@@ -97,20 +97,20 @@ const Proizvod = () => {
                         {/* Informacije o proizvodu */}
                         <div className="md:flex-1 px-4">
                             <h2 className="text-2xl font-bold text-white mb-2">{proizvod?.naziv}</h2>
-                            <p className="text-gray-300 text-sm mb-4">{proizvod?.opis}</p>
+                            <p className="text-gray-300 text-sm mb-4"> {proizvod?.opis}</p>
                             <div className="flex mb-4">
                                 <div className="mr-4">
-                                    <span className="font-bold text-gray-300">Cena:</span>
+                                    <span className="font-bold text-gray-300"> Cena:</span>
                                     <span className="text-gray-300"> {proizvod?.cena}RSD</span>
                                 </div>
                                 <br/>
                                 <div>
-                                    <span className="font-bold text-gray-300">Kategorija:</span>
+                                    <span className="font-bold text-gray-300"> Kategorija:</span>
                                     <span className="text-gray-300"> {proizvod?.kategorija}</span>
                                 </div>
                                 <br/>
                                 <div>
-                                    <span className="font-bold text-gray-300">Dostupnost:</span>
+                                    <span className="font-bold text-gray-300"> Dostupnost:</span>
                                     <span className="text-gray-300"> {proizvod?.stanje}</span>
                                 </div>
                             </div>
