@@ -14,26 +14,26 @@ const ProizvodCard = ({ proizvod }) => {
         setSlike(data)
     }
     const dodajUKorpu = () => {
-        
+
         setNewOrder((prevOrder) => {
             const existingProductIndex = prevOrder.proizvodi.findIndex((p) => p.id === proizvod.id);
 
             let updatedProizvodi;
             if (existingProductIndex !== -1) {
-               if(proizvod.kolicina+1<=proizvod.stanje){
-                updatedProizvodi = [...prevOrder.proizvodi];
-                updatedProizvodi[existingProductIndex].kolicina += 1;
-            }else{
-                toast.warning("Moras dodati proizvod kojeg imamo dovoljno na stanju")
-            }
+                if (proizvod.kolicina + 1 <= proizvod.stanje) {
+                    updatedProizvodi = [...prevOrder.proizvodi];
+                    updatedProizvodi[existingProductIndex].kolicina += 1;
+                } else {
+                    toast.warning("Moras dodati proizvod kojeg imamo dovoljno na stanju")
+                }
             } else {
                 // Proizvod ne postoji, dodaj ga sa kolicinom 1
-                if(proizvod.stanje>0){
-                updatedProizvodi = [...prevOrder.proizvodi, { ...proizvod, kolicina: 1 }];
-                toast.success("Proizvod dodat u korpu!");
-            }else{
-                toast.warning("Proizvoda nema na stanju")
-            }
+                if (proizvod.stanje > 0) {
+                    updatedProizvodi = [...prevOrder.proizvodi, { ...proizvod, kolicina: 1 }];
+                    toast.success("Proizvod dodat u korpu!");
+                } else {
+                    toast.warning("Proizvoda nema na stanju")
+                }
             }
 
             return { ...prevOrder, proizvodi: updatedProizvodi };
@@ -59,9 +59,16 @@ const ProizvodCard = ({ proizvod }) => {
 
                 <h3 className="mt-1.5 text-lg font-medium text-gray-900">{proizvod.naziv}</h3>
 
+
                 <p className="mt-1.5 line-clamp-3 text-gray-700">
-                    {proizvod.opis}
+                    {proizvod.kategorija}
                 </p>
+
+                <p className="mt-1.5 line-clamp-3 text-gray-700">
+                    {proizvod.opis.length > 30 ? `${proizvod.opis.substring(0, 30)}...` : proizvod.opis}
+                </p>
+
+
 
                 <div className="mt-4 flex gap-4">
                     <Link to={`/proizvod/${proizvod.id}`}

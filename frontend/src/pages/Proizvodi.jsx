@@ -7,14 +7,14 @@ const Proizvodi = () => {
   const { proizvodi } = useStateContext()
   const [showMobileSort, setShowMobileSort] = useState(false);
   const [selectedSort, setSelectedSort] = useState(""); // Držimo sort opciju
-  const [selectedCategories, setSelectedCategories] = useState([]); // Filter kategorije
+  const{selectedCategories,setSelectedPodCategories,setSelectedCategories,selectedPodCategories} = useStateContext()
   const [priceRange, setPriceRange] = useState({ min: "", max: "" })
   const kategorije = [
-    { id: "Alati", naziv: "Alati",podKategorija:['Aku alati','Električni alati','Ručni alati','Setovi gedora','Specijalni setovi'] },
-    { id: "Dvorište i bašta", naziv: "Dvorište i bašta",podKategorija:['Oprema za košenja','Motorni bušači rupa','Creva i brze spojke','Makaze za orezivanje','Ostali baštenski alati'] },
-    { id: "Auto oprema", naziv: "Auto oprema",podKategorija:['Ambijentalna LED svetla za vodila','Audio oprema','Halogene auto sijalice','Kopresori za automobile i setovi za krpljenje guma','LED auto sijalice','Obloge volana', ' Presvlake za vozila', 'Punjači akumulatora'] },
+    { id: "Alati", naziv: "Alati", podKategorija: ['Aku alati', 'Električni alati', 'Ručni alati', 'Setovi gedora', 'Specijalni setovi'] },
+    { id: "Dvorište i bašta", naziv: "Dvorište i bašta", podKategorija: ['Oprema za košenja', 'Motorni bušači rupa', 'Creva i brze spojke', 'Makaze za orezivanje', 'Ostali baštenski alati'] },
+    { id: "Auto oprema", naziv: "Auto oprema", podKategorija: ['Ambijentalna LED svetla za vodila', 'Audio oprema', 'Halogene auto sijalice', 'Kopresori za automobile i setovi za krpljenje guma', 'LED auto sijalice', 'Obloge volana', ' Presvlake za vozila', 'Punjači akumulatora'] },
   ];
-  
+
 
   const sortirajProizvode = (proizvodi) => {
     if (selectedSort === "priceAsc") {
@@ -30,15 +30,22 @@ const Proizvodi = () => {
   // Funkcija za filtriranje proizvoda
   const filtrirajProizvode = (proizvodi) => {
     return proizvodi.filter((proizvod) => {
+      // Razdvajanje kategorije i podkategorije na osnovu '/'
+      const glavnaKategorija = proizvod.kategorija.split('/')[0].trim(); // Uzimamo samo prvu (glavnu) kategoriju
+      const podKategorija = proizvod.kategorija.split('/')[1]?.trim();
+
+      const isInPodCategory = selectedPodCategories.length ===0 || selectedPodCategories.includes(podKategorija)
       const isInCategory =
-        selectedCategories.length === 0 || selectedCategories.includes(proizvod.kategorija);
+        selectedCategories.length === 0 || selectedCategories.includes(glavnaKategorija);
+
       const isInPriceRange =
         (!priceRange.min || proizvod.cena >= parseInt(priceRange.min)) &&
         (!priceRange.max || proizvod.cena <= parseInt(priceRange.max));
 
-      return isInCategory && isInPriceRange;
+      return isInCategory && isInPriceRange && isInPodCategory;
     });
   };
+
 
   // Ažuriraj listu proizvoda posle filtriranja i sortiranja
   const prikazaniProizvodi = sortirajProizvode(filtrirajProizvode(proizvodi));
@@ -197,26 +204,52 @@ const Proizvodi = () => {
                   </header>
 
                   <ul className="space-y-1 border-t border-gray-200 p-4">
-                    {kategorije.map((kategorija) => (
-                      <li key={kategorija.id}>
-                        <label htmlFor={kategorija.id} className="inline-flex items-center gap-2">
-                          <input
-                            type="checkbox"
-                            id={kategorija.id}
-                            checked={selectedCategories.includes(kategorija.id)}
-                            onChange={() => {
-                              if (selectedCategories.includes(kategorija.id)) {
-                                setSelectedCategories(selectedCategories.filter((id) => id !== kategorija.id));
-                              } else {
-                                setSelectedCategories([...selectedCategories, kategorija.id]);
-                              }
-                            }}
-                            className="size-5 rounded-sm border-gray-300"
-                          />
-                          <span className="text-sm font-medium text-gray-700">{kategorija.naziv}</span>
-                        </label>
-                      </li>
-                    ))}
+                  {kategorije.map((kategorija) => (
+                        <li key={kategorija.id}>
+                          <label htmlFor={kategorija.id} className="inline-flex items-center gap-2">
+                            <input
+                              type="checkbox"
+                              id={kategorija.id}
+                              checked={selectedCategories.includes(kategorija.id)}
+                              onChange={() => {
+                                if (selectedCategories.includes(kategorija.id)) {
+                                  setSelectedCategories(selectedCategories.filter((id) => id !== kategorija.id));
+                                } else {
+                                  setSelectedCategories([...selectedCategories, kategorija.id]);
+                                }
+                              }}
+                              className="size-5 rounded-sm border-gray-300"
+                            />
+                            <span className="text-sm font-medium text-gray-700">{kategorija.naziv}</span>
+                          </label>
+
+                          {/* Prikazivanje podkategorija ako je kategorija selektovana */}
+                          {selectedCategories.includes(kategorija.id) && (
+                            <ul className="pl-6">
+                              {kategorija.podKategorija.map((podKategorija) => (
+                                <li key={podKategorija}>
+                                  <label className="inline-flex items-center gap-2">
+                                    <input
+                                      type="checkbox"
+                                      checked={selectedPodCategories.includes(podKategorija)}
+                                      onChange={() => {
+                                        if (selectedPodCategories.includes(podKategorija)) {
+                                          setSelectedPodCategories(selectedPodCategories.filter((ime) => ime !== podKategorija));
+                                        } else {
+                                          setSelectedPodCategories([...selectedPodCategories, podKategorija]);
+                                        }
+                                      }}
+                                      className="size-4 rounded-sm border-gray-300"
+                                    />
+                                    <span className="text-sm text-gray-600">{podKategorija}</span>
+                                  </label>
+                                </li>
+                              ))}
+                            </ul>
+                          )}
+                        </li>
+                      ))}
+
                   </ul>
                 </div>
               </details>
@@ -367,8 +400,34 @@ const Proizvodi = () => {
                             />
                             <span className="text-sm font-medium text-gray-700">{kategorija.naziv}</span>
                           </label>
+
+                          {/* Prikazivanje podkategorija ako je kategorija selektovana */}
+                          {selectedCategories.includes(kategorija.id) && (
+                            <ul className="pl-6">
+                              {kategorija.podKategorija.map((podKategorija) => (
+                                <li key={podKategorija}>
+                                  <label className="inline-flex items-center gap-2">
+                                    <input
+                                      type="checkbox"
+                                      checked={selectedPodCategories.includes(podKategorija)}
+                                      onChange={() => {
+                                        if (selectedPodCategories.includes(podKategorija)) {
+                                          setSelectedPodCategories(selectedPodCategories.filter((ime) => ime !== podKategorija));
+                                        } else {
+                                          setSelectedPodCategories([...selectedPodCategories, podKategorija]);
+                                        }
+                                      }}
+                                      className="size-4 rounded-sm border-gray-300"
+                                    />
+                                    <span className="text-sm text-gray-600">{podKategorija}</span>
+                                  </label>
+                                </li>
+                              ))}
+                            </ul>
+                          )}
                         </li>
                       ))}
+
                     </ul>
                   </div>
                 </details>

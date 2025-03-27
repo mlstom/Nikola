@@ -5,6 +5,8 @@ const Context = createContext();
 export const StateContext = ({ children }) => {
   
   const [proizvodi, setProizvodi] = useState([])
+  const [selectedCategories, setSelectedCategories] = useState([]);
+  const [selectedPodCategories, setSelectedPodCategories] = useState([]);
   const [newOrder, setNewOrder] = useState({
     ime: "",
     prezime: "",
@@ -38,7 +40,9 @@ export const StateContext = ({ children }) => {
         fetchProizvodi,fetchSlike,
         backURL,
         proizvodi, setProizvodi,
-        newOrder, setNewOrder
+        newOrder, setNewOrder,
+        selectedCategories,setSelectedCategories,
+        selectedPodCategories,setSelectedPodCategories
       }}
     >
       {children}

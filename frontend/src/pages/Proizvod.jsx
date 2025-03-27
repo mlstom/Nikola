@@ -110,7 +110,7 @@ const Proizvod = () => {
                                 </div>
                                 <br/>
                                 <div>
-                                    <span className="font-bold text-gray-300"> Dostupnost:</span>
+                                    <span className="font-bold text-gray-300 ml-1"> Dostupnost:</span>
                                     <span className="text-gray-300"> {proizvod?.stanje}</span>
                                 </div>
                             </div>

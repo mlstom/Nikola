@@ -6,7 +6,7 @@ const Najnoviji = () => {
     const {proizvodi} = useStateContext()
     const [najnovijiProizvodi, setNajnovijiProizvodi] = useState([])
     useEffect(() => {
-        const pom = proizvodi.slice(-4).reverse();
+        const pom = proizvodi.slice(-8).reverse();
         console.log("Privremeni niz:", pom); 
     
         setNajnovijiProizvodi(pom);

@@ -2,31 +2,34 @@ import React from 'react'
 import alati from "../assets/alatiset.jpg";
 import lanci from "../assets/lanci.jpg"
 import alatiset from "../assets/alat.jpg"
+import { useStateContext } from '../context/StateContext';
+import { useNavigate } from 'react-router-dom';
 const ShopBaner = () => {
   const items = [
     {
       title: "Svi proizvodi",
       description:
-        "Nimalo se nećete pokajati ako pogledate naše proizode",
+        "Nimalo se nećete pokajati ako pogledate naše proizode.",
       image:
         alati
     },
     {
-      title: "Lanci",
+      title: "Auto oprema",
       description:
-        "Svi najnoviji lanci na jednom mestu.",
+        "Najpovoljnija autooprema na jednom mestu.",
       image:
         lanci
     },
     {
-      title: "Dizalice",
+      title: "Alati",
       description:
-        "Bezbroj kvalitetnih dizalica na jednom mestu.",
+        "Bezbroj kvalitetnog alata koji svakom može da koristi.",
       image:
         alatiset
     },
   ];
-
+  const {selectedCategories,setSelectedCategories} = useStateContext()
+   const navigate = useNavigate();
   return (
     <div className="container mx-auto px-6 mt-5">
       <div
@@ -38,7 +41,9 @@ const ShopBaner = () => {
             <h2 className="text-2xl text-white font-semibold">{items[0].title}</h2>
             <p className="mt-2 text-gray-400">{items[0].description}</p>
             <button className="flex items-center mt-4 px-3 py-2 bg-orange-500 text-white text-sm uppercase font-medium rounded hover:bg-orange-700">
-              <span>Kupi odmah</span>
+              <span onClick={(e)=>{
+                navigate('/proizvodi')
+                }}>Vidi</span>
               <svg
                 className="h-5 w-5 mx-2"
                 fill="none"
@@ -66,7 +71,10 @@ const ShopBaner = () => {
                 <h2 className="text-2xl text-white font-semibold">{item.title}</h2>
                 <p className="mt-2 text-gray-400">{item.description}</p>
                 <button className="flex items-center mt-4 text-white text-sm uppercase font-medium rounded hover:underline">
-                  <span>Kupi odmah</span>
+                  <span onClick={()=>{
+                    setSelectedCategories([...selectedCategories,item.title])
+                    navigate('/proizvodi')
+                  }}>Vidi</span>
                   <svg
                     className="h-5 w-5 mx-2"
                     fill="none"

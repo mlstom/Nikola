@@ -1,7 +1,15 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-
+import { useStateContext } from '../context/StateContext';
+import { useNavigate } from 'react-router-dom';
 const Footer = () => {
+    const kategorije = [
+        { id: "Alati", naziv: "Alati", podKategorija: ['Aku alati', 'Električni alati', 'Ručni alati', 'Setovi gedora', 'Specijalni setovi'] },
+        { id: "Dvorište i bašta", naziv: "Dvorište i bašta", podKategorija: ['Oprema za košenja', 'Motorni bušači rupa', 'Creva i brze spojke', 'Makaze za orezivanje', 'Ostali baštenski alati'] },
+        { id: "Auto oprema", naziv: "Auto oprema", podKategorija: ['Ambijentalna LED svetla za vodila', 'Audio oprema', 'Halogene auto sijalice', 'Kopresori za automobile i setovi za krpljenje guma', 'LED auto sijalice', 'Obloge volana', ' Presvlake za vozila', 'Punjači akumulatora'] },
+      ];
+      const {selectedCategories,setSelectedCategories} = useStateContext()
+      const navigate = useNavigate();
     return (
         <footer className="bg-white">
             <div className="mx-auto max-w-screen-xl px-4 pt-16 pb-8 sm:px-6 lg:px-8">
@@ -53,27 +61,12 @@ const Footer = () => {
                             <strong className="font-medium text-gray-900"> Proizvodi </strong>
 
                             <ul className="mt-6 space-y-1">
-                                <li>
-                                    <a className="text-gray-700 transition hover:text-gray-700/75" href="#"> Trimeri </a>
-                                </li>
-
-                                <li>
-                                    <a className="text-gray-700 transition hover:text-gray-700/75" href="#">
-                                        Lampe
-                                    </a>
-                                </li>
-
-                                <li>
-                                    <a className="text-gray-700 transition hover:text-gray-700/75" href="#">
-                                        Kosilice
-                                    </a>
-                                </li>
-
-                                <li>
-                                    <a className="text-gray-700 transition hover:text-gray-700/75" href="#">
-                                        Ostalo
-                                    </a>
-                                </li>
+                                {kategorije.map((kategorija,index)=>(
+                                    <li key={index}><a className='cursor-pointer' onClick={()=>{
+                                        setSelectedCategories([...selectedCategories,kategorija.id])
+                                        navigate('/proizvodi')
+                                    }}>{kategorija.id} </a></li>
+                                ))}
                             </ul>
                         </div>
 
