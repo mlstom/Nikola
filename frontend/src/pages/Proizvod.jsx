@@ -103,10 +103,12 @@ const Proizvod = () => {
                                     <span className="font-bold text-gray-300">Cena:</span>
                                     <span className="text-gray-300"> {proizvod?.cena}RSD</span>
                                 </div>
+                                <br/>
                                 <div>
                                     <span className="font-bold text-gray-300">Kategorija:</span>
                                     <span className="text-gray-300"> {proizvod?.kategorija}</span>
                                 </div>
+                                <br/>
                                 <div>
                                     <span className="font-bold text-gray-300">Dostupnost:</span>
                                     <span className="text-gray-300"> {proizvod?.stanje}</span>
