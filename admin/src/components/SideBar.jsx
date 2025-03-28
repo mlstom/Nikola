@@ -1,15 +1,16 @@
-import { CalendarArrowDown, Package, Settings } from "lucide-react";
+import { CalendarArrowDown, Package, Settings,Tags } from "lucide-react";
 import { NavLink, useLocation,Link } from "react-router-dom";
 const Sidebar = () => {
     const location = useLocation();
 
     const links = [
         { path: "/proizvodi", icon: Package },
-        { path: "/narudzbine", icon: CalendarArrowDown }
+        { path: "/narudzbine", icon: CalendarArrowDown },
+        {path:"/kupon", icon:Tags}
     ];
 
     return (
-        <div className="h-screen w-8 flex flex-col  items-center justify-between bg-gray-900 text-white py-4 space-y-4 px-6">
+        <div className="min-h-full w-8 flex flex-col  items-center justify-between bg-gray-900 text-white py-4 space-y-4 px-6">
            
                 {links.map(({ path, icon: Icon }) => (
                     <Link
