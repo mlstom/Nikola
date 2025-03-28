@@ -47,11 +47,8 @@ app.get('/sitemap.xml', async (req, res) => {
     // Započni odgovor sa XML headerom
     res.header('Content-Type', 'application/xml');
     
-    // Dodaj početni XML u stream
-    sitemapStream.write('<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">');
-    
     // Pozovi API da dobiješ proizvode (ili koristi bazu ako je potrebno)
-    const response = await axios.get('https://alatinidza.rs/api/proizvod');
+    const response = await axios.get('https://backend.srv758372.hstgr.cloud/api/proizvod');
     const proizvodi = response.data;
 
     // Dodaj URL za svaki proizvod u sitemap
@@ -70,9 +67,10 @@ app.get('/sitemap.xml', async (req, res) => {
 
     // Zatvori stream i pošaljemo XML odgovor
     sitemapStream.end();
-    streamToPromise(sitemapStream).then((data) => {
-      res.send(data);
-    });
+
+    // Pretvaranje streama u podatke i slanje odgovora
+    const data = await streamToPromise(sitemapStream);
+    res.send(data);
   } catch (error) {
     console.error('Greška pri generisanju sitemap-a:', error);
     res.status(500).send('Greška pri generisanju sitemap-a');
