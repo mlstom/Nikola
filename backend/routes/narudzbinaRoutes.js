@@ -28,10 +28,10 @@ router.get("jednaNarudzbina/:id", (req, res) => {
 
 // POST - Dodaj novi proizvod
 router.post("/", (req, res) => {
-    const { brojKorpe, idPodaciKupca, brojPosiljke, poslato } = req.body;
+    const { brojKorpe, idPodaciKupca, brojPosiljke, poslato,cena,postarina,popust } = req.body;
     db.query(
-        "INSERT INTO Narudzbina (brojKorpe, idKupac, brojPosiljke,  poslato) VALUES (?, ?, ?, ?)",
-        [brojKorpe, idPodaciKupca, brojPosiljke, poslato],
+        "INSERT INTO Narudzbina (brojKorpe, idKupac, brojPosiljke,  poslato,cena,postarina,popust) VALUES (?, ?, ?, ?,?,?,?)",
+        [brojKorpe, idPodaciKupca, brojPosiljke, poslato,cena,postarina,popust],
         (err, result) => {
             if (err) return res.status(500).json(err);
             res.json({ message: "Narudžbina dodata", id: result.insertId });
@@ -110,6 +110,18 @@ router.put("/:brojPosiljke/poslato", (req, res) => {
         }
     );
 });
+
+router.put("/:brojPosiljke/cena", (req, res) => {
+    const { cena } = req.body; // Novi status "poslato"
+    db.query(
+        "UPDATE Narudzbina SET cena = ? WHERE brojPosiljke = ?",
+        [cena, req.params.brojPosiljke],
+        (err, result) => {
+            if (err) return res.status(500).json(err);
+            res.json({ message: "Status cena ažuriran" });
+        }
+    );
+});
 // Ažuriranje broja pošiljke
 router.put("/broj/:brojPosiljke", (req, res) => {
     const { noviBroj } = req.body; // Novi broj pošiljke
@@ -153,6 +165,9 @@ router.get("/konacnaNarudzbina", (req, res) => {
             n.brojPosiljke, 
             n.brojKorpe,
             n.poslato,
+            n.cena,
+            n.postarina,
+            n.popust,
             p.id AS proizvod_id,
             p.naziv AS proizvod_naziv,
             p.cena AS proizvod_cena,
@@ -178,6 +193,9 @@ router.get("/konacnaNarudzbina", (req, res) => {
             n.brojPosiljke, 
             n.poslato,
             n.brojKorpe,
+            n.cena,
+            n.postarina,
+            n.popust,
             p.id,
             p.naziv,
             p.cena,
@@ -239,6 +257,9 @@ router.get("/konacnaNarudzbina", (req, res) => {
                 kolicina: row.kolicina
             });
             narudzbina.ukupnaCena+= row.kolicina * row.proizvod_cena;
+            narudzbina.cena = row.cena;
+            narudzbina.postarina = row.postarina
+            narudzbina.popust = row.popust
         });
 
         res.json({ narudzbine: Array.from(narudzbineMap.values()) });
@@ -254,6 +275,9 @@ router.get("/search/:query", (req, res) => {
             n.brojPosiljke, 
             n.brojKorpe,
             n.poslato,
+            n.cena,
+            n.postarina,
+            n.popust,
             p.id AS proizvod_id,
             p.naziv AS proizvod_naziv,
             p.cena AS proizvod_cena,
@@ -286,6 +310,9 @@ router.get("/search/:query", (req, res) => {
             n.brojPosiljke, 
             n.poslato,
             n.brojKorpe,
+            n.cena,
+            n.postarina,
+            n.popust,
             p.id,
             p.naziv,
             p.cena,
@@ -348,7 +375,9 @@ router.get("/search/:query", (req, res) => {
             });
 
             narudzbina.ukupnaCena += row.kolicina * row.proizvod_cena;
-            
+            narudzbina.cena = row.cena;
+            narudzbina.postarina = row.postarina
+            narudzbina.popust = row.popust
         });
 
         res.json({ narudzbine: Array.from(narudzbineMap.values()) });

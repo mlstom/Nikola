@@ -110,10 +110,11 @@ const Korpa = () => {
   // Ažuriranje ukupne cene sa popustom
   useEffect(() => {
     if (kuponIskoristen) {
-      const noviTotal = total * (100 - popust) / 100;
-      setTotal(noviTotal);
+      const novi = subtotal * (100 - popust) / 100;
+      setSubtotal(novi);
+      setTotal(novi+postarina)
     }
-  }, [kuponIskoristen]);
+  }, [kuponIskoristen,popust]);
 
   return (
     <section>
@@ -238,7 +239,7 @@ const Korpa = () => {
                     <Link
                       to="/narudzbina"
                       className="block rounded-sm bg-orange-500 px-5 py-3 text-sm text-gray-100 transition hover:bg-orange-700"
-                      onClick={()=>setNewOrder({...newOrder,cena:total,postarina:postarina})}
+                      onClick={()=>setNewOrder({...newOrder,cena:total,postarina:postarina,cenaProizvoda:subtotal,popust:popust})}
                     >
                       Plaćanje
                     </Link>

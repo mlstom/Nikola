@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useStateContext } from "../context/StateContext";
 
 const CartModal = () => {
-  const{newOrder,setNewOrder,backURL} = useStateContext()
+  const { newOrder, setNewOrder, backURL } = useStateContext()
 
   return (
     <div
@@ -43,7 +43,7 @@ const CartModal = () => {
         <dl className="text-sm text-gray-700">
           <div className="flex justify-between">
             <dt>Cena:</dt>
-            <dd>{newOrder.cena-newOrder.postarina}RSD</dd>
+            <dd>{newOrder.cenaProizvoda}RSD</dd>
           </div>
           <div className="flex justify-between">
             <dt>Poštarina:</dt>
@@ -52,6 +52,9 @@ const CartModal = () => {
           <div className="flex justify-between text-base font-medium">
             <dt>Ukupno:</dt>
             <dd>{newOrder.cena}RSD</dd>
+            {newOrder.popust.length > 0 && <div className="text-green-600">
+              <p> Popust: {newOrder.popust} %, Samo jedan kod za popust može biti iskorišćen</p>
+            </div>}
           </div>
         </dl>
       </div>

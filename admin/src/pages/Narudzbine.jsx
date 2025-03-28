@@ -5,7 +5,7 @@ import CustomerDetails from "../components/CustomerDetails";
 import { useStateContext } from "../context/StateContext";
 
 const Narudzbine = () => {
-  
+
   const [searchQuery, setSearchQuery] = useState("");
   const [searchTerm, setSearchTerm] = useState("")
   const [showProductList, setShowProductList] = useState(false)
@@ -13,11 +13,11 @@ const Narudzbine = () => {
   const [editState, setEditState] = useState({}); // Track the edit state per order
   const [noviBroj, setnoviBroj] = useState("");
 
-  const{backURL} = useStateContext()
+  const { backURL } = useStateContext()
 
   const kolone = ["id", "sifra", "naziv", "opis", "kategorija", "cena", "stanje", "slike"];
 
-  const { akcija, trIdProizvoda, trKorpa, settrKorpa, fetchNarudzbine, filteredNarudzbine, setFilteredNarudzbine,proizvodi,fetchProizvodi,handleSearchProizvoda,filteredProizvodi,setFilteredProizvodi,narudzbine,setNarudzbine} = useStateContext()
+  const { akcija, trIdProizvoda, trKorpa, settrKorpa, fetchNarudzbine, filteredNarudzbine, setFilteredNarudzbine, proizvodi, fetchProizvodi, handleSearchProizvoda, filteredProizvodi, setFilteredProizvodi, narudzbine, setNarudzbine } = useStateContext()
 
   const [newOrder, setNewOrder] = useState({
     ime: "",
@@ -27,10 +27,14 @@ const Narudzbine = () => {
     adresa: "",
     postanskiBroj: "",
     mesto: "",
+    cena: "",
+    postarina: "",
+    cenaProizvoda: "",
+    popust: "",
     korpa: `KORPA${Math.floor(100000 + Math.random() * 900000)}`, // Generiše broj korpe
     proizvodi: [], // Lista proizvoda u korpi
   });
-  
+
 
   const handleAddOrder = async () => {
     try {
@@ -44,32 +48,35 @@ const Narudzbine = () => {
         postanskiBroj: newOrder.postanskiBroj,
         mesto: newOrder.mesto,
       });
-  
+
       const idKupca = kupacResponse.data.id; // ID kupca iz odgovora
-  
+
       // 2. Kreiranje broja korpe (generisanje nasumičnog broja)
-      const brojKorpe ="KORPA"+Math.floor(100000 + Math.random() * 900000); 
-      
+      const brojKorpe = "KORPA" + Math.floor(100000 + Math.random() * 900000);
+
       // 3. Dodavanje proizvoda u korpu
       await Promise.allSettled(newOrder.proizvodi.map(async (proizvod) => {
-        
+
         return axios.post(`${backURL}/api/narudzbina/korpa`, {
           brojKorpe: brojKorpe,
           idProizvod: proizvod.id,
           kolicina: proizvod.kolicina
         });
       })).then(results => console.log(results));
-  
+
       // 4. Kreiranje narudžbine
-      const brojPosiljke ="Posiljka"+Math.floor(100000 + Math.random() * 900000); // Šestocifren broj pošiljke
-  
+      const brojPosiljke = "Posiljka" + Math.floor(100000 + Math.random() * 900000); // Šestocifren broj pošiljke
+
       await axios.post(`${backURL}/api/narudzbina`, {
         brojKorpe: brojKorpe,
         idPodaciKupca: idKupca,
         brojPosiljke: brojPosiljke,
-        poslato: 0
+        poslato: 0,
+        cena: "",
+        postarina: "",
+        popust: ""
       });
-  
+
       // Osveži podatke i zatvori modal
       fetchNarudzbine();
       setIsAddOrderOpen(false);
@@ -83,21 +90,21 @@ const Narudzbine = () => {
         mesto: "",
         proizvodi: []
       });
-  
+
     } catch (error) {
       console.error("Greška pri dodavanju narudžbine:", error);
     }
   };
-  
+
 
   useEffect(() => {
     fetchNarudzbine();
     fetchProizvodi()
   }, []);
 
-  const handlePretrazivanjeProizvoda = async(e) =>{
+  const handlePretrazivanjeProizvoda = async (e) => {
     setSearchTerm(e.target.value)
-    if(!searchTerm.trim()){
+    if (!searchTerm.trim()) {
       setFilteredProizvodi(proizvodi)
       return
     }
@@ -164,12 +171,12 @@ const Narudzbine = () => {
     setNewOrder((prev) => {
       let proizvodi = prev.proizvodi || []; // Osiguravamo da postoji niz
       let existingProduct = proizvodi.find(p => p.id === product.id);
-  
+
       if (existingProduct) {
         // Ako proizvod već postoji, povećaj mu količinu
         return {
           ...prev,
-          proizvodi: proizvodi.map(p => 
+          proizvodi: proizvodi.map(p =>
             p.id === product.id ? { ...p, kolicina: p.kolicina + 1 } : p
           ),
         };
@@ -182,8 +189,8 @@ const Narudzbine = () => {
       }
     });
   };
-  
-  const handleRemoveProduct =(id)=>{
+
+  const handleRemoveProduct = (id) => {
 
 
     let lista = []
@@ -192,36 +199,36 @@ const Narudzbine = () => {
     const tr = proizvodi.find(proizvod => proizvod.id == id)
     const kolicina = tr.kolicina
 
-    proizvodi.map((proizvod)=>{
-      if(proizvod.id!=id) lista.push(proizvod)
-      else{
-        if(proizvod.kolicina>1){
+    proizvodi.map((proizvod) => {
+      if (proizvod.id != id) lista.push(proizvod)
+      else {
+        if (proizvod.kolicina > 1) {
           proizvod.kolicina--
           lista.push(proizvod)
         }
       }
     })
-    setNewOrder((prev)=>(
+    setNewOrder((prev) => (
       {
         ...prev,
-        proizvodi:lista
+        proizvodi: lista
       }
     ))
   }
-  const handleAddProduct = (id)=>{
+  const handleAddProduct = (id) => {
     let lista = []
     const proizvodi = newOrder.proizvodi
-    proizvodi.map((proizvod)=>{
-      if(proizvod.id != id) lista.push(proizvod)
-      else{
+    proizvodi.map((proizvod) => {
+      if (proizvod.id != id) lista.push(proizvod)
+      else {
         proizvod.kolicina++
         lista.push(proizvod)
       }
     })
-    setNewOrder((prev)=>(
+    setNewOrder((prev) => (
       {
         ...prev,
-        proizvodi:lista
+        proizvodi: lista
       }
     ))
   }
@@ -259,6 +266,10 @@ const Narudzbine = () => {
               <input type="text" placeholder="Adresa" value={newOrder.adresa} onChange={(e) => setNewOrder({ ...newOrder, adresa: e.target.value })} className="border px-3 py-2 rounded-md" />
               <input type="text" placeholder="Poštanski broj" value={newOrder.postanskiBroj} onChange={(e) => setNewOrder({ ...newOrder, postanskiBroj: e.target.value })} className="border px-3 py-2 rounded-md" />
               <input type="text" placeholder="Mesto" value={newOrder.mesto} onChange={(e) => setNewOrder({ ...newOrder, mesto: e.target.value })} className="border px-3 py-2 rounded-md" />
+              <input type="text" placeholder="Cena" value={newOrder.cena} onChange={(e) => setNewOrder({ ...newOrder, cena: e.target.value })} className="border px-3 py-2 rounded-md" />
+              <input type="text" placeholder="Postarina" value={newOrder.postarina} onChange={(e) => setNewOrder({ ...newOrder, postarina: e.target.value })} className="border px-3 py-2 rounded-md" />
+              <input type="text" placeholder="Popust" value={newOrder.popust} onChange={(e) => setNewOrder({ ...newOrder, popust: e.target.value })} className="border px-3 py-2 rounded-md" />
+
             </div>
 
             {/* Korpa */}
@@ -272,21 +283,21 @@ const Narudzbine = () => {
                 type="text"
                 placeholder="Dodaj proizvod..."
                 value={searchTerm}
-                onChange={(e) => {handlePretrazivanjeProizvoda(e)}}
+                onChange={(e) => { handlePretrazivanjeProizvoda(e) }}
                 onFocus={() => setShowProductList(true)}
                 className="border px-3 py-2 rounded-md w-full"
               />
               {/* Lista proizvoda */}
               {showProductList && (
                 <div className="absolute bg-white border rounded-md w-full mt-1 max-h-40 overflow-y-auto shadow-md pt-8">
-                  <div className="absolute top-1 right-1 text-red-500 px-2 py-2 cursor-pointer text-[20px]" onClick={()=>setShowProductList(false)}>x</div>
+                  <div className="absolute top-1 right-1 text-red-500 px-2 py-2 cursor-pointer text-[20px]" onClick={() => setShowProductList(false)}>x</div>
                   {filteredProizvodi.map((product) => (
                     <div
                       key={product.id}
                       className="px-3 py-2 cursor-pointer hover:bg-gray-200"
                       onClick={() => handleAddProductToCart(product)}
                     >
-                      {product.naziv} - {product.cena} RSD 
+                      {product.naziv} - {product.cena} RSD
                     </div>
                   ))}
                 </div>
@@ -346,8 +357,10 @@ const Narudzbine = () => {
                 autoFocus
               />
             )}
-            - Ukupna cena: {narudzbina.ukupnaCena} RSD
+            - Ukupna cena: {narudzbina.cena} RSD
           </h2>
+          <p>Postarina: {narudzbina.postarina} RSD</p>
+          <p>Postarina: {narudzbina.popust} %</p>
           <div className="flex items-center mb-2">
             <label className="flex items-center mr-4">
               <input

@@ -15,6 +15,10 @@ export const StateContext = ({ children }) => {
     adresa: "",
     postanskiBroj: "",
     mesto: "",
+    cena:"",
+    postarina:"",
+    cenaProizvoda:"",
+    popust:"",
     proizvodi: []
   })
   const backURL = 'https://backend.srv758372.hstgr.cloud'

@@ -51,7 +51,9 @@ const Narudzbina = () => {
         idPodaciKupca: idKupca,
         brojPosiljke: brojPosiljke,
         poslato: 0,
-        cena:newOrder.cena
+        cena:newOrder.cena,
+        postarina:newOrder.postarina,
+        popust:newOrder.popust
       });
 
       setNewOrder({
@@ -62,6 +64,10 @@ const Narudzbina = () => {
         adresa: "",
         postanskiBroj: "",
         mesto: "",
+        cena:"",
+        postarina:"",
+        cenaProizvoda:"",
+        popust:"",
         proizvodi: []
       })
 
