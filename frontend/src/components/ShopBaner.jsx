@@ -9,7 +9,7 @@ const ShopBaner = () => {
     {
       title: "Svi proizvodi",
       description:
-        "Nimalo se nećete pokajati ako pogledate naše proizode.",
+        "Sigurno se nećete pokajati ako pogledate naše proizvode.",
       image:
         alati
     },
@@ -23,11 +23,12 @@ const ShopBaner = () => {
     {
       title: "Alati",
       description:
-        "Bezbroj kvalitetnog alata koji svakom može da koristi.",
+        "Bezbroj kvalitetnog alata koji može da koristi svako.",
       image:
         alatiset
     },
   ];
+  
   const {selectedCategories,setSelectedCategories} = useStateContext()
    const navigate = useNavigate();
   return (

@@ -148,7 +148,7 @@ const Narudzbina = () => {
             to="/korpa"
             className="group mb-3 flex items-center font-hk text-sm text-secondary transition-all hover:text-primary group-hover:font-bold sm:mb-0"
           >
-            Return to Cart
+            Vrati se do Korpe
           </Link>
           <Link
             onClick={zavrsiKupovinu}

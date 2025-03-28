@@ -16,9 +16,9 @@ const Hero = () => {
             >
                 <div className="max-w-xl text-center ltr:sm:text-left rtl:sm:text-right">
                     <h1 className="text-3xl font-extrabold text-white sm:text-5xl">
-                        Prodnadji sve na jednom mestu
+                        Pronadji sve na jednom mestu
 
-                        <strong className="block font-extrabold text-orange-500"> Alati Nidža trgovinska radnja </strong>
+                        <strong className="block font-extrabold text-orange-500"> Alati Nidža</strong>
                     </h1>
 
                     <p className="mt-4 max-w-lg text-white sm:text-xl/relaxed">

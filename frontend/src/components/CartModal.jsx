@@ -3,10 +3,7 @@ import { useStateContext } from "../context/StateContext";
 
 const CartModal = () => {
   const{newOrder,setNewOrder,backURL} = useStateContext()
-  const subtotal = newOrder.proizvodi.reduce((sum, p) => sum + p.kolicina * p.cena, 0);
-  const vat = 500;
-  const discount = 2000;
-  const total = subtotal + vat - discount;
+
   return (
     <div
       className="relative w-screen max-w-sm border  border-gray-600 bg-white px-4 py-8 sm:px-4  lg:px-8"
@@ -46,19 +43,15 @@ const CartModal = () => {
         <dl className="text-sm text-gray-700">
           <div className="flex justify-between">
             <dt>Cena:</dt>
-            <dd>{subtotal}RSD</dd>
+            <dd>{newOrder.cena-newOrder.postarina}RSD</dd>
           </div>
           <div className="flex justify-between">
             <dt>Poštarina:</dt>
-            <dd>{vat}RSD</dd>
-          </div>
-          <div className="flex justify-between">
-            <dt>Popust:</dt>
-            <dd>-{discount}RSD</dd>
+            <dd>{newOrder.postarina}RSD</dd>
           </div>
           <div className="flex justify-between text-base font-medium">
             <dt>Ukupno:</dt>
-            <dd>{total}RSD</dd>
+            <dd>{newOrder.cena}RSD</dd>
           </div>
         </dl>
       </div>
