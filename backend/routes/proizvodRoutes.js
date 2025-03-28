@@ -21,11 +21,11 @@ router.get("/:id", (req, res) => {
 
 // POST - Dodaj novi proizvod
 router.post("/", (req, res) => {
-    const { sifra, naziv, opis, kategorija, cena, stanje } = req.body;
+    const { sifra, naziv, opis, kategorija, cena, stanje,tezina } = req.body;
 
     db.query(
-        "INSERT INTO Proizvod (sifra, naziv, opis, kategorija, cena, stanje) VALUES (?, ?, ?, ?, ?, ?)",
-        [sifra, naziv, opis, kategorija, cena, stanje],
+        "INSERT INTO Proizvod (sifra, naziv, opis, kategorija, cena, stanje,tezina) VALUES (?, ?, ?, ?, ?, ?,?)",
+        [sifra, naziv, opis, kategorija, cena, stanje,tezina],
         (err, result) => {
             if (err) return res.status(500).json(err);
             res.json({ message: "Proizvod dodat", id: result.insertId });
@@ -35,11 +35,11 @@ router.post("/", (req, res) => {
 
 // PUT - Ažuriraj proizvod
 router.put("/:id", (req, res) => {
-    const { sifra, naziv, opis, kategorija, cena, stanje } = req.body;
+    const { sifra, naziv, opis, kategorija, cena, stanje,tezina } = req.body;
 
     db.query(
-        "UPDATE Proizvod SET sifra = ?, naziv = ?, opis = ?, kategorija = ?, cena = ?, stanje = ? WHERE id = ?",
-        [sifra, naziv, opis, kategorija, cena, stanje, req.params.id],
+        "UPDATE Proizvod SET sifra = ?, naziv = ?, opis = ?, kategorija = ?, cena = ?, stanje = ?,tezina = ? WHERE id = ?",
+        [sifra, naziv, opis, kategorija, cena, stanje,tezina, req.params.id],
         (err, result) => {
             if (err) return res.status(500).json(err);
             res.json({ message: "Proizvod ažuriran" });

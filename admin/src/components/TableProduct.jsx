@@ -73,6 +73,8 @@ const TableProduct = ({ kolone, onDelete, proizvodi = [], edit,brojKorpe }) => {
                 <td className="px-4 py-2 text-gray-700">{item.kategorija}</td>
                 <td className="px-4 py-2 text-gray-700">{item.cena}</td>
                 <td className="px-4 py-2 text-gray-700">{item.stanje}</td>
+                <td className="px-4 py-2 text-gray-700">{item.tezina}</td>
+
                 <td className="px-4 py-2 text-gray-700 flex">
                   <TableSlika item={item} />
                 </td>

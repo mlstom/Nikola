@@ -24,7 +24,7 @@ const Proizvodi = () => {
  
   
 
-  const kolone = ["id", "sifra", "naziv", "opis", "kategorija", "cena", "stanje", "slike"];
+  const kolone = ["id", "sifra", "naziv", "opis", "kategorija", "cena", "stanje","tezina", "slike"];
 
   const onDelete = (id) => {
     setopenAlert(true);

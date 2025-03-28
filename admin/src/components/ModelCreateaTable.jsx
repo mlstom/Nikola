@@ -14,6 +14,7 @@ const ModelCreateaTable = () => {
         kategorija:"",
         cena: "",
         stanje:"",
+        tezina:"",
     });
 
     const handleInputChange = (e) => {
@@ -80,6 +81,7 @@ const ModelCreateaTable = () => {
                     <input type="text" className="h-[50px] px-5" name="kategorija" value={formData.kategorija} onChange={handleInputChange} placeholder="Kategorija" />
                     <input type="text" className="h-[50px] px-5" name="cena" value={formData.cena} onChange={handleInputChange} placeholder="Cena" />
                     <input type="text" className="h-[50px] px-5" name="stanje" value={formData.stanje} onChange={handleInputChange} placeholder="Stanje" />
+                    <input type="text" className="h-[50px] px-5" name="tezina" value={formData.tezina} onChange={handleInputChange} placeholder="Tezina" />
 
                     <div>
                         <FileUpload />
