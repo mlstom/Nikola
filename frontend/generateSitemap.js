@@ -2,7 +2,7 @@ import fs from 'fs';
 import axios from 'axios';
 
 (async () => {
-  const baseUrl = 'https://alatinidza.rs';
+  const baseUrl = 'https://backend.srv758372.hstgr.cloud';
 
   // Static URLs
   const staticUrls = [
