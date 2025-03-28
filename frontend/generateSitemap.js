@@ -13,7 +13,7 @@ import axios from 'axios';
 
   try {
     // Fetch dynamic routes
-    const response = await axios.get(`${baseUrl}/api/proizvodi`);
+    const response = await axios.get(`${baseUrl}/api/proizvod`);
     const proizvodi = response.data;
 
     // Generate dynamic product URLs
