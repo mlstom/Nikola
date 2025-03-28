@@ -55,8 +55,7 @@ const Korpa = () => {
 
   const subtotal = newOrder.proizvodi?.reduce((sum, p) => sum + p.kolicina * p.cena, 0);
   const vat = 500;
-  const discount = 2000;
-  const total = subtotal + vat - discount;
+  const total = subtotal + vat ;
 
   return (
     <section>
