@@ -70,6 +70,7 @@ const Narudzbina = () => {
         popust:"",
         proizvodi: []
       })
+      toast.success("Uspesno ste izvršili kupovinu!")
 
     } catch (error) {
       toast.error(`Greška: ${error.message}`);

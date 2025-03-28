@@ -43,7 +43,7 @@ const Search = () => {
 
 
   const filteredProducts =
-    query.length >= 3
+    query.length >= 1
       ? proizvodi.filter((product) =>
         // Filtriranje po nazivima, kategoriji i opisu
         product.naziv.toLowerCase().startsWith(query.toLowerCase()) ||
@@ -83,7 +83,7 @@ const Search = () => {
       </span>
 
       {filteredProducts.length > 0 && (
-        <div className="absolute z-10 mt-2 w-full rounded-md border border-gray-200 bg-white shadow-lg">
+        <div className="absolute z-10 mt-2 w-full h-[600px] overflow-y-scroll rounded-md border border-gray-200 bg-white shadow-lg">
           {filteredProducts.map((product) => (
             <div
               key={product.id}

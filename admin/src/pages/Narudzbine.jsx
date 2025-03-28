@@ -72,9 +72,9 @@ const Narudzbine = () => {
         idPodaciKupca: idKupca,
         brojPosiljke: brojPosiljke,
         poslato: 0,
-        cena: "",
-        postarina: "",
-        popust: ""
+        cena: newOrder.cena,
+        postarina: newOrder.postarina,
+        popust: newOrder.popust
       });
 
       // Osveži podatke i zatvori modal
@@ -358,9 +358,10 @@ const Narudzbine = () => {
               />
             )}
             - Ukupna cena: {narudzbina.cena} RSD
+            - Cena samo proizvoda: {narudzbina.ukupnaCena}
           </h2>
           <p>Postarina: {narudzbina.postarina} RSD</p>
-          <p>Postarina: {narudzbina.popust} %</p>
+          <p>Popust: {narudzbina.popust} %</p>
           <div className="flex items-center mb-2">
             <label className="flex items-center mr-4">
               <input
