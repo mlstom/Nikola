@@ -439,7 +439,7 @@ const Proizvodi = () => {
           </div>
 
           <div className="lg:col-span-3">
-            <div className="mt-8 grid grid-cols-1 gap-4 md:grid-cols-3 lg:grid-cols-4">
+            <div className="mt-8 grid grid-cols-1 gap-4 md:grid-cols-3 lg:grid-cols-3">
               {prikazaniProizvodi.length > 0 ? (
                 prikazaniProizvodi.map((proizvod) => <ProizvodCard key={proizvod.id} proizvod={proizvod} />)
               ) : (
