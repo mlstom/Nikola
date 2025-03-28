@@ -46,7 +46,7 @@ const Settings = () => {
     setopenAlert(false)
   }
   return (
-    <div className="flow-root rounded-lg border border-gray-100 py-3 shadow-xs">
+    <div className="flow-root rounded-lg border border-gray-100 py-3 shadow-xs min-h-screen" >
       {openAlert && <Alert text={'Da li ste sigurni da zelite da sacuvate promene'} ugasi={ugasi} />}
       <dl className="-my-3 divide-y divide-gray-100 text-sm">
         {/* Username */}
