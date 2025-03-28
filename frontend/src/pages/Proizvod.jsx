@@ -17,11 +17,17 @@ const Proizvod = () => {
 
     useEffect(() => {
         const pom = proizvodi.find((pr) => pr.id == id);
-        console.log(pom)
+        console.log(pom);
         setProizvod(pom);
-        const pom1 = proizvodi.slice(-5).reverse();
-        setNajnovijiProizvodi(pom1);
-        setActiveImage(0)
+    
+        // Uzimamo poslednjih 10 dodatih proizvoda
+        const poslednjihDeset = proizvodi.slice(-10).reverse();
+    
+        // Nasumično sortiramo poslednjih 10 i uzimamo prvih 10 proizvoda iz nove liste
+        const randomProizvodi = [...poslednjihDeset].sort(() => 0.5 - Math.random()).slice(0, 10);
+    
+        setNajnovijiProizvodi(randomProizvodi);
+        setActiveImage(0);
     }, [proizvodi, id]);
 
 
