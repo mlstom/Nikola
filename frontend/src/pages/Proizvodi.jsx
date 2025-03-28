@@ -198,7 +198,9 @@ const Proizvodi = () => {
                   <header className="flex items-center justify-between p-4">
 
 
-                    <button onClick={() => setSelectedCategories([])} type="button" className="text-sm text-gray-900 underline underline-offset-4">
+                    <button onClick={() => {
+                      setSelectedCategories([]) 
+                      selectedPodCategories([])}} type="button" className="text-sm text-gray-900 underline underline-offset-4">
                       Reset
                     </button>
                   </header>
@@ -267,10 +269,9 @@ const Proizvodi = () => {
                 onChange={(e) => setSelectedSort(e.target.value)}
               >
                 <option>Izaberi raspored</option>
-                <option value="Title, DESC">Najnovije prvo</option>
-                <option value="Title, ASC">Cena opadajuća</option>
-                <option value="Price, DESC">Cena rastuća</option>
-                <option value="Price, ASC">Preporučeno prvo</option>
+                <option value="latest">Najnovije prvo</option>
+                <option value="priceDesc">Cena opadajuća</option>
+                <option value="priceAsc">Cena rastuća</option>
               </select>
             </div>
 
@@ -376,7 +377,9 @@ const Proizvodi = () => {
                   <div className="border-t border-gray-200 bg-white">
                     <header className="flex items-center justify-between p-4">
 
-                      <button onClick={() => setSelectedCategories([])} type="button" className="text-sm text-gray-900 underline underline-offset-4">
+                      <button onClick={() => {setSelectedCategories([])
+                        setSelectedPodCategories([])
+                      }} type="button" className="text-sm text-gray-900 underline underline-offset-4">
                         Reset
                       </button>
                     </header>
