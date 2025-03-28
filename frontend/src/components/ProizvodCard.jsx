@@ -4,8 +4,9 @@ import { useStateContext } from '../context/StateContext';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { toast } from 'react-toastify';
+import { useNavigate } from 'react-router-dom';
 const ProizvodCard = ({ proizvod }) => {
-
+    const navigate = useNavigate();
     const { backURL, newOrder, setNewOrder } = useStateContext()
     const [slike, setSlike] = useState([])
     const fetchSlike = async () => {
@@ -50,6 +51,7 @@ const ProizvodCard = ({ proizvod }) => {
                 src={`${backURL}${slike[0]?.urlSlika}`}
                 alt=""
                 className="h-64 w-full object-cover transition duration-500 group-hover:scale-105 sm:h-72"
+                onClick={()=>navigate(`/proizvod/${proizvod.id}`)}
             />
 
             <div className="relative border border-gray-100 bg-white p-6">
