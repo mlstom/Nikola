@@ -16,6 +16,17 @@ const App = () => {
   useEffect(() => {
     window.scrollTo(0, 0); 
   }, [pathname]);
+  useEffect(() => {
+    // Kada se aplikacija učita, pozivamo /sitemap.xml
+    fetch('https://backend.srv758372.hstgr.cloud/sitemap.xml')
+      .then((response) => response.text()) // Pretvaramo XML u tekst
+      .then((data) => {
+        console.log('Sitemap:', data); // Prikazujemo sitemap u konzoli (ili ga koristiš kako ti treba)
+      })
+      .catch((error) => {
+        console.error('Error fetching sitemap:', error);
+      });
+  }, []); 
   return (
     <>
       <Header />
