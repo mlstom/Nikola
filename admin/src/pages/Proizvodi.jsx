@@ -51,7 +51,7 @@ const Proizvodi = () => {
   }, [searchQuery, proizvodi]);
 
   return (
-    <div className="flex flex-col justify-center items-center overflow-x-scroll overflow-y-hidden">
+    <div className="flex max-h-screen flex-col justify-center items-center overflow-x-scroll overflow-y-scroll">
       {openAlert && (
         <Alert
           text={"Da li ste sigurni da želite da obrišete ovaj proizvod?"}
