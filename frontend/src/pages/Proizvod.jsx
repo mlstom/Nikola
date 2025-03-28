@@ -67,7 +67,7 @@ const Proizvod = () => {
             <Helmet>
                 <title>Proizvod | Alati Nidža</title>
                 <meta name="description" content={`Mismo mesto koje nodi najbolje cene za proizvod poput ${proizvod?.naziv} `} />
-                <meta name="keywords" content="Bušilice, Pumpe, Lampe, Auto delovi,Automobili"/>
+                <meta name="keywords" content="Bušilice, Pumpe, Lampe, Auto delovi,Automobili" />
             </Helmet>
             <div className="bg-black pt-8">
                 <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -75,9 +75,11 @@ const Proizvod = () => {
                         {/* Slika proizvoda */}
                         <div className="md:flex-1 px-4">
                             {proizvod?.slike?.length > 0 && (
-                                <img className=" object-cover mb-4 w-[500px] h-[500px]"
+                                <img
+                                    className="object-contain mb-4 w-full max-w-xs md:max-w-md lg:max-w-lg max-h-[300px]"
                                     src={`${backURL}${proizvod.slike[activeImage]?.urlSlika}`}
-                                    alt="Product Image" />
+                                    alt="Product Image"
+                                />
                             )}
 
                             <div className="flex space-x-2 justify-center">
@@ -86,8 +88,7 @@ const Proizvod = () => {
                                         <img
                                             src={`${backURL}${img?.urlSlika}`}
                                             alt={`Thumbnail ${index + 1}`}
-                                            className={`w-16 h-16 object-cover rounded-lg border-2 transition ${activeImage === index ? "border-orange-500 scale-105" : "border-transparent"
-                                                } hover:border-gray-500`}
+                                            className={`w-12 h-12 sm:w-16 sm:h-16 object-contain rounded-lg border-2 transition ${activeImage === index ? "border-orange-500 scale-105" : "border-transparent"} hover:border-gray-500`}
                                         />
                                     </button>
                                 ))}
@@ -104,12 +105,12 @@ const Proizvod = () => {
                                     <span className="font-bold text-gray-300"> Cena:</span>
                                     <span className="text-gray-300"> {proizvod?.cena}RSD</span>
                                 </div>
-                                <br/>
+                                <br />
                                 <div>
                                     <span className="font-bold text-gray-300"> Kategorija:</span>
                                     <span className="text-gray-300"> {proizvod?.kategorija}</span>
                                 </div>
-                                <br/>
+                                <br />
                                 <div>
                                     <span className="font-bold text-gray-300 ml-1"> Dostupnost:</span>
                                     <span className="text-gray-300"> {proizvod?.stanje}</span>
