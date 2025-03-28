@@ -25,7 +25,7 @@ const Narudzbina = () => {
       const kupacResponse = await axios.post(`${backURL}/api/kupac`, {
         ime: newOrder.ime,
         prezime: newOrder.prezime,
-        email: newOrder.email,
+        email: newOrder.email || "",
         telefon: newOrder.telefon,
         adresa: newOrder.adresa,
         postanskiBroj: newOrder.postanskiBroj,
@@ -50,7 +50,8 @@ const Narudzbina = () => {
         brojKorpe: brojKorpe,
         idPodaciKupca: idKupca,
         brojPosiljke: brojPosiljke,
-        poslato: 0
+        poslato: 0,
+        cena:newOrder.cena
       });
 
       setNewOrder({
@@ -80,7 +81,7 @@ const Narudzbina = () => {
           <div className="flex justify-between ">
             <input
               type="text"
-              placeholder="Ime"
+              placeholder="Ime*"
               className="form-input mb-4 sm:mb-5"
               id="ime"
               value={newOrder.ime}
@@ -88,7 +89,7 @@ const Narudzbina = () => {
             />
             <input
               type="text"
-              placeholder="Prezime"
+              placeholder="Prezime*"
               className="form-input mb-4 sm:mb-5"
               id="prezime"
               value={newOrder.prezime }
@@ -105,7 +106,7 @@ const Narudzbina = () => {
           />
           <input
             type="text"
-            placeholder="Telefon"
+            placeholder="Telefon*"
             className="form-input mb-4 sm:mb-5"
             id="telefon"
             value={newOrder.telefon }
@@ -113,7 +114,7 @@ const Narudzbina = () => {
           />
           <input
             type="text"
-            placeholder="Adresa"
+            placeholder="Adresa*"
             className="form-input mb-4 sm:mb-5"
             id="adresa"
             value={newOrder.adresa }
@@ -122,7 +123,7 @@ const Narudzbina = () => {
           <div className="flex justify-between">
             <input
               type="text"
-              placeholder="Mesto"
+              placeholder="Mesto*"
               className="form-input mb-4 sm:mb-5"
               id="mesto"
               value={newOrder.mesto }
@@ -130,7 +131,7 @@ const Narudzbina = () => {
             />
             <input
               type="number"
-              placeholder="Poštanski broj"
+              placeholder="Poštanski broj*"
               className="form-input mb-4 sm:mb-5"
               id="postanskiBroj"
               value={newOrder.postanskiBroj }
