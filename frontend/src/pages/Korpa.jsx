@@ -152,7 +152,7 @@ const Korpa = () => {
                     <dd>{postarina.toFixed(2)}RSD</dd>
                   </div>
                   <button onClick={() => setmodelKupon(!modelKupon)} className="flex items-center mt-4 px-3 py-2 bg-orange-500 text-white text-sm uppercase font-medium rounded hover:bg-orange-700">
-                    <span >Vidi</span>
+                    <span >Dodatni popust?</span>
                     <svg
                       className="h-5 w-5 mx-2"
                       fill="none"

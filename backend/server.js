@@ -33,6 +33,7 @@ app.use("/api/proizvodSlika", require("./routes/proizvodSlikaRoutes"));
 app.use("/api/kupac", require("./routes/kupacRoutes"));
 app.use("/api/narudzbina", require("./routes/narudzbinaRoutes"));
 app.use("/api/admin", require("./routes/adminRoutes"));
+app.use("/api/kupon", require("./routes/kuponRoutes"));
 
 app.use("/api/uploads", require("./routes/upload"));
 
