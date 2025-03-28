@@ -98,6 +98,7 @@ const Proizvod = () => {
                         <div className="md:flex-1 px-4">
                             <h2 className="text-2xl font-bold text-white mb-2">{proizvod?.naziv}</h2>
                             <p className="text-gray-300 text-sm mb-4"> {proizvod?.opis}</p>
+                            <p className="text-gray-300 text-sm mb-4"> {proizvod?.tezina}Kg</p>
                             <div className="flex mb-4">
                                 <div className="mr-4">
                                     <span className="font-bold text-gray-300"> Cena:</span>

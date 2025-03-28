@@ -8,7 +8,6 @@ import axios from 'axios';
 const Narudzbina = () => {
   const notify = () => toast.success("Kupovina je uspešno izvršena");
   const { newOrder, setNewOrder, backURL } = useStateContext();
-
   const handleChange = (e) => {
     const { id, value } = e.target;
     setNewOrder((prevOrder) => ({
@@ -16,6 +15,10 @@ const Narudzbina = () => {
       [id]: value, // Direktno ažuriranje kupca unutar newOrder
     }));
   };
+
+  
+
+  
   const zavrsiKupovinu = async () => {
     try {
       console.log(newOrder)

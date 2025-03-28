@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React,  { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useStateContext } from '../context/StateContext';
 import axios from 'axios';
@@ -14,6 +14,20 @@ const Korpa = () => {
       proizvodi: prevOrder.proizvodi.filter((p) => p.id !== id),
     }));
   };
+  const [postarina, setPostarina] = useState(450)
+  useEffect(() => {
+    let ukupnaTezina = 0;
+    newOrder.proizvodi.map((proizvod)=>{
+      ukupnaTezina += proizvod.tezina;
+    })
+    if (ukupnaTezina>= 0.25 && ukupnaTezina < 2) setPostarina(450);
+    if(ukupnaTezina>=2 && ukupnaTezina<5) setPostarina(600);
+    if(ukupnaTezina>=5 && ukupnaTezina<10) setPostarina(720);
+    if(ukupnaTezina>=10 && ukupnaTezina<15) setPostarina(850);
+    if(ukupnaTezina>=15 && ukupnaTezina<20) setPostarina(980);
+    if(ukupnaTezina>=20 && ukupnaTezina<30) setPostarina(1350);
+    if(ukupnaTezina>=30 && ukupnaTezina<50) setPostarina(1780);
+  }, [newOrder])
 
   // Promena količine proizvoda
   const handleQuantityChange = (id, novaKolicina) => {
@@ -54,8 +68,7 @@ const Korpa = () => {
   }, [newOrder]);
 
   const subtotal = newOrder.proizvodi?.reduce((sum, p) => sum + p.kolicina * p.cena, 0);
-  const vat = 500;
-  const total = subtotal + vat ;
+  const total = subtotal + postarina ;
 
   return (
     <section>
@@ -119,12 +132,9 @@ const Korpa = () => {
                   </div>
                   <div className="flex justify-between">
                     <dt>Poštarina</dt>
-                    <dd>{vat.toFixed(2)}RSD</dd>
+                    <dd>{postarina.toFixed(2)}RSD</dd>
                   </div>
-                  <div className="flex justify-between">
-                    <dt>Popust</dt>
-                    <dd>-{discount.toFixed(2)}RSD</dd>
-                  </div>
+                 
                   <div className="flex justify-between text-base font-medium">
                     <dt>Ukupno</dt>
                     <dd>{total.toFixed(2)}RSD</dd>
