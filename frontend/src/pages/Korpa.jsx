@@ -1,4 +1,4 @@
-import React,  { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useStateContext } from '../context/StateContext';
 import axios from 'axios';
@@ -6,7 +6,8 @@ import { toast } from 'react-toastify';
 
 const Korpa = () => {
   const { newOrder, setNewOrder, backURL } = useStateContext();
-
+  const [modelKupon, setmodelKupon] = useState(false)
+  const [inputData, setinputData] = useState('')
   // Brisanje proizvoda iz korpe
   const handleRemove = (id) => {
     setNewOrder((prevOrder) => ({
@@ -17,28 +18,29 @@ const Korpa = () => {
   const [postarina, setPostarina] = useState(450)
   useEffect(() => {
     let ukupnaTezina = 0;
-    newOrder.proizvodi.map((proizvod)=>{
+    newOrder.proizvodi.map((proizvod) => {
       ukupnaTezina += proizvod.tezina;
     })
-    if (ukupnaTezina>= 0.25 && ukupnaTezina < 2) setPostarina(450);
-    if(ukupnaTezina>=2 && ukupnaTezina<5) setPostarina(600);
-    if(ukupnaTezina>=5 && ukupnaTezina<10) setPostarina(720);
-    if(ukupnaTezina>=10 && ukupnaTezina<15) setPostarina(850);
-    if(ukupnaTezina>=15 && ukupnaTezina<20) setPostarina(980);
-    if(ukupnaTezina>=20 && ukupnaTezina<30) setPostarina(1350);
-    if(ukupnaTezina>=30 && ukupnaTezina<50) setPostarina(1780);
+    if (ukupnaTezina >= 0.25 && ukupnaTezina < 2) setPostarina(450);
+    if (ukupnaTezina >= 2 && ukupnaTezina < 5) setPostarina(600);
+    if (ukupnaTezina >= 5 && ukupnaTezina < 10) setPostarina(720);
+    if (ukupnaTezina >= 10 && ukupnaTezina < 15) setPostarina(850);
+    if (ukupnaTezina >= 15 && ukupnaTezina < 20) setPostarina(980);
+    if (ukupnaTezina >= 20 && ukupnaTezina < 30) setPostarina(1350);
+    if (ukupnaTezina >= 30 && ukupnaTezina < 50) setPostarina(1780);
   }, [newOrder])
 
   // Promena količine proizvoda
   const handleQuantityChange = (id, novaKolicina) => {
-    const proizvodStanje = newOrder.proizvodi.find((prev)=>(prev.id == id)).stanje
-    if(novaKolicina<= proizvodStanje)
-    {setNewOrder((prevOrder) => ({
-      ...prevOrder,
-      proizvodi: prevOrder.proizvodi.map((p) =>
-        p.id === id ? { ...p, kolicina: novaKolicina } : p
-      ),
-    }));}else{
+    const proizvodStanje = newOrder.proizvodi.find((prev) => (prev.id == id)).stanje
+    if (novaKolicina <= proizvodStanje) {
+      setNewOrder((prevOrder) => ({
+        ...prevOrder,
+        proizvodi: prevOrder.proizvodi.map((p) =>
+          p.id === id ? { ...p, kolicina: novaKolicina } : p
+        ),
+      }));
+    } else {
       toast.warning("Ne mozes dodati vise od stanja proizvoda")
     }
   };
@@ -67,8 +69,23 @@ const Korpa = () => {
     });
   }, [newOrder]);
 
+  const handleKuponPotvrda = () => {
+    // Primer provere kupona
+    if (inputData === 'DISCOUNT10') {
+      setPopust(10);  // Primer popusta
+      alert('Kupon primenjen!');
+    } else {
+      alert('Neispravan kupon!');
+    }
+
+    // Zatvaranje modela nakon potvrde
+    setModelKupon(false);
+  };
+
   const subtotal = newOrder.proizvodi?.reduce((sum, p) => sum + p.kolicina * p.cena, 0);
-  const total = subtotal + postarina ;
+  const total = subtotal + postarina;
+
+
 
   return (
     <section>
@@ -105,7 +122,7 @@ const Korpa = () => {
                       value={isNaN(proizvod.kolicina) || proizvod.kolicina < 1 ? 0 : proizvod.kolicina}
                       onChange={(e) => {
                         let novaKolicina = parseInt(e.target.value);
-                        if (isNaN(novaKolicina) ) novaKolicina = 0; // Sprečavamo NaN i negativne vrednosti
+                        if (isNaN(novaKolicina)) novaKolicina = 0; // Sprečavamo NaN i negativne vrednosti
                         handleQuantityChange(proizvod.id, novaKolicina);
                       }}
                       className="h-8 w-12 rounded-sm border-gray-200 bg-gray-50 p-0 text-center text-xs text-gray-600"
@@ -134,7 +151,38 @@ const Korpa = () => {
                     <dt>Poštarina</dt>
                     <dd>{postarina.toFixed(2)}RSD</dd>
                   </div>
-                 
+                  <button onClick={() => setmodelKupon(!modelKupon)} className="flex items-center mt-4 px-3 py-2 bg-orange-500 text-white text-sm uppercase font-medium rounded hover:bg-orange-700">
+                    <span >Vidi</span>
+                    <svg
+                      className="h-5 w-5 mx-2"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      viewBox="0 0 24 24"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    >
+                      <path d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                    </svg>
+                  </button>
+                  {modelKupon && (
+                    <div>
+                      <input
+                        type="text"
+                        className="h-[50px] px-5"
+                        name="kupon"
+                        value={inputData}
+                        onChange={(e) => setInputData(e.target.value)}
+                        placeholder="Kupon"
+                      />
+                      <button
+                        onClick={handleKuponPotvrda}
+                        className="bg-green-500 text-white px-4 py-2 mt-2 rounded hover:bg-green-700"
+                      >
+                        Potvrdi
+                      </button>
+                    </div>
+                  )}
                   <div className="flex justify-between text-base font-medium">
                     <dt>Ukupno</dt>
                     <dd>{total.toFixed(2)}RSD</dd>
@@ -156,7 +204,7 @@ const Korpa = () => {
                   </Link>
                 </div>
               </div>
-            </div>:<p className='text-center'> Vaša korpa je prazna.</p>}
+            </div> : <p className='text-center'> Vaša korpa je prazna.</p>}
           </div>
         </div>
       </div>
