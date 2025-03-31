@@ -10,18 +10,7 @@ const PORT = process.env.PORT || 5000;
 
 const allowedOrigins = ['https://alatinidza.rs', 'https://admin.srv758372.hstgr.cloud','http://localhost:5173'];
 
-const corsOptions = {
-  origin: function (origin, callback) {
-    if (!origin || allowedOrigins.includes(origin)) {
-      callback(null, true);
-    } else {
-      callback(new Error('Not allowed by CORS'));
-    }
-  },
-  credentials: true,
-};
-
-app.use(cors(corsOptions));
+app.use(cors({ origin: '*' }));
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
