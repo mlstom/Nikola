@@ -21,12 +21,18 @@ const storage = multer.diskStorage({
   }
 });
 
-const upload = multer({ storage: storage });
+const upload = multer({ 
+  storage: storage,
+  limits: { fileSize: 50 * 1024 * 1024 } // ⚡ Postavlja limit na 50MB
+});
 
 // 📤 1️⃣ Ruta za upload slike
 router.post('/upload', (req, res) => {
   upload.single('image')(req, res, (err) => {
     if (err instanceof multer.MulterError) {
+      if (err.code === "LIMIT_FILE_SIZE") {
+        return res.status(400).json({ message: "Fajl je prevelik! Maksimalna veličina je 50MB." });
+      }
       return res.status(500).json({ message: "Greška pri uploadu fajla" });
     } else if (err) {
       return res.status(400).json({ message: err.message });
@@ -38,7 +44,6 @@ router.post('/upload', (req, res) => {
     res.json({ filePath: `/uploads/${req.file.filename}` });
   });
 });
-
 // 📃 2️⃣ Ruta za listanje svih slika
 router.get("/images", (req, res) => {
   fs.readdir(uploadDir, (err, files) => {
@@ -48,7 +53,7 @@ router.get("/images", (req, res) => {
 
     const imageLinks = files.map(file => ({
       filename: file,
-      url: `http://147.93.122.78:5000/uploads/${file}`, // Promeni URL ako hostuješ aplikaciju
+      url: `https://backend.srv758372.hstgr.cloud/uploads/${file}`, // Promeni URL ako hostuješ aplikaciju
     }));
 
     res.json(imageLinks);
