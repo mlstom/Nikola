@@ -11,14 +11,16 @@ const PORT = process.env.PORT || 5000;
 const allowedOrigins = ["https://alatinidza.rs", "https://admin.srv758372.hstgr.cloud", "http://localhost:3000","https://admin.srv758372.hstgr.cloud/proizvodi"];
 
 app.use(cors({
-    origin: (origin, callback) => {
-        if (!origin || allowedOrigins.includes(origin)) {
-            callback(null, true);
-        } else {
-            callback(new Error("Not allowed by CORS"));
-        }
-    },
-    credentials: true // Ako koristiš cookie-based auth
+  origin: (origin, callback) => {
+      if (!origin || allowedOrigins.includes(origin)) {
+          callback(null, true);
+      } else {
+          callback(new Error("Not allowed by CORS"));
+      }
+  },
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],  // ⚡ Omogućava sve metode
+  allowedHeaders: ['Content-Type', 'Authorization']  // ⚡ Dozvoljava custom header-e
 }));
 
 app.use(express.json());
