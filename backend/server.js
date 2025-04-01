@@ -8,7 +8,7 @@ const db = require("./config/db");
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-const allowedOrigins = ["https://alatinidza.rs", "https://admin.alatinidza.rs", "http://localhost:3000"];
+const allowedOrigins = ["https://alatinidza.rs", "https://admin.srv758372.hstgr.cloud", "http://localhost:3000","https://admin.srv758372.hstgr.cloud/proizvodi"];
 
 app.use(cors({
     origin: (origin, callback) => {
