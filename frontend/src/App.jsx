@@ -6,7 +6,7 @@ import { ToastContainer } from 'react-toastify';
 import { useEffect } from 'react';
 import { useStateContext } from './context/StateContext';
 import { useLocation } from 'react-router-dom';
-import ReactGA from 'react-ga'
+
 
 const App = () => {
   const { pathname } = useLocation();
@@ -16,7 +16,7 @@ const App = () => {
   }, [])
   useEffect(() => {
     window.scrollTo(0, 0); 
-    ReactGA.pageview(window.location.pathname)
+   
   }, [pathname]);
  
   return (
