@@ -1,17 +1,13 @@
 require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
-
-
 const db = require("./config/db");
 
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-const allowedOrigins = ['https://alatinidza.rs', 'https://admin.srv758372.hstgr.cloud','http://localhost:5173'];
-
+// ✅ CORS za sve
 app.use(cors({ origin: '*' }));
-
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -24,7 +20,6 @@ app.use("/api/kupac", require("./routes/kupacRoutes"));
 app.use("/api/narudzbina", require("./routes/narudzbinaRoutes"));
 app.use("/api/admin", require("./routes/adminRoutes"));
 app.use("/api/kupon", require("./routes/kuponRoutes"));
-
 app.use("/api/uploads", require("./routes/upload"));
 
 app.listen(PORT, () => {

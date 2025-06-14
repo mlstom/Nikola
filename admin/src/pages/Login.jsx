@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useStateContext } from '../context/StateContext';
-import { useNavigate } from "react-router-dom";
-
+import { useNavigate , useLocation} from "react-router-dom";
 
 
 const Login = () => {
@@ -11,6 +10,16 @@ const Login = () => {
   const [nepostojeci, setnepostojeci] = useState(false);
   const [passwordVisible, setPasswordVisible] = useState(false); // Stanje za vidljivost lozinke
   let navigate = useNavigate();
+  const location = useLocation();
+  useEffect(() => {
+      if(admin){
+        navigate('/proizvodi')
+      }
+      
+      
+      fetchProizvodi()
+      fetchKupci()
+    }, [])
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;

@@ -11,12 +11,15 @@ const App = () => {
   const {admin,fetchKupci,fetchProizvodi} = useStateContext()
   let navigate = useNavigate();
   useEffect(() => {
-    if(location.pathname =='/'){
-      navigate('/proizvodi')
-    }
     if(!admin){
       navigate('/login')
+    }else{
+      if(location.pathname =='/'){
+        navigate('/proizvodi')
+      }
     }
+    
+    
     fetchProizvodi()
     fetchKupci()
   }, [])
