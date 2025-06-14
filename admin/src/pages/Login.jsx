@@ -15,10 +15,6 @@ const Login = () => {
       if(admin){
         navigate('/proizvodi')
       }
-      
-      
-      fetchProizvodi()
-      fetchKupci()
     }, [])
 
   const handleInputChange = (e) => {
