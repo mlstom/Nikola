@@ -5,7 +5,7 @@ import { useNavigate , useLocation} from "react-router-dom";
 
 
 const Login = () => {
-  const { setAdmin,backURL } = useStateContext();
+  const { setAdmin,backURL ,admin} = useStateContext();
   const [formData, setFormData] = useState({ userName: '', lozinka: '' });
   const [nepostojeci, setnepostojeci] = useState(false);
   const [passwordVisible, setPasswordVisible] = useState(false); // Stanje za vidljivost lozinke
