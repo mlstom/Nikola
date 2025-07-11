@@ -6,8 +6,30 @@ const db = require("./config/db");
 const app = express();
 const PORT = process.env.PORT || 5000;
 
+const allowedOrigins = [
+  'https://alatinidza.rs',          // glavna prodavnica
+  'https://admin.srv758372.hstgr.cloud/',    // admin panel na posebnom domenu
+  'https://admin.srv758372.hstgr.cloud'       // dodatna klijentska aplikacija
+];
+
 // ✅ CORS za sve
-app.use(cors({ origin: '*' }));
+app.use((req, res, next) => {
+  const origin = req.headers.origin;
+  if (allowedOrigins.includes(origin)) {
+    // Dozvoli specifični origin
+    res.setHeader('Access-Control-Allow-Origin', origin);
+  }
+  // Dozvoli HTTP metode
+  res.setHeader('Access-Control-Allow-Methods', 'GET,POST,PUT,DELETE,OPTIONS');
+  // Dozvoli određene zaglavlja
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+  
+  // Ako je preflight (OPTIONS), odmah odgovori 204 No Content
+  if (req.method === 'OPTIONS') {
+    return res.sendStatus(204);
+  }
+  next();
+});
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
