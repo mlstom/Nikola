@@ -8,8 +8,8 @@ const PORT = process.env.PORT || 5000;
 
 const allowedOrigins = [
   'https://alatinidza.rs',          // glavna prodavnica
-  'https://admin.srv758372.hstgr.cloud/',    // admin panel na posebnom domenu
-  'https://admin.srv758372.hstgr.cloud'       // dodatna klijentska aplikacija
+  'https://admin.srv758372.hstgr.cloud',    // admin panel na posebnom domenu
+  'https://admin.srv758372.hstgr.cloud/'       // dodatna klijentska aplikacija
 ];
 
 // ✅ CORS za sve
