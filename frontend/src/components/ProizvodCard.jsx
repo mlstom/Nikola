@@ -42,6 +42,7 @@ const ProizvodCard = ({ proizvod }) => {
     }
 
     useEffect(() => {
+        console.log(proizvod.id)
         fetchSlike()
     }, [proizvod])
 
