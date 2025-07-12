@@ -17,15 +17,17 @@ const Proizvodi = () => {
       ];
 
   const sortirajProizvode = (proizvodi) => {
-    if (selectedSort === "priceAsc") {
-      return [...proizvodi].sort((a, b) => a.cena - b.cena);
-    } else if (selectedSort === "priceDesc") {
-      return [...proizvodi].sort((a, b) => b.cena - a.cena);
-    } else if (selectedSort === "latest") {
-      return proizvodi;
-    }
-    return proizvodi;
-  };
+  if (selectedSort === "priceAsc") {
+    return [...proizvodi].sort((a, b) => a.cena - b.cena);
+  } else if (selectedSort === "priceDesc") {
+    return [...proizvodi].sort((a, b) => b.cena - a.cena);
+  } else if (selectedSort === "latest") {
+    return [...proizvodi].reverse(); // najnoviji prvi
+  } else if (selectedSort === "oldest") {
+    return proizvodi; // najstariji prvi (originalni redosled)
+  }
+  return proizvodi;
+};
 
   // Funkcija za filtriranje proizvoda
   const filtrirajProizvode = (proizvodi) => {
@@ -98,6 +100,7 @@ const Proizvodi = () => {
               >
                 <option>Izaberi raspored</option>
                 <option value="latest">Najnovije prvo</option>
+                <option value="oldest">Najstarije prvo</option>
                 <option value="priceDesc">Cena opadajuća</option>
                 <option value="priceAsc">Cena rastuća</option>
               </select>
@@ -270,6 +273,7 @@ const Proizvodi = () => {
               >
                 <option>Izaberi raspored</option>
                 <option value="latest">Najnovije prvo</option>
+                 <option value="oldest">Najstarije prvo</option>
                 <option value="priceDesc">Cena opadajuća</option>
                 <option value="priceAsc">Cena rastuća</option>
               </select>
