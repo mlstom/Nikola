@@ -10,20 +10,14 @@ const PORT = process.env.PORT || 5000;
 const allowedOrigins = [
   'https://alatinidza.rs',  
   'https://admin.srv758372.hstgr.cloud',
+  "http://localhost:5173"
 ];
 
 // ✅ CORS middleware samo za API i opšti promet
 app.use(cors({
-  origin: (origin, callback) => {
-    // Dozvoli ako nema origin (npr. curl ili server-side) ili je na listi
-    if (!origin || allowedOrigins.includes(origin)) {
-      return callback(null, true);
-    }
-    return callback(new Error("Not allowed by CORS"));
-  },
-  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-  allowedHeaders: ['Content-Type', 'Authorization'],
-  credentials: true
+  origin: "*",
+  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+  allowedHeaders: ["Content-Type", "Authorization"]
 }));
 
 // ✅ JSON i URL-encoded parsiranje
