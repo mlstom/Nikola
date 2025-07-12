@@ -11,7 +11,7 @@ const ProizvodCard = ({ proizvod }) => {
     const [slike, setSlike] = useState([])
     const fetchSlike = async () => {
         const { data } = await axios.get(`${backURL}/api/proizvodSlika/proizvod/${proizvod.id}`)
-        console.log(data[0].urlSlika)
+        if(data.length>0) console.log(data[0].urlSlika)
         setSlike(data)
     }
     const dodajUKorpu = () => {
