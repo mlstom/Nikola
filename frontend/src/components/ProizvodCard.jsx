@@ -10,8 +10,8 @@ const ProizvodCard = ({ proizvod }) => {
     const { backURL, newOrder, setNewOrder } = useStateContext()
     const [slike, setSlike] = useState([])
     const fetchSlike = async () => {
-        const { data } = await axios.get(`${backURL}/api/proizvodSlika/proizvod/${proizvod.id}`)
-        if(data.length>0) console.log(data[0].urlSlika)
+        const { data } = await axios.get(`https://backend.srv758372.hstgr.cloud/api/proizvodSlika/proizvod/${proizvod.id}`)
+        if (data.length > 0) console.log(data[0].urlSlika)
         setSlike(data)
     }
     const dodajUKorpu = () => {
@@ -48,12 +48,18 @@ const ProizvodCard = ({ proizvod }) => {
 
     return (
         <div className="group relative block overflow-hidden scale-75">
-            <img
-                src={`${backURL}${slike[0]?.urlSlika}`}
-                alt=""
-                className="h-64 w-full object-cover transition duration-500 group-hover:scale-105 sm:h-72"
-                onClick={()=>navigate(`/proizvod/${proizvod.id}`)}
-            />
+            {slike.length > 0 ? (
+                <img
+                    src={`https://backend.srv758372.hstgr.cloud${slike[0].urlSlika}`}
+                    alt={proizvod.naziv}
+                    className="…"
+                    onClick={() => navigate(`/proizvod/${proizvod.id}`)}
+                />
+            ) : (
+                <div className="h-64 w-full bg-gray-200 flex items-center justify-center">
+                    <span className="text-gray-500">Nema slike</span>
+                </div>
+            )}
 
             <div className="relative border border-gray-100 bg-white p-6">
                 <p className="text-gray-700">
