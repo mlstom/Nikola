@@ -29,7 +29,7 @@ export async function GET(request) {
     }
 
     // Ako postoji slika (nije null), dodaj je u niz slika tog proizvoda
-    if (row.ps_id && row.ps?.urlSlika) {
+    if (row.ps_id) {
       map.get(row.id).slike.push({
         id: row.ps_id,
         urlSlika: row.urlSlika
