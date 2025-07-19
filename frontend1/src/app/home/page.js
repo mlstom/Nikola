@@ -1,6 +1,5 @@
 /** @type {import('next').Metadata} */
-
-import Image from "next/image";
+export const dynamic = 'force-dynamic';
 import Hero from "./Hero";
 import ShopBaner from "./Baner";
 import axios from "axios";
