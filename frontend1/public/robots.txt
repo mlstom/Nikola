@@ -1,0 +1,9 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://alatinidza.rs
+
+# Sitemaps
+Sitemap: https://alatinidza.rs/sitemap.xml
