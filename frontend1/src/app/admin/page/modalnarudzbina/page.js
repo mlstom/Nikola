@@ -8,7 +8,7 @@ export default async function ModalNarudzbina({ searchParams }) {
     let narudzbina
     if (id) {
         const res = await fetch(
-            `https://www.alatinidza.rs/api/narudzbina/${id}`,
+            `http:localhost:3000/api/narudzbina/${id}`,
             { cache: "no-store" }
         );
 

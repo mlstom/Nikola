@@ -53,7 +53,7 @@ export const metadata = {
 
 
 export default async function KorpaPage() {
-  const res = await axios.get('https://www.alatinidza.rs/api/kupon')
+  const res = await axios.get('http:localhost:3000/api/kupon')
   const kuponi = res.data
   return (
     <section className="mx-auto max-w-screen-md px-4 py-8">

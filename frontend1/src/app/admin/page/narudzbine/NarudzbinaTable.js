@@ -36,9 +36,9 @@ export default function NarudzbinaTable({ initialNarudzbine }) {
     if (!potvrdi) return;
     setLoading(true)
     try {
-      await axios.delete(`https://www.alatinidza.rs/api/kupac/${n.kupac.id}`);
-      await axios.delete(`https://www.alatinidza.rs/api/korpa?brojKorpe=${n.brojKorpe}`);
-      await axios.delete(`https://www.alatinidza.rs/api/narudzbina/${n.id}`);
+      await axios.delete(`http:localhost:3000/api/kupac/${n.kupac.id}`);
+      await axios.delete(`http:localhost:3000/api/korpa?brojKorpe=${n.brojKorpe}`);
+      await axios.delete(`http:localhost:3000/api/narudzbina/${n.id}`);
       setNarudzbine(prev => prev.filter(x => x.id !== n.id));
     } catch (err) {
       console.error('Greška pri brisanju:', err);
