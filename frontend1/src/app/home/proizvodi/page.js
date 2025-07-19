@@ -72,7 +72,7 @@ export default async function ProductsPage({ searchParams }) {
   let proizvodi = res.data
   proizvodi = [...proizvodi]
   let sviProizvodi = proizvodi
-  console.log(proizvodi)
+  
   
   if (podkategorija) {
     let svePodKategorije = []
