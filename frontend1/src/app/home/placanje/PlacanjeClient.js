@@ -6,6 +6,7 @@ import { toast } from 'react-toastify';
 import { useStateContext } from '@/app/context/StateContext';
 import Loader from '@/components/Loader';
 import axios from 'axios';
+import { generateOrderEmail } from '@/lib/porudzbinaHTML';
 
 const PlacanjeClient = ({ popust }) => {
   const { cart, setCart } = useStateContext();
@@ -54,9 +55,9 @@ const PlacanjeClient = ({ popust }) => {
       setLoading(true)
 
       const resKupac = await axios.post('https://alatinidza.rs/api/kupac', kupac)
-     
+
       const idKupac = resKupac.data.id
-     
+
       for (const proizvod of cart.proizvodi) {
         await axios.post('https://alatinidza.rs/api/korpa', {
           brojKorpe: cart.brojKorpe,
@@ -69,14 +70,15 @@ const PlacanjeClient = ({ popust }) => {
         0
       );
       const timestamp = Date.now()
+      const brojPosiljke = `POSILJKA-${timestamp}`
       await axios.post('https://alatinidza.rs/api/narudzbina', {
         brojKorpe: cart.brojKorpe,
         idKupac: idKupac,
-        brojPosiljke: `POSILJKA-${timestamp}`,
+        brojPosiljke:brojPosiljke,
         poslato: 0,
         cena: ukupnaPrePopusta,
         postarina: 500,
-        popust: popust?popust.popust:0,
+        popust: popust ? popust.popust : 0,
       })
 
       toast.success('Uspešno ste završili kupovinu!');
@@ -86,6 +88,32 @@ const PlacanjeClient = ({ popust }) => {
         proizvodi: [],
       };
       localStorage.setItem('korpa', JSON.stringify(novaKorpa));
+
+      const orderForEmail = {
+        id: brojPosiljke,                 // ili pravi ID narudžbine iz baze
+        date: new Date().toISOString(),
+        customer: {
+          name: `${kupac.ime} ${kupac.prezime}`,
+          email: kupac.email,
+        },
+        items: cart.proizvodi.map(p => ({
+          name: p.naziv,
+          quantity: p.kolicina,
+          price: p.cena,
+        })),
+        cartTotal: ukupnaPrePopusta,
+        shipping: 500,
+        discount: popust ? popust.popust : 0,
+        amountDue: (ukupnaPrePopusta + 500) - (popust ? Math.round(ukupnaPrePopusta * (popust.popust / 100)) : 0),
+      };
+      
+
+      await axios.post('https://alatinidza.rs/api/send-email', {
+        to: kupac.email,
+        subject: `Potvrda narudžbine #${orderForEmail.id}`,
+        html: generateOrderEmail(orderForEmail),
+      });
+
       setCart(novaKorpa);
       setLoading(false)
     } catch (e) {
@@ -95,7 +123,7 @@ const PlacanjeClient = ({ popust }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    
+
     napraviNarudzbinu();
   };
   if (loading) return <Loader />

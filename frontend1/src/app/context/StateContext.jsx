@@ -53,8 +53,6 @@ export const StateContext = ({ children }) => {
 
   // ✅ Dodaj proizvod u korpu
   const addToCart = (proizvod) => {
-    console.log(proizvod)
-    console.log('ads')
     let pomProizvodi = []
     const idx = cart.proizvodi.findIndex(p => p.id === proizvod.id);
     if (idx >= 0) {
@@ -66,9 +64,6 @@ export const StateContext = ({ children }) => {
       const noviProizvodi = [...cart.proizvodi, { ...proizvod, kolicina: 1 }];
       setCart({ brojKorpe: cart.brojKorpe, proizvodi: noviProizvodi });
     }
-
-
-    console.log(cart)
   };
 
   // ✅ Smanji količinu proizvoda

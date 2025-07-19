@@ -18,7 +18,7 @@ export const metadata = {
     title: 'Korpa | Alati Nidža - Spremni za Plaćanje',
     description:
       'Ovo su proizvodi koje ste dodali u svoju korpu. Završite porudžbinu brzo i jednostavno uz mogućnost unosa kupona za popust.',
-    url: process.env.SITE_URL + '/korpa' || 'https://www.alatinidza.rs/korpa',
+    url: process.env.SITE_URL + '/korpa' || 'https://alatinidza.rs/korpa',
     siteName: 'Alati Nidža',
     locale: 'sr_RS',
     type: 'website',

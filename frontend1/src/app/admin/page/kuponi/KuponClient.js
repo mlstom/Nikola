@@ -13,11 +13,11 @@ export default function KuponClient({ kuponi: initialKuponi }) {
   const handleAddKupon = async () => {
     setLoading(true)
     try {
-      const response = await axios.post("https://www.alatinidza.rs/api/kupon", newKupon);
+      const response = await axios.post("https://alatinidza.rs/api/kupon", newKupon);
       setKuponi([...kuponi, response.data.kupon]);
       setNewKupon({ kod: "", popust: "" });
     } catch (err) {
-      console.error("Greška pri dodavanju kupona:", err);
+    
     }
     setLoading(false)
   };
@@ -26,11 +26,11 @@ export default function KuponClient({ kuponi: initialKuponi }) {
     setLoading(true)
     if (editKupon) {
       try {
-        const response = await axios.put(`https://www.alatinidza.rs/api/kupon/${editKupon.id}`, editKupon);
+        const response = await axios.put(`https://alatinidza.rs/api/kupon/${editKupon.id}`, editKupon);
         setKuponi(kuponi.map(k => (k.id === editKupon.id ? response.data.kupon : k)));
         setEditKupon(null);
       } catch (err) {
-        console.error("Greška pri izmeni kupona:", err);
+        
       }
     }
     setLoading(false)
@@ -39,10 +39,10 @@ export default function KuponClient({ kuponi: initialKuponi }) {
   const handleDeleteKupon = async (id) => {
     setLoading(true)
     try {
-      await axios.delete(`https://www.alatinidza.rs/api/kupon/${id}`);
+      await axios.delete(`https://alatinidza.rs/api/kupon/${id}`);
       setKuponi(kuponi.filter(k => k.id !== id));
     } catch (err) {
-      console.error("Greška pri brisanju kupona:", err);
+
     }
     setLoading(false)
   };

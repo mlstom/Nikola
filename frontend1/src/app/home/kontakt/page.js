@@ -9,7 +9,7 @@ export const metadata = {
   openGraph: {
     title: 'Alati Nidza',
     description: 'Interna platforma za brzu i sigurnu porudžbinu alata',
-    url: process.env.SITE_URL || 'https://www.alatinidza.rs',
+    url: process.env.SITE_URL || 'https://alatinidza.rs',
     siteName: 'Alati Nidza',
     locale: 'sr_RS',
     type: 'website',

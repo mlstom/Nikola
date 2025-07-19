@@ -19,7 +19,7 @@ export const metadata = {
   openGraph: {
     title: 'Alati Nidza',
     description: 'Interna platforma za brzu i sigurnu porudžbinu alata',
-    url: process.env.SITE_URL || 'https://www.alatinidza.rs',
+    url: process.env.SITE_URL || 'https://alatinidza.rs',
     siteName: 'Alati Nidza',
     locale: 'sr_RS',
     type: 'website',
@@ -50,7 +50,7 @@ export const metadata = {
 };
 
 export default async function Home() {
-  const resProizvodi = await axios.get('https://www.alatinidza.rs/api/proizvod')
+  const resProizvodi = await axios.get('https://alatinidza.rs/api/proizvod')
   
   const proizvodi = resProizvodi.data.sort((a, b) => b.id - a.id).slice(0, 10);
   return (
