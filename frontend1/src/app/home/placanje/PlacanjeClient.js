@@ -117,7 +117,7 @@ const PlacanjeClient = ({ popust }) => {
       setCart(novaKorpa);
       setLoading(false)
     } catch (e) {
-      toast.error('Greška pri kreiranju narudžbine.');
+      toast.error('Greška pri salanju mejl');
     }
   };
 
