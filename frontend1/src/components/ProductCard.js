@@ -25,6 +25,7 @@ const ProizvodCard = ({ proizvod }) => {
   return (
     <div className="flex flex-col bg-white border border-gray-200 rounded-md overflow-hidden shadow-sm ">
       {/* Slika */}
+      {console.log(proizvod.slike)}
       {proizvod.slike?.length > 0 ? (
         <Image
           src={`${proizvod.slike[0].urlSlika}`}
