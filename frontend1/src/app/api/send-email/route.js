@@ -17,7 +17,7 @@ export async function POST(request) {
 
   try {
     await transporter.sendMail({
-      from: `"${process.env.EMAIL_FROM_NAME}" <${process.env.ZOHO_USER}>`,
+      from: `"${process.env.EMAIL_FROM_NAME}" <info@alatinidza.rs>`,
       to:`${to}, porudzbine@alatinidza.rs`,
       subject,
       text,
