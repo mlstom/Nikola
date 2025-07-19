@@ -28,7 +28,7 @@ const ProizvodCard = ({ proizvod }) => {
       {/* Slika */}
       {proizvod.slike?.length > 0 ? (
         <Image
-          src={`/${proizvod.slike[0].urlSlika}`}
+          src={`/${proizvod.slike[proizvod.slike.length-1].urlSlika}`}
           width={200}
           height={200}
           alt={proizvod.naziv}
