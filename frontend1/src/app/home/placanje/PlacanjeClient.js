@@ -155,7 +155,7 @@ const PlacanjeClient = ({ popust }) => {
         <div className="mt-6 flex justify-between">
           <button
             className="bg-gray-300 px-4 py-2 rounded hover:bg-gray-400"
-            onClick={() => router.push('/korpa')}
+            onClick={() => router.push('home/korpa')}
           >
             Nazad na korpu
           </button>
