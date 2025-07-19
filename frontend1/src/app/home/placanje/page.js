@@ -51,7 +51,7 @@ export default async function Placanje({ searchParams }) {
     const {
         popust
     } = sP
-    const res = await axios.get('http:localhost:3000/api/kupon')
+    const res = await axios.get('/api/kupon')
     const postojiPopust = res.data.find(k => k.kod == popust)
     return (
         <div>

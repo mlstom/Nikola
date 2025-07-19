@@ -39,7 +39,7 @@ export default function KuponClient({ kuponi: initialKuponi }) {
   const handleDeleteKupon = async (id) => {
     setLoading(true)
     try {
-      await axios.delete(`http:localhost:3000/api/kupon/${id}`);
+      await axios.delete(`/api/kupon/${id}`);
       setKuponi(kuponi.filter(k => k.id !== id));
     } catch (err) {
       console.error("Greška pri brisanju kupona:", err);

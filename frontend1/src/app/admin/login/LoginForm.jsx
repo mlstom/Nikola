@@ -19,7 +19,7 @@ export default function LoginForm() {
     setError('');
 
     try {
-      const res = await axios.post('http:localhost:3000/api/login', formData);
+      const res = await axios.post('/api/login', formData);
       if (res.status === 200) {
         router.push('/admin');
       }

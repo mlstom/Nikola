@@ -5,7 +5,7 @@ export default async function ProductModal({ searchParams }) {
     const id = sP.id
     let proizvod
     if(id){
-        const res = await fetch(`http:localhost:3000/api/proizvod/${id}`, {
+        const res = await fetch(`/api/proizvod/${id}`, {
         cache: "no-store",
       });
       

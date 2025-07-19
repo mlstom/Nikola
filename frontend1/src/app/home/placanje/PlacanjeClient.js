@@ -54,7 +54,7 @@ const PlacanjeClient = ({ popust }) => {
     try {
       setLoading(true)
 
-      const resKupac = await axios.post('http:localhost:3000/api/kupac', kupac)
+      const resKupac = await axios.post('/api/kupac', kupac)
       console.log('usao ovde')
       const idKupac = resKupac.data.id
       console.log(idKupac)
@@ -70,7 +70,7 @@ const PlacanjeClient = ({ popust }) => {
         0
       );
       const timestamp = Date.now()
-      await axios.post('http:localhost:3000/api/narudzbina', {
+      await axios.post('/api/narudzbina', {
         brojKorpe: cart.brojKorpe,
         idKupac: idKupac,
         brojPosiljke: `POSILJKA-${timestamp}`,

@@ -8,7 +8,7 @@ export default async function ModalNarudzbina({ searchParams }) {
     let narudzbina
     if (id) {
         const res = await fetch(
-            `http:localhost:3000/api/narudzbina/${id}`,
+            `/api/narudzbina/${id}`,
             { cache: "no-store" }
         );
 

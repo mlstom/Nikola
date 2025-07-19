@@ -51,7 +51,7 @@ export const metadata = {
 };
 
 export default async function Home() {
-  const resProizvodi = await axios.get('http:localhost:3000/api/proizvod')
+  const resProizvodi = await axios.get('/api/proizvod')
   
   const proizvodi = resProizvodi.data.sort((a, b) => b.id - a.id).slice(0, 10);
   return (

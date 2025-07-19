@@ -1,6 +1,6 @@
 import ProductTable from "@/components/ProductTable";
 export default async function AdminProizvodi() {
-  const res = await fetch(`http://localhost:3000/api/proizvod`, {
+  const res = await fetch(`/api/proizvod`, {
     cache: 'no-store', 
   });
 
