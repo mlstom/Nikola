@@ -31,6 +31,7 @@ const ProizvodCard = ({ proizvod }) => {
           width={200}
           height={200}
           alt={proizvod.naziv}
+          unoptimized
           className="h-64 w-full object-contain bg-white p-2"
         />
       ) : (
