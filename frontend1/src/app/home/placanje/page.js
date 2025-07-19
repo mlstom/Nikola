@@ -13,7 +13,7 @@ export const metadata = {
     openGraph: {
         title: 'Plaćanje | Alati Nidža',
         description: 'Unesite podatke i završite svoju narudžbinu. Sigurna i brza kupovina alata online.',
-        url: process.env.SITE_URL + '/placanje' || 'https://alatinidza.rs/placanje',
+        url: 'https://alatinidza.rs/home/placanje',
         siteName: 'Alati Nidža',
         locale: 'sr_RS',
         type: 'website',

@@ -21,7 +21,7 @@ export const metadata = {
     title: 'Alati Nidža - Najveći izbor alata i opreme',
     description:
       'Kupujte profesionalne i amaterske alate brzo i sigurno. Trimere, bušilice, auto oprema i još mnogo više.',
-    url: process.env.SITE_URL || 'https://alatinidza.rs',
+    url: 'https://alatinidza.rs/home/proizvodi',
     siteName: 'Alati Nidža',
     locale: 'sr_RS',
     type: 'website',

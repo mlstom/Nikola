@@ -8,7 +8,7 @@ import ProizvodCard from "@/components/ProductCard";
 export const metadata = {
   title: 'Alati Nidza – Najbrza prodavnica alata, delova i trimera',
   description: 'Najširi asortiman alata, trimera, delova brzo pretraživanje i sigurna kupovina – za zaposlene u servisu ili DIY entuzijaste.',
-  keywords: 'alati, delovi, trimeri',
+  keywords: 'alati, delovi, trimeri, oprema, ventilatori, za negu domacinstva',
   alternates: {
     canonical: '/',              // canonical URL
   },
@@ -19,7 +19,7 @@ export const metadata = {
   openGraph: {
     title: 'Alati Nidza',
     description: 'Interna platforma za brzu i sigurnu porudžbinu alata',
-    url: process.env.SITE_URL || 'https://alatinidza.rs',
+    url:  'https://alatinidza.rs',
     siteName: 'Alati Nidza',
     locale: 'sr_RS',
     type: 'website',

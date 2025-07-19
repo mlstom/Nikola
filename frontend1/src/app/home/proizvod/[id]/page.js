@@ -54,7 +54,7 @@ export async function generateMetadata({ params }) {
     openGraph: {
       title,
       description,
-      url: `${process.env.SITE_URL || 'https://alatinidza.rs'}/products/${id}`,
+      url: `${'https://alatinidza.rs'}/home/products/${id}`,
       siteName: 'Alati Nidža',
       locale: 'sr_RS',
       type: 'website',

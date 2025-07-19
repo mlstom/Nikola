@@ -39,3 +39,6 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+#ignorisi fajlove koje se dodaju iz admina panela
+public/uploads
