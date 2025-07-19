@@ -6,6 +6,7 @@ import Link from "next/link";
 import { toast } from "react-toastify";
 
 const ProizvodCard = ({ proizvod }) => {
+  
   const {addToCart}= useStateContext()
   const dodajUKorpu = () => {
  
