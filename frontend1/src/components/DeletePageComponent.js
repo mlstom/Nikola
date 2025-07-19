@@ -21,18 +21,18 @@ export default function DeletePageComponent({ id }) {
       }
 
       try {
-        const res = await fetch(`http:localhost:3000/api/proizvod/${id}`, {
+        const res = await fetch(`https://alatinidza.rs/api/proizvod/${id}`, {
           cache: "no-store",
         });
         const proizvod = await res.json();
 
         await Promise.all(
           proizvod.slike.map((slika) =>
-            axios.delete(`http:localhost:3000/api/proizvodSlike/${slika.id}`)
+            axios.delete(`https://alatinidza.rs/api/proizvodSlike/${slika.id}`)
           )
         );
 
-        await fetch(`http:localhost:3000/api/proizvod/${id}`, {
+        await fetch(`https://alatinidza.rs/api/proizvod/${id}`, {
           method: "DELETE",
         });
 

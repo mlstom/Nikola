@@ -12,7 +12,7 @@ function truncate(text = '', maxLength = 155) {
 
 export async function generateMetadata({ params }) {
   const { id } = params;
-  const res = await fetch(`/api/proizvod/${id}`, { cache: 'no-store' });
+  const res = await fetch(`https://alatinidza.rs/api/proizvod/${id}`, { cache: 'no-store' });
   const proizvod = await res.json();
 
   const title = proizvod?.naziv
@@ -79,8 +79,8 @@ export async function generateMetadata({ params }) {
 
 export default async function ProizvodPage({ params }) {
     const { id } = await params
-    const proizvodRes = await axios.get(`/api/proizvod/${id}`);
-    const sviRes = await axios.get(`/api/proizvod`);
+    const proizvodRes = await axios.get(`https://alatinidza.rs/api/proizvod/${id}`);
+    const sviRes = await axios.get(`https://alatinidza.rs/api/proizvod`);
 
 
     const proizvod = proizvodRes.data

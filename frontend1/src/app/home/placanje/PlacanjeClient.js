@@ -54,12 +54,12 @@ const PlacanjeClient = ({ popust }) => {
     try {
       setLoading(true)
 
-      const resKupac = await axios.post('/api/kupac', kupac)
+      const resKupac = await axios.post('https://alatinidza.rs/api/kupac', kupac)
       console.log('usao ovde')
       const idKupac = resKupac.data.id
       console.log(idKupac)
       for (const proizvod of cart.proizvodi) {
-        await axios.post('/api/korpa', {
+        await axios.post('https://alatinidza.rs/api/korpa', {
           brojKorpe: cart.brojKorpe,
           idProizvod: proizvod.id,
           kolicina: proizvod.kolicina
@@ -70,7 +70,7 @@ const PlacanjeClient = ({ popust }) => {
         0
       );
       const timestamp = Date.now()
-      await axios.post('/api/narudzbina', {
+      await axios.post('https://alatinidza.rs/api/narudzbina', {
         brojKorpe: cart.brojKorpe,
         idKupac: idKupac,
         brojPosiljke: `POSILJKA-${timestamp}`,

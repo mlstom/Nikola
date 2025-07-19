@@ -16,7 +16,7 @@ export default function Search() {
     if (products.length > 0) return
     setLoading(true)
     try {
-      const res = await fetch('/api/proizvod')     // ili tvoja ruta za sve proizvode
+      const res = await fetch('https://alatinidza.rs/api/proizvod')     // ili tvoja ruta za sve proizvode
       const data = await res.json()
       setProducts(data)                             // niz { id, naziv, sifra, kategorija, opis, cena, slike }
     } finally {
