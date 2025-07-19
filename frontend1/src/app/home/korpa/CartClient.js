@@ -103,7 +103,7 @@ export default function CartClient({ kuponi }) {
                 className="mt-2 text-red-600 hover:text-red-800 transition text-2xl cursor-pointer"
                 title="Ukloni iz korpe"
               >
-                🗑
+                x
               </button>
             </div>
           </li>

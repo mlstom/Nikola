@@ -82,12 +82,8 @@ const PlacanjeClient = ({ popust }) => {
       })
 
       toast.success('Uspešno ste završili kupovinu!');
-      router.push('/');
-      const novaKorpa = {
-        brojKorpe: `KORPA-${Date.now()}`,
-        proizvodi: [],
-      };
-      localStorage.setItem('korpa', JSON.stringify(novaKorpa));
+      
+      
 
       const orderForEmail = {
         id: brojPosiljke,                 // ili pravi ID narudžbine iz baze
@@ -113,6 +109,13 @@ const PlacanjeClient = ({ popust }) => {
         subject: `Potvrda narudžbine #${orderForEmail.id}`,
         html: generateOrderEmail(orderForEmail),
       });
+      
+      const novaKorpa = {
+        brojKorpe: `KORPA-${Date.now()}`,
+        proizvodi: [],
+      };
+      localStorage.setItem('korpa', JSON.stringify(novaKorpa));
+      router.push('/');
 
       setCart(novaKorpa);
       setLoading(false)
