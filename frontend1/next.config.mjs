@@ -9,6 +9,7 @@ const nextConfig = {
     return [
       { source: '/',             destination: '/home' },
       { source: '/placanje',     destination: '/home/placanje' },
+      { source: '/placanje',     destination: '/home/placanje' },
       { source: '/korpa',        destination: '/home/korpa' },
       { source: '/proizvodi',    destination: '/home/proizvodi' },
       { source: '/proizvod/:id', destination: '/home/proizvod/:id' },
