@@ -2,46 +2,45 @@ import { NextResponse } from "next/server";
 import db from '@/lib/db'; 
 
 export async function GET(request) {
-  const [rows] = await db.execute(`
-    SELECT 
-      p.id, p.naziv, p.opis, p.kategorija, p.sifra, p.cena, p.stanje, p.tezina,
-      ps.id   AS ps_id,
-      ps.urlSlika
+  
+  const [results] = await db.execute(`
+    SELECT p.*, ps.id as ps_id, ps.urlSlika 
     FROM Proizvod p
     LEFT JOIN ProizvodSlika ps ON p.id = ps.idProizvod
   `);
 
-  const grouped = (rows ).reduce((acc, row) => {
-    // Nađemo ili kreiramo objekat proizvoda
-    let prod = acc.find((p) => p.id === row.id);
-    if (!prod) {
-      prod = {
+  // Parsiraj JSON niz slika
+ const map = new Map();
+
+  results.forEach(row => {
+    // Ako proizvod još nije u mapi, dodaj ga sa praznim nizom slika
+    if (!map.has(row.id)) {
+      map.set(row.id, {
         id: row.id,
         naziv: row.naziv,
         opis: row.opis,
         kategorija: row.kategorija,
-        sifra: row.sifra,
-        cena: row.cena,
-        stanje: row.stanje,
-        tezina: row.tezina,
+        sifra:row.sifra,
+        cena:row.cena,
+        stanje:row.stanje,
+        tezina:row.tezina,
         slike: []
-      };
-      acc.push(prod);
+      });
     }
 
-    // Ako postoji slika, dodaj je
-    if (row.ps_id != null) {
-      prod.slike.push({
+    // Ako postoji slika (nije null), dodaj je u niz slika tog proizvoda
+    if (row.ps_id && row.ps?.urlSlika) {
+      map.get(row.id).slike.push({
         id: row.ps_id,
         urlSlika: row.urlSlika
       });
     }
-
-    return acc;
   });
+  const groupedProducts = Array.from(map.values())
 
-  return NextResponse.json(grouped);
+  return NextResponse.json(groupedProducts);
 }
+
 export async function POST(request) {
   const { sifra, naziv, opis, kategorija, cena, stanje, tezina } = await request.json();
   const [result] = await db.execute(
