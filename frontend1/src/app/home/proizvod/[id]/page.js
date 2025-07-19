@@ -35,7 +35,9 @@ export async function generateMetadata({ params }) {
     'Sijalice',
     'Trimeri'
   ].filter(Boolean);
-
+  const alternates= {
+        canonical: '/home/proizvod',              // canonical URL
+    }
   // Slike proizvoda ili banner
   const productImages = Array.isArray(proizvod.images) ? proizvod.images : [];
   const ogImages = productImages.length > 0
@@ -51,6 +53,7 @@ export async function generateMetadata({ params }) {
     title,
     description,
     keywords,
+    alternates,
     openGraph: {
       title,
       description,

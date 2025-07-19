@@ -6,6 +6,9 @@ export const metadata = {
   title: "Kontakt | Alati Nidža",
   description: "Saznajte sve o nama na jednom mestu, za osnovna pitanja javite se putem mejla.",
   keywords: ["Kontakt", "Email", "Telefon", "Radno vreme"],
+  alternates: {
+        canonical: '/home/kontakt',              // canonical URL
+    },
   openGraph: {
     title: 'Alati Nidza',
     description: 'Interna platforma za brzu i sigurnu porudžbinu alata',

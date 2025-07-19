@@ -13,6 +13,9 @@ export const metadata = {
     'agregati', 'aku alati', 'motorne testere', 'baštenski alati',
     'auto oprema', 'alata nidža', 'kupovina alata', 'plaćanje', 'popust'
   ].join(', '),
+  alternates: {
+        canonical: '/home/korpa',              // canonical URL
+    },
 
   openGraph: {
     title: 'Korpa | Alati Nidža - Spremni za Plaćanje',

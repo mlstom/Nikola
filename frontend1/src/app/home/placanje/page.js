@@ -9,6 +9,9 @@ export const metadata = {
         'plaćanje', 'kupovina alata', 'alat online', 'online plaćanje', 'alat Nidža', 'završetak kupovine',
         'alat za domaćinstvo', 'narudžbina alata', 'dostava alata', 'alati online shop'
     ].join(', '),
+    alternates: {
+        canonical: '/home/placanje',              // canonical URL
+    },
 
     openGraph: {
         title: 'Plaćanje | Alati Nidža',

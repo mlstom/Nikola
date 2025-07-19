@@ -16,6 +16,9 @@ export const metadata = {
     'alat za kućnu upotrebu', 'radionički alati', 'auto delovi', 'pribor za zavarivanje', 'baštenska creva',
     'motorni bušači rupa', 'presvlake za vozila', 'pumpa za vodu', 'alat za auto popravku', 'alati za orezivanje'
   ].join(', '),
+  alternates: {
+    canonical: '/home/proizvodi',              // canonical URL
+  },
 
   openGraph: {
     title: 'Alati Nidža - Najveći izbor alata i opreme',
@@ -72,8 +75,8 @@ export default async function ProductsPage({ searchParams }) {
   let proizvodi = res.data
   proizvodi = [...proizvodi]
   let sviProizvodi = proizvodi
-  
-  
+
+
   if (podkategorija) {
     let svePodKategorije = []
     const podkategorijeNiz = podkategorija.split(',');
@@ -83,11 +86,11 @@ export default async function ProductsPage({ searchParams }) {
     }
     proizvodi = svePodKategorije
   }
-  
 
-  
+
+
   if (kategorija) {
-  let sveKategorije = []
+    let sveKategorije = []
 
     const kategorijeNiz = kategorija.split(',');
     for (const kat of kategorijeNiz) {
@@ -96,7 +99,7 @@ export default async function ProductsPage({ searchParams }) {
     }
     proizvodi = sveKategorije
   }
-  
+
 
   if (pricedo) {
     proizvodi = proizvodi.filter(p =>
@@ -104,19 +107,19 @@ export default async function ProductsPage({ searchParams }) {
     );
   }
 
-   if (searchquery) {
+  if (searchquery) {
     const query = searchquery.toLowerCase();
     proizvodi = proizvodi.filter(p =>
       p.naziv?.toLowerCase().includes(query) ||
       p.opis?.toLowerCase().includes(query) ||
-       p.sifra?.toLowerCase().includes(query)
+      p.sifra?.toLowerCase().includes(query)
     );
   }
-  
 
-  if(proizvodi.length == 0) proizvodi = sviProizvodi
 
-  
+  if (proizvodi.length == 0) proizvodi = sviProizvodi
+
+
 
   // Sortiranje
   if (sort === 'latest') {
