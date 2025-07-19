@@ -73,7 +73,7 @@ export default function ProductForm({ proizvod }) {
       setLoading(false);
       setForm({ ...form });
     } catch (err) {
-      console.error("Greška pri brisanju slike:", err);
+      
       alert("Došlo je do greške prilikom brisanja slike.");
     }
   };

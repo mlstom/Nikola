@@ -49,15 +49,14 @@ const PlacanjeClient = ({ popust }) => {
       toast.error("Molimo popunite sva obavezna polja.");
       return;
     }
-    console.log('usao')
 
     try {
       setLoading(true)
 
       const resKupac = await axios.post('https://alatinidza.rs/api/kupac', kupac)
-      console.log('usao ovde')
+     
       const idKupac = resKupac.data.id
-      console.log(idKupac)
+     
       for (const proizvod of cart.proizvodi) {
         await axios.post('https://alatinidza.rs/api/korpa', {
           brojKorpe: cart.brojKorpe,
@@ -96,7 +95,7 @@ const PlacanjeClient = ({ popust }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log('usao')
+    
     napraviNarudzbinu();
   };
   if (loading) return <Loader />

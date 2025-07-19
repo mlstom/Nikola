@@ -50,7 +50,7 @@ export default function CartClient({ kuponi }) {
           <li key={index} className="flex flex-wrap md:flex-nowrap items-start justify-between gap-4 py-6 border-b border-gray-200">
             {/* Leva strana: Slika + Naziv */}
             <div className="flex gap-4 w-full md:w-2/3">
-              {console.log(p)}
+              
               {p.slike[0] ? (
                 <div className="relative w-20 h-20 rounded border border-gray-300 p-1 bg-white shrink-0">
 

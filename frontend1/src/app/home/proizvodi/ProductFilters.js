@@ -38,7 +38,7 @@ export default function ProductFilters({ initialFilters }) {
 
     useEffect(() => {
         const kategorijaParam = parseParam(initialFilters.kategorija);
-        console.log("Kategorije iz URL-a:", kategorijaParam);
+        
 
         if (kategorijaParam && kategorijaParam.length > 0) {
             for (const kat of kategorije) {

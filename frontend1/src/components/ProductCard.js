@@ -6,7 +6,7 @@ import Link from "next/link";
 import { toast } from "react-toastify";
 
 const ProizvodCard = ({ proizvod }) => {
-  const {addToCart,cart}= useStateContext()
+  const {addToCart}= useStateContext()
   const dodajUKorpu = () => {
  
     addToCart(proizvod);
@@ -27,7 +27,7 @@ const ProizvodCard = ({ proizvod }) => {
       {/* Slika */}
       {proizvod.slike?.length > 0 ? (
         <Image
-          src={`https://alatinidza.rs/${proizvod?.slike[0].urlSlika}`}
+          src={`${proizvod.slike[0].urlSlika}`}
           width={200}
           height={200}
           alt={proizvod.naziv}
