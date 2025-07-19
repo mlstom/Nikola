@@ -19,7 +19,7 @@ export default function LoginForm() {
     setError('');
 
     try {
-      const res = await axios.post('/api/login', formData);
+      const res = await axios.post('https://www.alatinidza.rs/api/login', formData);
       if (res.status === 200) {
         router.push('/admin');
       }

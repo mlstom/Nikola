@@ -32,7 +32,7 @@ export default function ProductForm({ proizvod }) {
     try {
       let savedProizvod = proizvod;
       if (proizvod?.id) {
-        await axios.put(`http://localhost:3000/api/proizvod/${proizvod.id}`, form);
+        await axios.put(`https://www.alatinidza.rs/api/proizvod/${proizvod.id}`, form);
       } else {
         const res = await axios.post('/api/proizvod', form);
         savedProizvod = res.data;
@@ -44,11 +44,11 @@ export default function ProductForm({ proizvod }) {
         for (const slika of noveSlike) {
           const formData = new FormData();
           formData.append('image', slika.file);
-          const res = await axios.post('/api/upload', formData, {
+          const res = await axios.post('https://www.alatinidza.rs/api/upload', formData, {
             headers: { 'Content-Type': 'multipart/form-data' },
           });
           uploadedPaths.push(res.data.path);
-          await axios.post(`http://localhost:3000/api/proizvodSlike/${savedProizvod.id}`, {
+          await axios.post(`https://www.alatinidza.rs/api/proizvodSlike/${savedProizvod.id}`, {
             urlSlike: res.data.path
           });
         }
@@ -67,7 +67,7 @@ export default function ProductForm({ proizvod }) {
 
     try {
       setLoading(true);
-      await axios.delete(`/api/proizvodSlike/${slikaId}`);
+      await axios.delete(`https://www.alatinidza.rs/api/proizvodSlike/${slikaId}`);
       const updatedSlike = proizvod.slike.filter((s) => s.id !== slikaId);
       proizvod.slike = updatedSlike;
       setLoading(false);

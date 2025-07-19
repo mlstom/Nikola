@@ -15,7 +15,7 @@ export default function FileUpload({ proizvod,onFilesReady }) {
   // Brisanje slike iz baze (postojeće slike)
   const handleRemoveStara = async (idSlike) => {
     try {
-      await axios.delete(`/api/proizvodSlike/${idSlike}`);
+      await axios.delete(`https://www.alatinidza.rs/api/proizvodSlike/${idSlike}`);
       setSlike((prev) => prev.filter((slika) => slika.id !== idSlike));
     } catch (err) {
       console.error('Greška pri brisanju slike:', err);

@@ -21,7 +21,7 @@ export default function NarudzbinaForm({ narudzbina }) {
   useEffect(() => {
     (async () => {
       try {
-        const res = await fetch('/api/proizvod', { cache: 'no-store' });
+        const res = await fetch('https://www.alatinidza.rs/api/proizvod', { cache: 'no-store' });
         const data = await res.json();
         setProizvodi(data);
       } catch (err) {
@@ -83,10 +83,10 @@ export default function NarudzbinaForm({ narudzbina }) {
     e.preventDefault(); setLoading(true);
     try {
       if (narudzbina?.id) {
-        await axios.put(`/api/kupac/${narudzbina.kupac.id}`, form.kupac);
-        await axios.delete(`/api/korpa?brojKorpe=${form.brojKorpe}`);
+        await axios.put(`https://www.alatinidza.rs/api/kupac/${narudzbina.kupac.id}`, form.kupac);
+        await axios.delete(`https://www.alatinidza.rs/api/korpa?brojKorpe=${form.brojKorpe}`);
         for (const { proizvod, kolicina } of form.korpa) {
-          await axios.post('/api/korpa', {
+          await axios.post('https://www.alatinidza.rs/api/korpa', {
             brojKorpe: form.brojKorpe,
             idProizvod: proizvod.id,
             kolicina,
@@ -98,7 +98,7 @@ export default function NarudzbinaForm({ narudzbina }) {
           0
         );
 
-        await axios.put(`/api/narudzbina/${narudzbina.id}`, {
+        await axios.put(`https://www.alatinidza.rs/api/narudzbina/${narudzbina.id}`, {
           brojKorpe: form.brojKorpe,
           brojPosiljke: form.brojPosiljke,
           poslato: form.poslato ? 1 : 0,
@@ -108,10 +108,10 @@ export default function NarudzbinaForm({ narudzbina }) {
         });
       }
       else {
-        const resKupac = await axios.post('/api/kupac', form.kupac)
+        const resKupac = await axios.post('https://www.alatinidza.rs/api/kupac', form.kupac)
         const idKupac = resKupac.data.id
         for (const { proizvod, kolicina } of form.korpa) {
-          await axios.post('/api/korpa', { brojKorpe: form.brojKorpe, idProizvod: proizvod.id, kolicina })
+          await axios.post('https://www.alatinidza.rs/api/korpa', { brojKorpe: form.brojKorpe, idProizvod: proizvod.id, kolicina })
         }
         const ukupnaPrePopusta = form.korpa.reduce(
           (sum, { proizvod, kolicina }) => sum + proizvod.cena * kolicina,

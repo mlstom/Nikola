@@ -68,7 +68,7 @@ export default async function ProductsPage({ searchParams }) {
     pricedo
   } = sP
 
-  const res = await axios.get('http://localhost:3000/api/proizvod')
+  const res = await axios.get('https://www.alatinidza.rs/api/proizvod')
   let proizvodi = res.data
   proizvodi = [...proizvodi]
   let sviProizvodi = proizvodi
