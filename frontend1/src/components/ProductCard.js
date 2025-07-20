@@ -7,12 +7,16 @@ import { toast } from "react-toastify";
 
 const ProizvodCard = ({ proizvod }) => {
 
-  const {addToCart}= useStateContext()
+  const { addToCart } = useStateContext()
   const dodajUKorpu = () => {
- 
+
     addToCart(proizvod);
-    
-    toast.success(`${proizvod.naziv} je dodat u korpu!`, {
+    toast.success(
+      <div>{proizvod.naziv} je dodat u korpu!{' '}
+        <Link href="/home/cart">
+          Pogledaj korpu →
+        </Link>
+      </div>, {
       position: "top-right",
       autoClose: 3000, // zatvara se posle 3s
       hideProgressBar: false,
@@ -28,7 +32,7 @@ const ProizvodCard = ({ proizvod }) => {
       {/* Slika */}
       {proizvod.slike?.length > 0 ? (
         <Image
-          src={`/${proizvod.slike[proizvod.slike.length-1].urlSlika}`}
+          src={`/${proizvod.slike[proizvod.slike.length - 1].urlSlika}`}
           width={200}
           height={200}
           alt={proizvod.naziv}

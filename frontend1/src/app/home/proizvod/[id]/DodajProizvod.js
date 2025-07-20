@@ -1,5 +1,6 @@
 'use client';
 import { useStateContext } from '@/app/context/StateContext';
+import Link from 'next/link';
 import { useState } from 'react';
 import { toast } from 'react-toastify';
 export default function DodajProizvod({ proizvod }) {
@@ -7,19 +8,21 @@ export default function DodajProizvod({ proizvod }) {
     const { addToCart } = useStateContext();
 
     const handleAdd = () => {
-        for (let i = 0; i < kolicina; i++) {
-            addToCart(proizvod);
-            
-        }
-        toast.success(`${proizvod.naziv} je dodat u korpu!`, {
-                position: "top-right",
-                autoClose: 3000, // zatvara se posle 3s
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined,
-            });
+        addToCart(proizvod, kolicina)
+        toast.success(
+            <div>{proizvod.naziv} je dodat u korpu!{' '}
+                <Link href="/home/cart">
+                    Pogledaj korpu →
+                </Link>
+            </div>, {
+            position: "top-right",
+            autoClose: 3000, // zatvara se posle 3s
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+        });
     };
 
     return (

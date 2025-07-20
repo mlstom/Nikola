@@ -52,16 +52,16 @@ export const StateContext = ({ children }) => {
   };
 
   // ✅ Dodaj proizvod u korpu
-  const addToCart = (proizvod) => {
+  const addToCart = (proizvod,qty=1) => {
     let pomProizvodi = []
     const idx = cart.proizvodi.findIndex(p => p.id === proizvod.id);
     if (idx >= 0) {
       const noviProizvodi = cart.proizvodi.map((p, i) =>
-        i === idx ? { ...p, kolicina: p.kolicina + 1 } : p
+        i === idx ? { ...p, kolicina: p.kolicina + qty } : p
       );
       setCart({ brojKorpe: cart.brojKorpe, proizvodi: noviProizvodi });
     } else {
-      const noviProizvodi = [...cart.proizvodi, { ...proizvod, kolicina: 1 }];
+      const noviProizvodi = [...cart.proizvodi, { ...proizvod, kolicina: qty }];
       setCart({ brojKorpe: cart.brojKorpe, proizvodi: noviProizvodi });
     }
   };

@@ -16,6 +16,7 @@ const geistMono = Geist_Mono({
 export default function RootLayout({ children }) {
   return (
     <html lang="sr">
+      <link rel='icon' href="/logo.ico" />
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >

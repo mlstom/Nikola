@@ -63,7 +63,7 @@ export default function Header() {
           </div>
 
           {/* Search and cart */}
-          <div className="flex mt-1 items-center lg:order-2 gap-3">
+          <div className="flex justify-between mt-1 items-center lg:order-2 gap-3">
             <Search />
             <Link
               href="/home/korpa"

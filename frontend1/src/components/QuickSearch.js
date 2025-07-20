@@ -1,11 +1,16 @@
 // components/QuickSearch.jsx
 "use client"
+import { useStateContext } from '@/app/context/StateContext'
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
 
 export default function QuickSearch({ products,setQuery }) {
   const router = useRouter()
-
+  const {addToCart} = useStateContext()
+  function handleAdd (e,p){
+     e.stopPropagation()
+    addToCart(p)
+  }
   return (
     <ul>
       {products.map((p) => (
@@ -37,7 +42,7 @@ export default function QuickSearch({ products,setQuery }) {
               <span className="text-sm font-bold text-orange-600 whitespace-nowrap">{p.cena} RSD</span>
               <button
                 type="button"
-                onMouseDown={(e) => e.stopPropagation()}
+                onMouseDown={(e) =>handleAdd(e,p)}
                 className="text-xs bg-orange-500 hover:bg-orange-600 text-white px-2 py-0.5 rounded"
               >
                 Dodaj

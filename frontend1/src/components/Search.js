@@ -50,7 +50,7 @@ export default function Search() {
   }
 
   return (
-    <div className="relative lg:w-[300px] max-w-md mx-auto">
+    <div className="relative lg:w-[300px] max-w-lg mx-auto">
       <input
         type="text"
         placeholder="Pretraži..."
