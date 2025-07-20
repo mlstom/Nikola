@@ -35,7 +35,7 @@ export default function QuickSearch({ products, setQuery }) {
           className="flex items-center justify-between border-b last:border-none px-3 py-1.5 hover:bg-gray-100 cursor-pointer"
         >
           <div className="flex items-center gap-2 w-full">
-            <div className="relative min-w-[100px] min-h-[40px] bg-gray-100 rounded overflow-hidden">
+            <div className="relative min-w-[40px] min-h-[40px] bg-gray-100 rounded overflow-hidden">
               {p.slike?.[0] ? (
                 <Image
                   src={`/${p.slike[p.slike.length - 1].urlSlika}`}
