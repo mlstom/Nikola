@@ -11,7 +11,7 @@ export default function DodajProizvod({ proizvod }) {
         addToCart(proizvod, kolicina)
         toast.success(
             <div>{proizvod.naziv} je dodat u korpu!{' '}
-                <Link href="/home/cart">
+                <Link href="/home/korpa" className="underline text-green-400 hover:text-green-600">
                     Pogledaj korpu →
                 </Link>
             </div>, {
