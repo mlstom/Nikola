@@ -2,6 +2,7 @@
 "use client"
 import { useStateContext } from '@/app/context/StateContext'
 import Image from 'next/image'
+import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { toast } from 'react-toastify'
 
