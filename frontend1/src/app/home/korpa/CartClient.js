@@ -55,7 +55,7 @@ export default function CartClient({ kuponi }) {
                 <div className="relative w-20 h-20 rounded border border-gray-300 p-1 bg-white shrink-0">
 
                   <Image
-                    src={`/${p.slike[0].urlSlika}`}
+                    src={`/${p.slike[p.slike.length-1].urlSlika}`}
                     alt={p.naziv}
                     fill
                     className="object-contain"
