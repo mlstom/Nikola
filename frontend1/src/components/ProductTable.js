@@ -82,18 +82,20 @@ export default function ProductTable({ proizvodi }) {
               <td className="border px-4 py-2">{p.cena}</td>
               <td className="border px-4 py-2">{p.stanje}</td>
               <td className="border px-4 py-2">{p.tezina}</td>
-              <td className="flex flex-wrap gap-2 max-w-[120px]">
+              <td className="p-1 align-top">
                 {p.slike && p.slike.length > 0 && (
-                  p.slike.map((slika, idx) => (
-                    <Image
-                      key={idx}
-                      src={`/${slika.urlSlika}`}
-                      alt={`Slika ${idx + 1}`}
-                      className="w-10 h-10 object-cover rounded"
-                      width={40}
-                      height={40}
-                    />
-                  ))
+                  <div className="grid grid-cols-3 gap-1 max-w-[180px]">
+                    {p.slike.map((slika, idx) => (
+                      <Image
+                        key={idx}
+                        src={`/${slika.urlSlika}`}
+                        alt={`Slika ${idx + 1}`}
+                        width={40}
+                        height={40}
+                        className="object-cover rounded border"
+                      />
+                    ))}
+                  </div>
                 )}
               </td>
 
