@@ -1,6 +1,7 @@
 'use client';
 import { useState, useMemo } from "react";
 import Link from "next/link";
+import Image from "next/image";
 
 export default function ProductTable({ proizvodi }) {
   const [search, setSearch] = useState('');
@@ -66,6 +67,7 @@ export default function ProductTable({ proizvodi }) {
             <th className="px-4 py-2 border text-white">Cena</th>
             <th className="px-4 py-2 border text-white">Stanje</th>
             <th className="px-4 py-2 border text-white">Težina</th>
+            <th className="px-4 py-2 border text-white">Slike</th>
             <th className="px-4 py-2 border text-white">Akcije</th>
           </tr>
         </thead>
@@ -80,6 +82,21 @@ export default function ProductTable({ proizvodi }) {
               <td className="border px-4 py-2">{p.cena}</td>
               <td className="border px-4 py-2">{p.stanje}</td>
               <td className="border px-4 py-2">{p.tezina}</td>
+              <td className="flex gap-1">
+                {p.slike && p.slike.length > 0 && (
+                  p.slike.map((slika, idx) => (
+                    <Image
+                      key={idx}
+                      src={`/${slika.urlSlika}`}
+                      alt={`Slika ${idx + 1}`}
+                      className="w-10 h-10 object-cover rounded"
+                      width={40}
+                      height={40}
+                    />
+                  ))
+                )}
+              </td>
+
               <td className="border px-4 py-2">
                 <Link
                   href={`/admin/page/modal?id=${p.id}`}
