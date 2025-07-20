@@ -39,7 +39,7 @@ export const metadata = {
     title: 'Alati Nidza',
     description: 'Najbrža interna platforma za kupovinu alata',
     images: [
-      'https://images.unsplash.com/photo-1552519507-da3b142c6e3d?auto=format&fit=crop&w=1200&q=80'
+      'https://plus.unsplash.com/premium_photo-1681487516403-773ca29231e0'
     ],
   },
   icons: {

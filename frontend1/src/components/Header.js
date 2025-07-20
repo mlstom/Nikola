@@ -63,15 +63,13 @@ export default function Header() {
           </div>
 
           {/* Search and cart */}
-           <div className="flex w-full gap-4 items-center lg:order-2 lg:w-auto mt-2 lg:mt-0">
-            {/* Search grows to fill available space on mobile */}
+          <div className="flex w-full items-center lg:order-2 lg:w-auto mt-2 lg:mt-0 justify-between  gap-4">
             <div className="flex-1 lg:flex-none">
               <Search className="w-full" />
             </div>
-            {/* Cart aligned to right */}
             <Link
               href="/home/korpa"
-              className="ml-4 rounded-lg border-2 border-white px-4 py-2 text-sm font-medium text-white hover:bg-gray-50 hover:text-black"
+              className="relative rounded-lg border-2 border-white px-4 py-2 text-sm font-medium text-white hover:bg-gray-50 hover:text-black"
             >
               <ShoppingCart className="h-6 w-6" />
               <span className="absolute -top-1 -right-1 flex h-5 w-5 items-center justify-center rounded-full bg-orange-500 text-xs font-bold text-white">
