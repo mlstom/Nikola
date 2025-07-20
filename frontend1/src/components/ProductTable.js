@@ -82,7 +82,7 @@ export default function ProductTable({ proizvodi }) {
               <td className="border px-4 py-2">{p.cena}</td>
               <td className="border px-4 py-2">{p.stanje}</td>
               <td className="border px-4 py-2">{p.tezina}</td>
-              <td className="flex gap-1">
+              <td className="flex flex-wrap gap-2 max-w-[120px]">
                 {p.slike && p.slike.length > 0 && (
                   p.slike.map((slika, idx) => (
                     <Image
