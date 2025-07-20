@@ -13,6 +13,7 @@ const nextConfig = {
       { source: '/korpa',        destination: '/home/korpa' },
       { source: '/proizvodi',    destination: '/home/proizvodi' },
       { source: '/proizvod/:id', destination: '/home/proizvod/:id' },
+      { source: '/kontakt', destination: '/home/kontakt' }
     ];
   },
 };
