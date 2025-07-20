@@ -88,7 +88,7 @@ export default function ProductTable({ proizvodi }) {
                     p.slike.map((img, index) => (
                       <div
                         key={index}
-                        className="relative w-16 h-16 sm:w-20 sm:h-20 rounded-lg border-2 border-gray-300"
+                        className="relative w-16 grid grid-cols-2 gap-2 h-16 sm:w-20 sm:h-20 rounded-lg border-2 border-gray-300"
                       >
                         <Image
                           src={`/${img.urlSlika}`}
