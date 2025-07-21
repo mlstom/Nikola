@@ -73,6 +73,7 @@ export default function RootLayout({ children }) {
     <html lang="sr">
       <head>
         <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+        <link rel="icon" href="/favicon.png" sizes="32x32" type="image/png" />
         <link rel='icon' href="/favicon.ico" />
       </head>
       <body
