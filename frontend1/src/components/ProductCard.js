@@ -4,9 +4,10 @@ import { useStateContext } from "@/app/context/StateContext";
 import Image from "next/image";
 import Link from "next/link";
 import { toast } from "react-toastify";
+import { useRouter } from 'next/navigation';
 
 const ProizvodCard = ({ proizvod }) => {
-
+ const router = useRouter();
   const { addToCart } = useStateContext()
   const dodajUKorpu = () => {
 
@@ -28,7 +29,7 @@ const ProizvodCard = ({ proizvod }) => {
   };
 
   return (
-    <div className="flex flex-col bg-white border border-gray-200 rounded-md overflow-hidden shadow-sm ">
+    <div  className="flex flex-col bg-white border border-gray-200 rounded-md overflow-hidden shadow-sm ">
       {/* Slika */}
       {proizvod.slike?.length > 0 ? (
         <Image
@@ -38,9 +39,10 @@ const ProizvodCard = ({ proizvod }) => {
           alt={proizvod.naziv}
           unoptimized
           className="h-64 w-full object-contain bg-white p-2"
+          onClick={() => router.push(`/home/proizvod/${proizvod.id}`)}
         />
       ) : (
-        <div className="h-64 w-full bg-gray-200 flex items-center justify-center">
+        <div onClick={() => router.push(`/home/proizvod/${proizvod.id}`)} className="h-64 w-full bg-gray-200 flex items-center justify-center">
           <span className="text-gray-500">Nema slike</span>
         </div>
       )}

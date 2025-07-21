@@ -27,10 +27,18 @@ export default function CartClient({ kuponi }) {
 
 
   if (!cart || cart.proizvodi.length === 0) {
-    return (
+    return (<div>
       <p className="text-center text-gray-600 mt-20 text-lg font-medium">
         Korpa je prazna.
+
       </p>
+      <Link
+        href="/"
+        className="bg-orange-600 text-white px-6 py-2 rounded-full hover:bg-orange-700 transition"
+      >
+        Vrati se na početnu
+      </Link>
+      </div>
     );
   }
 
