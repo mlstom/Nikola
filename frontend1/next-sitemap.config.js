@@ -8,7 +8,7 @@ module.exports = {
   priority: 0.8,
 
   additionalPaths: async (config) => {
-    const res = await axios.get('https://alatinidza.rs/api/proizvodi');
+    const res = await axios.get('https://alatinidza.rs/api/proizvod');
     const proizvodi = res.data;
 
     const staticRoutes = [
