@@ -39,9 +39,9 @@ export async function generateMetadata({ params }) {
         canonical: '/home/proizvod',              // canonical URL
     }
   // Slike proizvoda ili banner
-  const productImages = Array.isArray(proizvod.images) ? proizvod.images : [];
+  const productImages = Array.isArray(proizvod.slike) ? proizvod.slike : [];
   const ogImages = productImages.length > 0
-    ? productImages.map(url => ({ url, width: 1200, height: 630, alt: proizvod.naziv }))
+    ? productImages.map((slika) => ({url: `/${slika.urlSlika}`, width: 1200, height: 630, alt: proizvod.naziv }))
     : [{
         url: 'https://plus.unsplash.com/premium_photo-1681487516403-773ca29231e0',
         width: 1200,
