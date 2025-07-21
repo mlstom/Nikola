@@ -27,10 +27,9 @@ export default function CartClient({ kuponi }) {
 
 
   if (!cart || cart.proizvodi.length === 0) {
-    return (<div>
-      <p className="text-center text-gray-600 mt-20 text-lg font-medium">
+    return (<div className="w-full h-[60vh] flex flex-col items-center justify-center space-y-4">
+      <p className="text-gray-600 text-lg font-medium text-center">
         Korpa je prazna.
-
       </p>
       <Link
         href="/"
@@ -38,7 +37,7 @@ export default function CartClient({ kuponi }) {
       >
         Vrati se na početnu
       </Link>
-      </div>
+    </div>
     );
   }
 
@@ -58,12 +57,12 @@ export default function CartClient({ kuponi }) {
           <li key={index} className="flex flex-wrap md:flex-nowrap items-start justify-between gap-4 py-6 border-b border-gray-200">
             {/* Leva strana: Slika + Naziv */}
             <div className="flex gap-4 w-full md:w-2/3">
-              
+
               {p.slike[0] ? (
                 <div className="relative w-20 h-20 rounded border border-gray-300 p-1 bg-white shrink-0">
 
                   <Image
-                    src={`/${p.slike[p.slike.length-1].urlSlika}`}
+                    src={`/${p.slike[p.slike.length - 1].urlSlika}`}
                     alt={p.naziv}
                     fill
                     className="object-contain"
@@ -182,7 +181,7 @@ export default function CartClient({ kuponi }) {
           Nazad
         </Link>
         <Link
-          href={kuponValidan? `/home/placanje?popust=${kupon}`:"/home/placanje"}
+          href={kuponValidan ? `/home/placanje?popust=${kupon}` : "/home/placanje"}
           className="flex-grow items-center text-center px-4 py-2 bg-orange-500 text-white rounded hover:bg-orange-600 transition"
         >
           Plaćanje

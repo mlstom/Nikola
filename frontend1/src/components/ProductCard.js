@@ -38,11 +38,11 @@ const ProizvodCard = ({ proizvod }) => {
           height={200}
           alt={proizvod.naziv}
           unoptimized
-          className="h-64 w-full object-contain bg-white p-2"
+          className="h-64 w-full object-contain bg-white p-2 hover:cursor-pointer"
           onClick={() => router.push(`/home/proizvod/${proizvod.id}`)}
         />
       ) : (
-        <div onClick={() => router.push(`/home/proizvod/${proizvod.id}`)} className="h-64 w-full bg-gray-200 flex items-center justify-center">
+        <div onClick={() => router.push(`/home/proizvod/${proizvod.id}`)} className="hover:cursor-pointer h-64 w-full bg-gray-200 flex items-center justify-center">
           <span className="text-gray-500">Nema slike</span>
         </div>
       )}
