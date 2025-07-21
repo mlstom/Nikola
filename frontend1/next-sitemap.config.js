@@ -1,23 +1,36 @@
 /** @type {import('next-sitemap').IConfig} */
-const fetch = require('node-fetch');
+const axios = require('axios');
 
 module.exports = {
   siteUrl: 'https://alatinidza.rs',
   generateRobotsTxt: true,
   changefreq: 'weekly',
   priority: 0.8,
-  exclude: [],
 
-  // Ovo dodaje proizvode dinamički u sitemap
   additionalPaths: async (config) => {
-    const res = await fetch('https://alatinidza.rs/api/proizvodi');
-    const proizvodi = await res.json();
+    const res = await axios.get('https://alatinidza.rs/api/proizvodi');
+    const proizvodi = res.data;
 
-    return proizvodi.map((proizvod) => ({
+    const staticRoutes = [
+      '/kontakt',
+      '/korpa',
+      '/proizvodi',
+      '/placanje',
+      '/',
+    ].map((path) => ({
+      loc: path,
+      changefreq: 'weekly',
+      priority: 0.8,
+      lastmod: new Date().toISOString(),
+    }));
+
+    const dynamicRoutes = proizvodi.map((proizvod) => ({
       loc: `/proizvod/${proizvod.id}`,
       changefreq: 'weekly',
       priority: 0.8,
       lastmod: new Date().toISOString(),
     }));
+
+    return [...staticRoutes, ...dynamicRoutes];
   },
 };
