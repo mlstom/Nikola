@@ -41,7 +41,7 @@ export async function generateMetadata({ params }) {
   // Slike proizvoda ili banner
   const productImages = Array.isArray(proizvod.slike) ? proizvod.slike : [];
   const ogImages = productImages.length > 0
-    ? productImages.map((slika) => ({url: `https://alatinidza.rs/public/${slika.urlSlika}`, width: 1200, height: 630, alt: proizvod.naziv }))
+    ? productImages.map((slika) => ({url: `https://alatinidza.rs/${slika.urlSlika}`, width: 1200, height: 630, alt: proizvod.naziv }))
     : [{
         url: 'https://plus.unsplash.com/premium_photo-1681487516403-773ca29231e0',
         width: 1200,
