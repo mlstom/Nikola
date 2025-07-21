@@ -36,7 +36,7 @@ export async function generateMetadata({ params }) {
     'Trimeri'
   ].filter(Boolean);
   const alternates= {
-        canonical: '/home/proizvod',              // canonical URL
+        canonical:` /home/proizvod/${id}`,              // canonical URL
     }
   // Slike proizvoda ili banner
   const productImages = Array.isArray(proizvod.slike) ? proizvod.slike : [];
@@ -57,7 +57,7 @@ export async function generateMetadata({ params }) {
     openGraph: {
       title,
       description,
-      url: `${'https://alatinidza.rs'}/home/products/${id}`,
+      url: `${'https://alatinidza.rs'}/home/proizvod/${id}`,
       siteName: 'Alati Nidža',
       locale: 'sr_RS',
       type: 'website',
