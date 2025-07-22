@@ -41,12 +41,7 @@ export const metadata = {
     images: [
       'https://plus.unsplash.com/premium_photo-1681487516403-773ca29231e0'
     ],
-  },
-  icons: {
-    icon: '/logo.svg',
-    shortcut: '/favicon.ico',
-    apple: '/logo.svg',
-  },
+  }
 };
 
 export default async function Home() {

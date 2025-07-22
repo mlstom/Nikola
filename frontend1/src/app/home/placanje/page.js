@@ -39,13 +39,7 @@ export const metadata = {
         images: [
             'https://images.unsplash.com/photo-1552519507-da3b142c6e3d?auto=format&fit=crop&w=1200&q=80',
         ],
-    },
-
-    icons: {
-        icon: '/logo.svg',
-        shortcut: '/favicon.ico',
-        apple: '/logo.svg',
-    },
+    }
 };
 
 

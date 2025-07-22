@@ -70,11 +70,6 @@ export async function generateMetadata({ params }) {
       title,
       description,
       images: ogImages.map(img => img.url)
-    },
-    icons: {
-      icon: '/logo.svg',
-      shortcut: '/favicon.ico',
-      apple: '/logo.svg'
     }
   };
 }
