@@ -36,7 +36,7 @@ export async function generateMetadata({ params }) {
     'Trimeri'
   ].filter(Boolean);
   const alternates= {
-        canonical:`https://alatinidza.rs/proizvod/${id}`,              // canonical URL
+        canonical:`/home/proizvod/${id}`,              // canonical URL
     }
   // Slike proizvoda ili banner
   const productImages = Array.isArray(proizvod.slike) ? proizvod.slike : [];

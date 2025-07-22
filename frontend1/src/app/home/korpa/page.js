@@ -14,7 +14,7 @@ export const metadata = {
     'auto oprema', 'alata nidža', 'kupovina alata', 'plaćanje', 'popust'
   ].join(', '),
   alternates: {
-        canonical: 'https://alatinidza.rs/korpa',              // canonical URL
+        canonical: '/home/korpa',              // canonical URL
     },
 
   openGraph: {

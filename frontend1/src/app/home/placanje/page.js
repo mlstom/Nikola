@@ -10,7 +10,7 @@ export const metadata = {
         'alat za domaćinstvo', 'narudžbina alata', 'dostava alata', 'alati online shop'
     ].join(', '),
     alternates: {
-        canonical: 'https://alatinidza.rs/placanje',              // canonical URL
+        canonical: '/home/placanje',              // canonical URL
     },
 
     openGraph: {
