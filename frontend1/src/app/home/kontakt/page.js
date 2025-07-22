@@ -7,7 +7,7 @@ export const metadata = {
   description: "Saznajte sve o nama na jednom mestu, za osnovna pitanja javite se putem mejla.",
   keywords: ["Kontakt", "Email", "Telefon", "Radno vreme"],
   alternates: {
-        canonical: '/home/kontakt',              // canonical URL
+        canonical: 'https://alatinidza.rs/kontakt',              // canonical URL
     },
   openGraph: {
     title: 'Alati Nidza',

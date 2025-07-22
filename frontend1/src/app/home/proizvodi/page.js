@@ -17,7 +17,7 @@ export const metadata = {
     'motorni bušači rupa', 'presvlake za vozila', 'pumpa za vodu', 'alat za auto popravku', 'alati za orezivanje'
   ].join(', '),
   alternates: {
-    canonical: '/home/proizvodi',              // canonical URL
+    canonical: 'https://alatinidza.rs/proizvodi',              // canonical URL
   },
 
   openGraph: {
