@@ -3,7 +3,7 @@ import Link from "next/link";
 const Hero = () => {
   return (
     <section
-      className="relative h-screen w-full overflow-hidden"
+      className="relative h-[85vh] w-full overflow-hidden"
       aria-label="Hero sekcija sajta Alati Nidža"
     >
       {/* Picture sa WebP i fallback PNG */}
