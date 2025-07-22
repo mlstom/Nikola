@@ -10,7 +10,7 @@ export const metadata = {
   description: 'Najširi asortiman alata, trimera, delova brzo pretraživanje i sigurna kupovina – za zaposlene u servisu ili DIY entuzijaste.',
   keywords: 'alati, delovi, trimeri, oprema, ventilatori, za negu domacinstva',
   alternates: {
-    canonical: '/',              // canonical URL
+    canonical: 'https://alatinidza.rs',              // canonical URL
   },
   robots: {
     index: true,
@@ -44,7 +44,7 @@ export const metadata = {
   },
   icons: {
     icon: '/logo.svg',
-    shortcut: '/logo.svg',
+    shortcut: '/favicon.ico',
     apple: '/logo.svg',
   },
 };
