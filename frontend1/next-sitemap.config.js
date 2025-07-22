@@ -7,16 +7,23 @@ module.exports = {
   changefreq: 'weekly',
   priority: 0.8,
 
+  exclude: ['/home', '/home/**'], // Izbacuje "tehničke" rute
+
+  robotsTxtOptions: {
+    policies: [
+      {
+        userAgent: '*',
+        allow: '/',
+      },
+    ],
+  },
+
   additionalPaths: async (config) => {
     const res = await axios.get('https://alatinidza.rs/api/proizvod');
     const proizvodi = res.data;
 
     const staticRoutes = [
-      '/kontakt',
-      '/korpa',
-      '/proizvodi',
-      '/placanje',
-      '/',
+      '/', '/kontakt', '/korpa', '/proizvodi', '/placanje'
     ].map((path) => ({
       loc: path,
       changefreq: 'weekly',
@@ -27,7 +34,7 @@ module.exports = {
     const dynamicRoutes = proizvodi.map((proizvod) => ({
       loc: `/proizvod/${proizvod.id}`,
       changefreq: 'weekly',
-      priority: 0.8,
+      priority: 0.9,
       lastmod: new Date().toISOString(),
     }));
 
