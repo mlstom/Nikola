@@ -36,7 +36,7 @@ export async function generateMetadata({ params }) {
   ].filter(Boolean);
 
   // Canonical URL i OpenGraph URL
-  const canonicalUrl = `https://alatinidza.rs/home/proizvod/${id}`;
+  const canonicalUrl = `https://alatinidza.rs/proizvod/${id}`;
 
   // Open Graph slike
   const productImages = Array.isArray(proizvod.slike) ? proizvod.slike : [];
@@ -87,10 +87,8 @@ export async function generateMetadata({ params }) {
 
 export default async function ProizvodPage({ params }) {
   const { id } = params;
-  const [proizvodRes, sviRes] = await Promise.all([
-    axios.get(`https://alatinidza.rs/api/proizvod/${id}`),
-    axios.get(`https://alatinidza.rs/api/proizvod`)
-  ]);
+  const proizvodRes= await  axios.get(`https://alatinidza.rs/api/proizvod/${id}`)
+  const sviRes =await  axios.get(`https://alatinidza.rs/api/proizvod`)
 
   const proizvod = proizvodRes.data;
   const proizvodi = sviRes.data;
