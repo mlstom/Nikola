@@ -5,7 +5,7 @@ import path from 'path';
 
 export const config = {
   api: { bodyParser: false },
-  maxSize: 200 * 1024 * 1024, // 100MB (samo kao hint, glavni limit postavlja nginx)
+  maxSize:209715200, // 100MB (samo kao hint, glavni limit postavlja nginx)
 };
 
 export async function GET() {
