@@ -12,7 +12,7 @@ function truncate(text = '', maxLength = 155) {
 
 export async function generateMetadata({ params }) {
   const { id } = params;
-  const res = await fetch(`https://alatinidza.rs/api/proizvod/${id}`, { cache: 'no-store' });
+  const res = await fetch(`${process.env.NEXT_PUBLIC_SITE_URL}/api/proizvod/${id}`, { cache: 'no-store' });
   const proizvod = await res.json();
 
   const title = proizvod?.naziv
@@ -77,8 +77,8 @@ export async function generateMetadata({ params }) {
 
 export default async function ProizvodPage({ params }) {
     const { id } = await params
-    const proizvodRes = await axios.get(`https://alatinidza.rs/api/proizvod/${id}`);
-    const sviRes = await axios.get(`https://alatinidza.rs/api/proizvod`);
+    const proizvodRes = await axios.get(`${process.env.NEXT_PUBLIC_SITE_URL}/api/proizvod/${id}`);
+    const sviRes = await axios.get(`${process.env.NEXT_PUBLIC_SITE_URL}/api/proizvod`);
 
 
     const proizvod = proizvodRes.data
@@ -106,9 +106,11 @@ export default async function ProizvodPage({ params }) {
                             <span>
                                 <strong className="text-lg text-white">Cena:</strong>{" "}
                                 <span className="font-bold text-orange-500 text-lg">{proizvod?.cena} RSD</span>
-                            </span>
-                            <span><strong>Kategorija:</strong> {proizvod?.kategorija}</span>
+                            </span> 
                         </div>
+                         <span className="text-gray-300"><strong>Marka:</strong> {proizvod?.marka}</span>
+                         <br />
+                          <span className="text-gray-300"><strong>Kategorija:</strong> {proizvod?.kategorija}</span>
 
                         {/* Količina + dugmići (SSR-friendly – kasnije možemo vezati za server action) */}
                         <DodajProizvod proizvod={proizvod} />

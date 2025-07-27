@@ -62,12 +62,13 @@ export default async function ProductsPage({ searchParams }) {
     podkategorija,
     sort,
     priceod,
-    pricedo
+    pricedo,
+    marka
   } = sP
 
-  const res = await axios.get('https://alatinidza.rs/api/proizvod')
+  const res = await axios.get(`${process.env.NEXT_PUBLIC_SITE_URL}/api/proizvod`)
   let proizvodi = res.data
-  proizvodi = [...proizvodi]
+  proizvodi.sort((a, b) => b.id - a.id);
   let sviProizvodi = proizvodi
 
 
@@ -93,6 +94,16 @@ export default async function ProductsPage({ searchParams }) {
     }
     proizvodi = sveKategorije
   }
+  if (marka) {
+    let sveMarke = []
+
+    const markeNiz = marka.split(',');
+    for (const mar of markeNiz) {
+      let pom = sviProizvodi.filter(p => p.marka.includes(mar))
+      sveMarke = [...sveMarke, ...pom]
+    }
+    proizvodi = sveMarke
+  }
 
 
   if (pricedo) {
@@ -111,7 +122,7 @@ export default async function ProductsPage({ searchParams }) {
   }
 
 
-  if (proizvodi.length == 0) proizvodi = sviProizvodi
+ 
 
 
 
@@ -125,6 +136,8 @@ export default async function ProductsPage({ searchParams }) {
   } else if (sort === 'priceDesc') {
     proizvodi.sort((a, b) => b.cena - a.cena);
   }
+
+   if (!(searchquery || kategorija || podkategorija || marka)) { if (proizvodi.length == 0) proizvodi = sviProizvodi }
 
 
 
@@ -143,7 +156,8 @@ export default async function ProductsPage({ searchParams }) {
             podkategorija,
             sort,
             priceod,
-            pricedo
+            pricedo,
+            marka
           }
         } />
         {/* Server Component for product grid */}

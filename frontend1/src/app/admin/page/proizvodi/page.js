@@ -1,6 +1,6 @@
 import ProductTable from "@/components/ProductTable";
 export default async function AdminProizvodi() {
-  const res = await fetch(`https://alatinidza.rs/api/proizvod`, {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_SITE_URL}/api/proizvod`, {
     cache: 'no-store', 
   });
 
@@ -13,7 +13,6 @@ export default async function AdminProizvodi() {
       <div
         className={`antialiased`}
       >
-        <h1>Proizvodi:</h1>
         <ProductTable proizvodi={proizvodi} />
       </div>
   );

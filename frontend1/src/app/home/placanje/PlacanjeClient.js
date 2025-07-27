@@ -9,7 +9,7 @@ import axios from 'axios';
 import { generateOrderEmail } from '@/lib/porudzbinaHTML';
 
 const PlacanjeClient = ({ popust }) => {
-  const { cart, setCart } = useStateContext();
+  const { cart, setCart , izracunajPostarinu} = useStateContext();
   const [loading, setLoading] = useState(false)
   const router = useRouter();
 
@@ -77,7 +77,7 @@ const PlacanjeClient = ({ popust }) => {
         brojPosiljke:brojPosiljke,
         poslato: 0,
         cena: ukupnaPrePopusta,
-        postarina: 500,
+        postarina: izracunajPostarinu(),
         popust: popust ? popust.popust : 0,
       })
 
@@ -153,11 +153,11 @@ const PlacanjeClient = ({ popust }) => {
 
           <div className="flex justify-between">
             <span>Poštarina</span>
-            <span>500 RSD</span>
+            <span>{izracunajPostarinu()} RSD</span>
           </div>
           <div className="flex justify-between font-bold text-xl mt-2 border-t pt-2">
             <span>Ukupno</span>
-            <span>{cenaSaPopustom + 500} RSD</span>
+            <span>{cenaSaPopustom + izracunajPostarinu()} RSD</span>
           </div>
         </div>
       </div>

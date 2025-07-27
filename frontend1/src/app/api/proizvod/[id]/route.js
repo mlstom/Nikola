@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import db from '@/lib/db'; 
 
 export async function GET(request, { params }) {
-  const { id } = params;
+  const { id } = await params;
 
   // Dohvati flat rezultate (proizvod + po jedna slika po redu)
   const [rows] = await db.execute(
@@ -13,6 +13,7 @@ export async function GET(request, { params }) {
       p.naziv,
       p.opis,
       p.kategorija,
+      p.marka,
       p.cena,
       p.stanje,
       p.tezina,
@@ -44,6 +45,7 @@ export async function GET(request, { params }) {
         naziv: row.naziv,
         opis: row.opis,
         kategorija: row.kategorija,
+        marka:row.marka,
         cena: row.cena,
         stanje: row.stanje,
         tezina: row.tezina,
@@ -68,10 +70,10 @@ export async function GET(request, { params }) {
 
 export async function PUT(request, { params }) {
   const { id } = await params;
-  const { sifra, naziv, opis, kategorija, cena, stanje, tezina } = await request.json();
+  const { sifra, naziv, opis, kategorija, cena, stanje, tezina,marka } = await request.json();
   await db.execute(
-    'UPDATE Proizvod SET sifra=?, naziv=?, opis=?, kategorija=?, cena=?, stanje=?, tezina=? WHERE id=?',
-    [sifra, naziv, opis, kategorija, cena, stanje, tezina, id]
+    'UPDATE Proizvod SET sifra=?, naziv=?, opis=?, kategorija=?, cena=?, stanje=?, tezina=?,marka=? WHERE id=?',
+    [sifra, naziv, opis, kategorija, cena, stanje, tezina,marka, id]
   );
   return NextResponse.json({ message: 'Proizvod ažuriran' });
 }

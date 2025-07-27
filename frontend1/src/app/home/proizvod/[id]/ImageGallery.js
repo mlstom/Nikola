@@ -17,7 +17,7 @@ export default function ImageGallery({ slike }) {
     <div className="flex flex-col items-center">
       <div className="relative mb-4 w-full max-w-xs md:max-w-md lg:max-w-lg h-[300px]">
         <Image
-          src={`/${aktivnaSlika}`} // npr: "/slike/proizvod1.jpg"
+          src={`https:/alatinidza.rs/${aktivnaSlika}`} // npr: "/slike/proizvod1.jpg"
           alt="Glavna slika"
           fill
           className="object-contain rounded"
@@ -26,7 +26,7 @@ export default function ImageGallery({ slike }) {
         />
       </div>
 
-      <div className="flex space-x-2 justify-center">
+      <div className="flex overflow-x-scroll space-x-2 justify-center">
         {slike.map((img, index) => (
           <div
             key={index}
@@ -38,7 +38,7 @@ export default function ImageGallery({ slike }) {
             onClick={() => setAktivnaSlika(img.urlSlika)}
           >
             <Image
-              src={`/${img.urlSlika}`}
+              src={`https://alatinidza.rs/${img.urlSlika}`}
               alt={`Thumbnail ${index + 1}`}
               fill
               className="object-contain rounded-lg"

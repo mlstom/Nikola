@@ -9,7 +9,7 @@ export default function CartClient({ kuponi }) {
   const [kuponValidan, setKuponValidan] = useState(false);
   const [procenatPopusta, setProcenatPopusta] = useState(0);
   const [zakljucanInput, setZakljucanInput] = useState(false);
-  const { cart, addToCart, decreaseFromCart, removeFromCart } = useStateContext();
+  const { cart, addToCart, decreaseFromCart, removeFromCart , izracunajPostarinu} = useStateContext();
 
   const proveriKupon = () => {
     const nadjen = kuponi.find(k => k.kod.toLowerCase() === kupon.toLowerCase().trim());
@@ -62,7 +62,7 @@ export default function CartClient({ kuponi }) {
                 <div className="relative w-20 h-20 rounded border border-gray-300 p-1 bg-white shrink-0">
 
                   <Image
-                    src={`/${p.slike[p.slike.length - 1].urlSlika}`}
+                    src={`https://alatinidza.rs/${p.slike[p.slike.length - 1].urlSlika}`}
                     alt={p.naziv}
                     fill
                     className="object-contain"
@@ -160,8 +160,8 @@ export default function CartClient({ kuponi }) {
         )}
       </div>
       <div className="mt-6 flex justify-between items-center text-lg font-semibold">
-        <span>Postarina: (cena postarine nije fiskna, zavisi od tezine paketa)</span>
-        <span>500 RSD</span>
+        <span>Postarina: </span>
+        <span>{izracunajPostarinu()} RSD</span>
       </div>
 
       <div className="flex justify-between items-center text-xl font-bold border-t border-gray-300 pt-4 mt-4">
@@ -169,7 +169,7 @@ export default function CartClient({ kuponi }) {
         <span>
           {(kuponValidan ? ukupnoSaPopustom : ukupno + 0).toLocaleString("sr-RS", {
             minimumFractionDigits: 0,
-          })} + 500 = {((kuponValidan ? ukupnoSaPopustom : ukupno) + 500).toLocaleString("sr-RS")} RSD
+          })} + {izracunajPostarinu()} = {((kuponValidan ? ukupnoSaPopustom : ukupno) + 500).toLocaleString("sr-RS")} RSD
         </span>
       </div>
 

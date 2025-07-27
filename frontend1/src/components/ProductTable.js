@@ -64,6 +64,7 @@ export default function ProductTable({ proizvodi }) {
             <th className="px-4 py-2 border text-white">Naziv</th>
             <th className="px-4 py-2 border text-white">Opis</th>
             <th className="px-4 py-2 border text-white">Kategorija</th>
+            <th className="px-4 py-2 border text-white">Marka</th>
             <th className="px-4 py-2 border text-white">Cena</th>
             <th className="px-4 py-2 border text-white">Stanje</th>
             <th className="px-4 py-2 border text-white">Težina</th>
@@ -79,6 +80,7 @@ export default function ProductTable({ proizvodi }) {
               <td className="border px-4 py-2">{p.naziv}</td>
               <td className="border px-4 py-2">{p.opis}</td>
               <td className="border px-4 py-2">{p.kategorija}</td>
+              <td className="border px-4 py-2">{p.marka}</td>
               <td className="border px-4 py-2">{p.cena}</td>
               <td className="border px-4 py-2">{p.stanje}</td>
               <td className="border px-4 py-2">{p.tezina}</td>
@@ -91,7 +93,7 @@ export default function ProductTable({ proizvodi }) {
                         className="relative w-16 grid grid-cols-2 gap-2 h-16 sm:w-20 sm:h-20 rounded-lg border-2 border-gray-300"
                       >
                         <Image
-                          src={`/${img.urlSlika}`}
+                          src={`https://alatinidza.rs/${img.urlSlika}`}
                           alt={`Slika ${index + 1}`}
                           fill
                           className="object-contain rounded-lg"

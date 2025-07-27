@@ -4,6 +4,7 @@ import { useRouter } from 'next/navigation';
 import kategorije from '@/data/kategorije';
 
 import { Range } from 'react-range';
+import marke from '@/data/marke';
 
 const MIN = 0;
 const MAX = 100000;
@@ -14,6 +15,7 @@ export default function ProductFilters({ initialFilters }) {
     // Parse initial filters: comma-separated strings into arrays
     const parseParam = (val) => (val ? val.split(',') : []);
     const [selectedCats, setSelectedCats] = useState(parseParam(initialFilters.kategorija));
+    const [selectedMarke, setSelectedMarke] = useState(parseParam(initialFilters.marka));
     const [selectedSubCats, setSelectedSubCats] = useState(parseParam(initialFilters.podkategorija));
     const [sort, setSort] = useState(initialFilters.sort || '');
     const [priceod, setPriceod] = useState(initialFilters.priceod || 0);
@@ -24,6 +26,7 @@ export default function ProductFilters({ initialFilters }) {
         if (sort) qp.set('sort', sort);
         if (priceod) qp.set('priceod', priceod);
         if (pricedo) qp.set('pricedo', pricedo);
+        if (selectedMarke.length) qp.set('marka', selectedMarke.join(','));
         if (selectedCats.length) qp.set('kategorija', selectedCats.join(','));
         if (selectedSubCats.length) qp.set('podkategorija', selectedSubCats.join(','));
         router.push(`/home/proizvodi?${qp.toString()}`);
@@ -38,7 +41,7 @@ export default function ProductFilters({ initialFilters }) {
 
     useEffect(() => {
         const kategorijaParam = parseParam(initialFilters.kategorija);
-        
+
 
         if (kategorijaParam && kategorijaParam.length > 0) {
             for (const kat of kategorije) {
@@ -49,7 +52,7 @@ export default function ProductFilters({ initialFilters }) {
         }
     }, [initialFilters, kategorije]);
 
-    
+
 
     return (
         <aside className="w-[275px] lg:w-1/5  h-fit  mb-8 lg:mb-0 space-y-6 p-4 bg-white rounded-xl shadow border border-gray-200">
@@ -143,25 +146,29 @@ export default function ProductFilters({ initialFilters }) {
 
             </div>
 
-            {/* Categories */}
             <div>
+                {/* Kategorije */}
                 <p className="text-sm font-semibold text-gray-800 mb-2 tracking-wide">Kategorije</p>
                 <ul className="space-y-2">
                     {kategorije.map(cat => {
                         const allSubSelected = cat.podKategorija.every(sub => selectedSubCats.includes(sub));
+                        const isCategorySelected = selectedCats.includes(cat.id); // nova promenljiva
+
                         return (
                             <li key={cat.id}>
                                 <label className="flex items-center gap-2 text-sm font-medium text-gray-700">
                                     <span className="relative">
                                         <input
                                             type="checkbox"
-                                            checked={allSubSelected}
+                                            checked={isCategorySelected}
                                             onChange={() => {
-                                                if (allSubSelected) {
-                                                    // Ukloni sve podkategorije ove kategorije
+                                                if (isCategorySelected) {
+                                                    // Uklanjanje cele kategorije i njenih podkategorija
+                                                    setSelectedCats(prev => prev.filter(id => id !== cat.id));
                                                     setSelectedSubCats(prev => prev.filter(sub => !cat.podKategorija.includes(sub)));
                                                 } else {
-                                                    // Dodaj sve koje nisu već dodate
+                                                    // Dodavanje kategorije i svih njenih podkategorija
+                                                    setSelectedCats(prev => [...prev, cat.id]);
                                                     setSelectedSubCats(prev => [...new Set([...prev, ...cat.podKategorija])]);
                                                 }
                                             }}
@@ -172,30 +179,56 @@ export default function ProductFilters({ initialFilters }) {
                                     {cat.naziv}
                                 </label>
 
-                                {/* Podkategorije */}
-                                <ul className="pl-5 mt-1 space-y-1">
-                                    {cat.podKategorija.map(sub => (
-                                        <li key={sub}>
-                                            <label className="flex items-center gap-2 text-sm text-gray-600">
-                                                <span className="relative">
-                                                    <input
-                                                        type="checkbox"
-                                                        checked={selectedSubCats.includes(sub)}
-                                                        onChange={() => toggleItem(selectedSubCats, setSelectedSubCats, sub)}
-                                                        className="peer hidden"
-                                                    />
-                                                    <span className="w-4 h-4 inline-block border-2 border-orange-400 rounded-md peer-checked:bg-orange-400 peer-checked:border-orange-400 transition-all duration-150"></span>
-                                                </span>
-                                                {sub}
-                                            </label>
-                                        </li>
-                                    ))}
-                                </ul>
+                                {/* Prikaz podkategorija samo ako je kategorija selektovana */}
+                                {isCategorySelected && (
+                                    <ul className="pl-5 mt-1 space-y-1">
+                                        {cat.podKategorija.map(sub => (
+                                            <li key={sub}>
+                                                <label className="flex items-center gap-2 text-sm text-gray-600">
+                                                    <span className="relative">
+                                                        <input
+                                                            type="checkbox"
+                                                            checked={selectedSubCats.includes(sub)}
+                                                            onChange={() => toggleItem(selectedSubCats, setSelectedSubCats, sub)}
+                                                            className="peer hidden"
+                                                        />
+                                                        <span className="w-4 h-4 inline-block border-2 border-orange-400 rounded-md peer-checked:bg-orange-400 peer-checked:border-orange-400 transition-all duration-150"></span>
+                                                    </span>
+                                                    {sub}
+                                                </label>
+                                            </li>
+                                        ))}
+                                    </ul>
+                                )}
                             </li>
                         );
                     })}
                 </ul>
+
+                {/* Marke */}
+                <p className="text-sm font-semibold text-gray-800 mb-2 tracking-wide mt-6">Marke</p>
+                <ul className="space-y-2">
+                    {marke.map(marka => (
+                        <li key={marka.id}>
+                            <label className="flex items-center gap-2 text-sm text-gray-700">
+                                <span className="relative">
+                                    <input
+                                        type="checkbox"
+                                        checked={selectedMarke.includes(marka.id)}
+                                        onChange={() => toggleItem(selectedMarke, setSelectedMarke, marka.id)}
+                                        className="peer hidden"
+                                    />
+                                    <span className="w-4 h-4 inline-block border-2 border-orange-500 rounded-md peer-checked:bg-orange-500 peer-checked:border-orange-500 transition-all duration-150"></span>
+                                </span>
+                                {marka.naziv}
+                            </label>
+                        </li>
+                    ))}
+                </ul>
+
             </div>
+
+
 
             <div className="pt-4 border-t border-gray-200">
                 <button

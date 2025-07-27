@@ -37,6 +37,7 @@ export const StateContext = ({ children }) => {
     if (typeof window !== 'undefined') {
       localStorage.setItem('korpa', JSON.stringify(cart));
     }
+    izracunajPostarinu
   }, [cart]);
 
   // ✅ Normalizuj slike u niz stringova (URL-ova)
@@ -52,7 +53,7 @@ export const StateContext = ({ children }) => {
   };
 
   // ✅ Dodaj proizvod u korpu
-  const addToCart = (proizvod,qty=1) => {
+  const addToCart = (proizvod, qty = 1) => {
     let pomProizvodi = []
     const idx = cart.proizvodi.findIndex(p => p.id === proizvod.id);
     if (idx >= 0) {
@@ -92,6 +93,25 @@ export const StateContext = ({ children }) => {
   // ✅ Ukupan broj proizvoda u korpi
   const brojProizvodaUKorpi = cart.proizvodi.reduce((suma, p) => suma + p.kolicina, 0);
 
+
+  const ukupnaTezinaKorpe = () => {
+    return cart.proizvodi.reduce((suma, p) => suma + (p.tezina || 0) * p.kolicina, 0);
+  };
+
+  // ✅ Izračunaj cenu poštarine na osnovu ukupne težine (kg)
+  const izracunajPostarinu = () => {
+    const tezina = ukupnaTezinaKorpe();
+    if (tezina < 2) return 450;
+    if (tezina < 5) return 600;
+    if (tezina < 10) return 720;
+    if (tezina < 15) return 850;
+    if (tezina < 20) return 980;
+    if (tezina < 30) return 1350;
+    if (tezina < 50) return 1780;
+    // Za težine preko 50kg zahtev za posebnu ponudu
+    return (1780 + 43*(tezina-50));
+  };
+
   return (
     <Context.Provider
       value={{
@@ -100,7 +120,8 @@ export const StateContext = ({ children }) => {
         decreaseFromCart,
         removeFromCart,
         brojProizvodaUKorpi,
-        setCart
+        setCart,
+        izracunajPostarinu
       }}
     >
       {children}

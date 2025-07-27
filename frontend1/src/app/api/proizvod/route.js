@@ -20,6 +20,7 @@ export async function GET(request) {
         naziv: row.naziv,
         opis: row.opis,
         kategorija: row.kategorija,
+        marka:row.marka,
         sifra:row.sifra,
         cena:row.cena,
         stanje:row.stanje,
@@ -42,10 +43,10 @@ export async function GET(request) {
 }
 
 export async function POST(request) {
-  const { sifra, naziv, opis, kategorija, cena, stanje, tezina } = await request.json();
+  const { sifra, naziv, opis, kategorija, cena, stanje, tezina,marka } = await request.json();
   const [result] = await db.execute(
-    'INSERT INTO Proizvod (sifra, naziv, opis, kategorija, cena, stanje, tezina) VALUES (?, ?, ?, ?, ?, ?, ?)',
-    [sifra, naziv, opis, kategorija, cena, stanje, tezina]
+    'INSERT INTO Proizvod (sifra, naziv, opis, kategorija, cena, stanje, tezina,marka) VALUES (?, ?, ?, ?, ?, ?, ?)',
+    [sifra, naziv, opis, kategorija, cena, stanje, tezina,marka]
   );
   return NextResponse.json({ message: 'Proizvod dodat', id: result.insertId });
 }

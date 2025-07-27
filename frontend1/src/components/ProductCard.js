@@ -33,7 +33,7 @@ const ProizvodCard = ({ proizvod }) => {
       {/* Slika */}
       {proizvod.slike?.length > 0 ? (
         <Image
-          src={`/${proizvod.slike[proizvod.slike.length - 1].urlSlika}`}
+          src={`https:/alatinidza.rs/${proizvod.slike[proizvod.slike.length - 1].urlSlika}`}
           width={200}
           height={200}
           alt={proizvod.naziv}
@@ -55,9 +55,9 @@ const ProizvodCard = ({ proizvod }) => {
           <h3 className="mt-1 text-lg font-medium text-gray-900">
             {proizvod.naziv}
           </h3>
-
+          <p className="text-sm text-gray-600 mt-1">{proizvod.marka}</p>
           <p className="text-sm text-gray-600 mt-1">{proizvod.kategorija}</p>
-
+         
           <p className="mt-2 text-gray-700 text-sm line-clamp-3">
             {proizvod.opis.length > 30
               ? `${proizvod.opis.substring(0, 30)}...`

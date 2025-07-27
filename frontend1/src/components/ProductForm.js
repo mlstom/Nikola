@@ -6,6 +6,8 @@ import axios from 'axios';
 import FileUpload from './FileUpload';
 import Loader from './Loader';
 import kategorije from '../data/kategorije';
+import Image from 'next/image';
+import marke from '@/data/marke';
 
 export default function ProductForm({ proizvod }) {
   const [loading, setLoading] = useState(false);
@@ -16,6 +18,7 @@ export default function ProductForm({ proizvod }) {
     naziv: proizvod?.naziv || '',
     opis: proizvod?.opis || '',
     kategorija: proizvod?.kategorija || '',
+    marka: proizvod?.marka || '',
     cena: proizvod?.cena || '',
     stanje: proizvod?.stanje || '',
     tezina: proizvod?.tezina || 0,
@@ -32,7 +35,7 @@ export default function ProductForm({ proizvod }) {
     try {
       let savedProizvod = proizvod;
       if (proizvod?.id) {
-        await axios.put(`https://alatinidza.rs/api/proizvod/${proizvod.id}`, form);
+        await axios.put(`${process.env.NEXT_PUBLIC_SITE_URL}/api/proizvod/${proizvod.id}`, form);
       } else {
         const res = await axios.post('https://alatinidza.rs/api/proizvod', form);
         savedProizvod = res.data;
@@ -81,12 +84,12 @@ export default function ProductForm({ proizvod }) {
   if (loading) return <Loader />;
 
   return (
-    <div className="relative w-full w-fit min-w-[300px] mt-10">
+    <div className="relative w-fit min-w-[300px] mt-10">
       <button
         onClick={() => redirect('/admin/page/proizvodi')}
         className="text-white font-semibold bg-orange-500 px-4 py-2 rounded hover:bg-orange-600 mb-4"
       >
-        ← Nazad
+        ← 
       </button>
 
       <h1 className="mb-3 font-bold text-3xl font-mono text-gray-800">
@@ -141,6 +144,20 @@ export default function ProductForm({ proizvod }) {
             ))
           )}
         </select>
+        <select
+          name="marka"
+          value={form.marka}
+          onChange={handleChange}
+          className="max-w-[250px]  h-[50px] px-5 border rounded"
+          required
+        >
+          <option value="">-- Izaberite Marku --</option>
+          {marke.map((marka, index) =>
+              <option key={`${index}`} value={`${marka.naziv}`}>
+                {`${marka.naziv}`}
+              </option>
+          )}
+        </select>
         <input
           type="number"
           name="cena"
@@ -165,12 +182,15 @@ export default function ProductForm({ proizvod }) {
           onChange={handleChange}
           className="h-[50px] px-5 border rounded"
         />
+        <div></div>
         {proizvod?.slike.length > 0 && (
           <div className="flex flex-wrap gap-4">
             {proizvod.slike.map((slika, index) => (
               <div key={index} className="relative">
-                <img
-                  src={`/${slika.urlSlika}`}
+                <Image
+                  width={128}
+                  height={128}
+                  src={`https://alatinidza.rs/${slika.urlSlika}`}
                   alt={`slika-${index}`}
                   className="h-32 w-32 rounded-lg object-cover object-center border-2 border-orange-500"
                 />
