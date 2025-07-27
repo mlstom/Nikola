@@ -17,7 +17,7 @@ export default function ImageGallery({ slike }) {
     <div className="flex flex-col items-center">
       <div className="relative mb-4 w-full max-w-xs md:max-w-md lg:max-w-lg h-[300px]">
         <Image
-          src={`https:/alatinidza.rs/${aktivnaSlika}`} // npr: "/slike/proizvod1.jpg"
+          src={`https://alatinidza.rs/${aktivnaSlika}`} // npr: "/slike/proizvod1.jpg"
           alt="Glavna slika"
           fill
           className="object-contain rounded"

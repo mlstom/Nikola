@@ -33,7 +33,7 @@ const ProizvodCard = ({ proizvod }) => {
       {/* Slika */}
       {proizvod.slike?.length > 0 ? (
         <Image
-          src={`https:/alatinidza.rs/${proizvod.slike[proizvod.slike.length - 1].urlSlika}`}
+          src={`https://alatinidza.rs/${proizvod.slike[proizvod.slike.length - 1].urlSlika}`}
           width={200}
           height={200}
           alt={proizvod.naziv}
