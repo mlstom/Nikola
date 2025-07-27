@@ -30,7 +30,7 @@ export default function ImageGallery({ slike }) {
         {slike.map((img, index) => (
           <div
             key={index}
-            className={`relative w-12 h-12 sm:w-16 sm:h-16 cursor-pointer rounded-lg border-2 ${
+            className={`relative bg-white w-12 h-12 sm:w-16 sm:h-16 cursor-pointer rounded-lg border-2 ${
               aktivnaSlika === img.urlSlika
                 ? "border-orange-500"
                 : "border-gray-300"
