@@ -10,12 +10,12 @@ const faqs = [
   {
     question: "Koliko košta poštarina?",
     answer:
-      "Minimalna cena postarine je 350 RSD na teritoriji Srbije."
+      "Cena poštarine zavisi od težine proizvoda koji ste poručili, kada dodate proizod u korpu cena će biti automatski obračunata"
   },
   {
-    question: "Da li dajete akcija na veću količinu?",
+    question: "Da li dajete popuste na veće količine?",
     answer:
-      "Svaka roba se može prodati na veće, najprodavanije tako stvari su struna za trimere"
+      "Na sve artikle se moze dobiti popust na veću količinu kupljenih artikla"
   }
 ];
 
@@ -23,7 +23,7 @@ const KontaktPitanja = () => {
   const [faqIndex, setFaqIndex] = useState(null);
 
   return (
-    <div id="faqs" className="mx-auto text-center sm:w-5/6 md:w-full">
+    <div id="faqs" className="mx-auto text-center lg:max-w-[50%] w-full">
       <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl">
         Često postavljena pitanja (FAQs)
       </h2>

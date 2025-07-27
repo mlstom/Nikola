@@ -47,7 +47,7 @@ export const metadata = {
 export default async function Home() {
   const resProizvodi = await axios.get(`${process.env.NEXT_PUBLIC_SITE_URL}/api/proizvod`)
   
-  const proizvodi = resProizvodi.data.sort((a, b) => b.id - a.id).slice(0, 10);
+  const proizvodi = resProizvodi.data.sort((a, b) => b.id - a.id).slice(0, 20);
   return (
     <div className="min-h-screen">
       <Hero />
