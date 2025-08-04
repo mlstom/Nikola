@@ -35,6 +35,30 @@ const marke = [
   {
     id:"nepoznata",
     naziv:"nepoznata"
+  },
+  {
+    id:"RoyalKraft",
+    naziv:"RoyalKraft"
+  },
+  {
+    id:"Tesla",
+    naziv:"Tesla"
+  },
+  {
+    id:"Trimex",
+    naziv:"Trimex"
+  },
+  {
+    id:"A8",
+    naziv:"A8"
+  },
+  {
+    id:"Mitutoyo",
+    naziv:"Mitutoyo"
+  },
+  {
+    id:"MAR-POL",
+    naziv:"MAR-POL"
   }
 ];
 
