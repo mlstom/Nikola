@@ -59,6 +59,10 @@ const marke = [
   {
     id:"MAR-POL",
     naziv:"MAR-POL"
+  },
+  {
+    id:"KingRoy",
+    naziv:"KingRoy"
   }
 ];
 
