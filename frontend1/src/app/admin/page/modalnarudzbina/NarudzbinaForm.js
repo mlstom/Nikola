@@ -85,7 +85,7 @@ export default function NarudzbinaForm({ narudzbina }) {
       if (narudzbina?.id) {
         await axios.put(`https://alatinidza.rs/api/kupac/${narudzbina.kupac.id}`, form.kupac);
         await axios.delete(`https://alatinidza.rs/api/korpa?brojKorpe=${form.brojKorpe}`);
-        console.log("Korak 1")
+        
         for (const { proizvod, kolicina } of form.korpa) {
           await axios.post('https://alatinidza.rs/api/korpa', {
             brojKorpe: form.brojKorpe,
@@ -93,7 +93,7 @@ export default function NarudzbinaForm({ narudzbina }) {
             kolicina,
           });
         }
-        console.log("STigao si do ovde")
+        
 
         const originalTotal = form.korpa.reduce(
           (sum, { proizvod, kolicina }) => sum + proizvod.cena * kolicina,
@@ -108,7 +108,9 @@ export default function NarudzbinaForm({ narudzbina }) {
           postarina: form.postarina,
           popust: form.popust,
         });
+        console.log("Korak 1")
       }
+      
       else {
         const resKupac = await axios.post('https://alatinidza.rs/api/kupac', form.kupac)
         const idKupac = resKupac.data.id
