@@ -98,7 +98,7 @@ const PlacanjeClient = ({ popust }) => {
           price: p.cena,
         })),
         cartTotal: ukupnaPrePopusta,
-        shipping: 500,
+        shipping: izracunajPostarinu(),
         discount: popust ? popust.popust : 0,
         amountDue: (ukupnaPrePopusta + 500) - (popust ? Math.round(ukupnaPrePopusta * (popust.popust / 100)) : 0),
       };
