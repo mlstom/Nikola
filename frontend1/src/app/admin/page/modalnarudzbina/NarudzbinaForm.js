@@ -81,7 +81,7 @@ export default function NarudzbinaForm({ narudzbina }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault(); setLoading(true);
-    try {
+    
       if (narudzbina?.id) {
         console.log("➡️ PUT kupac");
         await axios.put(`https://alatinidza.rs/api/kupac/${narudzbina.kupac.id}`, form.kupac);
@@ -164,13 +164,7 @@ export default function NarudzbinaForm({ narudzbina }) {
 
       router.push('/admin/page/narudzbine');
       router.refresh();
-    } catch (err) {
-      console.error(" Detalji greške:", err);
-      console.error(" Odgovor servera:", err.response?.data);
-      console.error(" Status:", err.response?.status);
-      alert('Greška prilikom čuvanja narudžbine.');
-      alert('Greška prilikom čuvanja narudžbine.');
-    } finally { setLoading(false); }
+    
   };
 
   if (loading) return <Loader />;
