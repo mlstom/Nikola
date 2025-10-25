@@ -169,7 +169,7 @@ export default function CartClient({ kuponi }) {
         <span>
           {(kuponValidan ? ukupnoSaPopustom : ukupno + 0).toLocaleString("sr-RS", {
             minimumFractionDigits: 0,
-          })} + {izracunajPostarinu()} = {((kuponValidan ? ukupnoSaPopustom : ukupno) + 500).toLocaleString("sr-RS")} RSD
+          })} + {izracunajPostarinu()} = {((kuponValidan ? ukupnoSaPopustom : ukupno) + izracunajPostarinu()).toLocaleString("sr-RS")} RSD
         </span>
       </div>
 
