@@ -85,6 +85,7 @@ export default function NarudzbinaForm({ narudzbina }) {
       if (narudzbina?.id) {
         await axios.put(`https://alatinidza.rs/api/kupac/${narudzbina.kupac.id}`, form.kupac);
         await axios.delete(`https://alatinidza.rs/api/korpa?brojKorpe=${form.brojKorpe}`);
+        console.log("Korak 1")
         for (const { proizvod, kolicina } of form.korpa) {
           await axios.post('https://alatinidza.rs/api/korpa', {
             brojKorpe: form.brojKorpe,
@@ -92,6 +93,7 @@ export default function NarudzbinaForm({ narudzbina }) {
             kolicina,
           });
         }
+        console.log("STigao si do ovde")
 
         const originalTotal = form.korpa.reduce(
           (sum, { proizvod, kolicina }) => sum + proizvod.cena * kolicina,
@@ -143,9 +145,9 @@ export default function NarudzbinaForm({ narudzbina }) {
           price: p.cena,
         })),
         cartTotal: ukupnaPrePopusta,
-        shipping: 500,
+        shipping: narudzbina?.postarina || 500,
         discount: popust ? popust.popust : 0,
-        amountDue: (ukupnaPrePopusta + 500) - (popust ? Math.round(ukupnaPrePopusta * (popust.popust / 100)) : 0),
+        amountDue: (ukupnaPrePopusta + narudzbina?.postarina|| 500) - (popust ? Math.round(ukupnaPrePopusta * (popust.popust / 100)) : 0),
       };
       
 
