@@ -25,7 +25,7 @@ export default function NarudzbinaForm({ narudzbina }) {
         const data = await res.json();
         setProizvodi(data);
       } catch (err) {
-        
+
       }
     })();
     const randomKorpa = generateUniqueCode("KORPA")
@@ -40,7 +40,7 @@ export default function NarudzbinaForm({ narudzbina }) {
     poslato: narudzbina?.poslato || false,
     postarina: narudzbina?.postarina || 0,
     popust: narudzbina?.popust || 0,
-    korpa: narudzbina?.proizvodi.map(p => ({ proizvod: { id: p.id, sifra: p.sifra, naziv: p.naziv, cena: p.cena, kolicina:p.kolicina }, kolicina: p.kolicina })) || [],
+    korpa: narudzbina?.proizvodi.map(p => ({ proizvod: { id: p.id, sifra: p.sifra, naziv: p.naziv, cena: p.cena, kolicina: p.kolicina }, kolicina: p.kolicina })) || [],
     kupac: narudzbina?.kupac || { ime: '', prezime: '', email: '', telefon: '', adresa: '', mesto: '', postanskiBroj: '' },
   });
 
@@ -85,7 +85,7 @@ export default function NarudzbinaForm({ narudzbina }) {
       if (narudzbina?.id) {
         await axios.put(`https://alatinidza.rs/api/kupac/${narudzbina.kupac.id}`, form.kupac);
         await axios.delete(`https://alatinidza.rs/api/korpa?brojKorpe=${form.brojKorpe}`);
-       
+
         for (const { proizvod, kolicina } of form.korpa) {
           await axios.post('https://alatinidza.rs/api/korpa', {
             brojKorpe: form.brojKorpe,
@@ -93,7 +93,7 @@ export default function NarudzbinaForm({ narudzbina }) {
             kolicina,
           });
         }
-      
+
 
         const originalTotal = form.korpa.reduce(
           (sum, { proizvod, kolicina }) => sum + proizvod.cena * kolicina,
@@ -108,7 +108,7 @@ export default function NarudzbinaForm({ narudzbina }) {
           postarina: form.postarina,
           popust: form.popust,
         });
-         console.log("STigao si kraj")
+        console.log("STigao si kraj")
       }
       else {
         const resKupac = await axios.post('https://alatinidza.rs/api/kupac', form.kupac)
@@ -148,9 +148,9 @@ export default function NarudzbinaForm({ narudzbina }) {
         cartTotal: ukupnaPrePopusta,
         shipping: narudzbina?.postarina || 500,
         discount: popust ? popust.popust : 0,
-        amountDue: (ukupnaPrePopusta + narudzbina?.postarina|| 500) - (popust ? Math.round(ukupnaPrePopusta * (popust.popust / 100)) : 0),
+        amountDue: (ukupnaPrePopusta + narudzbina?.postarina || 500) - (popust ? Math.round(ukupnaPrePopusta * (popust.popust / 100)) : 0),
       };
-      
+
 
       await axios.post('https://alatinidza.rs/api/send-email', {
         to: kupac.email,
@@ -161,7 +161,10 @@ export default function NarudzbinaForm({ narudzbina }) {
       router.push('/admin/page/narudzbine');
       router.refresh();
     } catch (err) {
-      
+      console.error(" Detalji greške:", err);
+      console.error(" Odgovor servera:", err.response?.data);
+      console.error(" Status:", err.response?.status);
+      alert('Greška prilikom čuvanja narudžbine.');
       alert('Greška prilikom čuvanja narudžbine.');
     } finally { setLoading(false); }
   };
