@@ -13,7 +13,8 @@ const kategorije = [
       "Električni alati",
       "Ručni alati",
       "Setovi gedora",
-      "Specijalni setovi"
+      "Specijalni setovi",
+      "Pneumatski alat"
     ]
   },
   {
@@ -48,6 +49,11 @@ const kategorije = [
     id: "Kucni aparati",
     naziv: "Kucni aparati",
     podKategorija: ["Ventilatori"]
+  },
+  {
+    id: "Oprema za radionicu",
+    naziv: "Oprema za radionicu",
+    podKategorija: ["Oprema za radionicu"]
   }
 ];
 
